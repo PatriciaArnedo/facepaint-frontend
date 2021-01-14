@@ -1,19 +1,24 @@
 import React from 'react'
-import main, {atrament} from "./FaceFilterSource"
+import main from "./FaceFilterSource"
 
-function FaceFilter(props) {
+class FaceFilter extends React.Component {
 
-    const canvas = document.createElement('canvas');
-    main(canvas)
 
-    setTimeout(() => {
-        atrament.color = 'blue'
-    }, 5 * 1000)
+    componentDidMount() {
 
-    return (
-        <>
-        </>
-    )
+        const canvas = document.createElement('canvas');
+        main(canvas)
+    
+    }
+
+    render() {
+
+        return (
+            <>
+                <canvas id='jeeFaceFilterCanvas' width="600" height="600" />
+            </>
+        )
+    }
 
 }
 

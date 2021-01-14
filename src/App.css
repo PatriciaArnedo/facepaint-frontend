@@ -1,0 +1,44 @@
+/* Grid CSS */
+.parent {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .header { grid-area: 1 / 1 / 2 / 7; }
+    .filter-gallery { grid-area: 2 / 1 / 10 / 2; }
+    .filter-maker { grid-area: 2 / 2 / 10 / 7; }
+
+
+/* Face Filter CSS */
+
+#jeeFaceFilterCanvas {
+    z-index: 10;
+    max-height: 75%;
+    max-width: 75%;
+    left: 50%;
+    top: 50%;
+    transform:  rotateY(180deg);
+    /* width: 100vmin; */
+    /* transform: translate(-50%, -50%) */
+    /* position: absolute;  */
+  } 
+
+/* Header CSS */
+.header{
+    background-color: rgb(0, 200, 255);
+}
+
+/* Filter Gallery CSS */
+.filter-gallery{
+    background-color: rgb(255, 219, 129);
+}
+
+/* Filter Maker CSS */
+.filter-maker{
+    text-align: center;
+}
+
+
