@@ -19,12 +19,14 @@ class FilterMaker extends React.Component {
         // if (!this.state.atrament) {
         //     return
         // }
-        this.state.atrament.weight = parseInt(this.state.weight)
-        this.state.atrament.color = this.state.color
-        this.state.atrament.mode = this.state.mode
-        this.state.atrament.smoothing = this.state.smoothing
-        this.state.atrament.adaptiveStroke = this.state.adaptiveStroke
-        this.state.atrament.recordStrokes = this.state.recordStrokes
+        const atrament = this.state.atrament
+        atrament.weight = parseInt(this.state.weight)
+        atrament.color = this.state.color
+        atrament.mode = this.state.mode
+        atrament.smoothing = this.state.smoothing
+        atrament.adaptiveStroke = this.state.adaptiveStroke
+        atrament.recordStrokes = this.state.recordStrokes
+        this.setState({atrament})
     }
 
     componentDidMount() {
