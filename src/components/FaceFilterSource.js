@@ -5,6 +5,7 @@
 import "facefilter/demos/appearance/style.css"
 import * as JEEFACEFILTERAPI from "facefilter/dist/jeelizFaceFilter.module.js"
 import neuralNetworkModel from "facefilter/neuralNets/NN_DEFAULT.json"
+import * as Atrament from "atrament"
 
 
 /*
@@ -30,6 +31,8 @@ const SETTINGS = {
   canvasSizePx: 512 // resolution of the 2D canvas in pixels
 };
 
+let prevPoint = null
+export let atrament = null
 // some globalz:
 let CV = null, CANVAS2D = null, CTX = null, GL = null, CANVASTEXTURE = null, CANVASTEXTURENEEDSUPDATE = false;
 let PROJMATRIX = null, PROJMATRIXNEEDSUPDATE = true;
@@ -176,7 +179,7 @@ function update_projMatrix() {
 
 
 //build the 3D. called once when Jeeliz Face Filter is OK
-function init_scene(spec){
+function init_scene(spec, canvasPassed){
   // affect some globalz:
   GL = spec.GL;
   CV = spec.canvasElement;
@@ -184,18 +187,20 @@ function init_scene(spec){
   VIDEOTRANSFORMMAT2 = spec.videoTransformMat2;
 
   // create and size the 2D canvas and its drawing context:
-  CANVAS2D = document.createElement('canvas');
+  CANVAS2D = canvasPassed
   CANVAS2D.width = SETTINGS.canvasSizePx;
   CANVAS2D.height = Math.round(SETTINGS.canvasSizePx*SETTINGS.scale[1]/SETTINGS.scale[0]);
   CTX = CANVAS2D.getContext('2d');
-  CTX.strokeStyle = SETTINGS.strokeStyle;
-  CTX.lineWidth = 4;
+  // CTX.strokeStyle = SETTINGS.strokeStyle;
+  // CTX.lineWidth = 4;
 //   const frameImage = new Image()
 //   frameImage.src = '/frame.png';
 //   frameImage.onload = function(){
 //     CTX.drawImage(frameImage, 0, 0, frameImage.width, frameImage.height, 0, 0, CANVAS2D.width, CANVAS2D.height);
 //     update_canvasTexture();
 //   }
+
+  atrament = new Atrament(CANVAS2D);
   
   // create the WebGL texture with the canvas:
   CANVASTEXTURE = GL.createTexture();
@@ -276,6 +281,8 @@ function init_scene(spec){
   GL.uniform1i(uSampler, 0);
   GL.disableVertexAttribArray(shpCanvas, SHADERCANVAS.position);
   GL.disableVertexAttribArray(shpCanvas, SHADERCANVAS.uv);
+  
+  return atrament
 } //end init_scene()
 
 
@@ -342,9 +349,12 @@ function get_eventLoc(event){ // return the position of the picked point in pixe
 function onMouseDown(event){
   if (MOUSESTATE!==MOUSESTATES.idle || !ISDETECTED) return;
   MOUSESTATE = MOUSESTATES.drag;
+  
   OLDXY = get_eventLoc(event);
-  CTX.beginPath();
-  CTX.moveTo(OLDXY[0], OLDXY[1]);
+  atrament.beginStroke(OLDXY[0], OLDXY[1]);
+  prevPoint = {x: OLDXY[0], y: OLDXY[1]}
+  // CTX.beginPath();
+  // CTX.moveTo(OLDXY[0], OLDXY[1]);
 }
 function onMouseMove(event){
   if (MOUSESTATE!==MOUSESTATES.drag) return;
@@ -353,37 +363,42 @@ function onMouseMove(event){
     return;
   }
   const xy = get_eventLoc(event);
-  CTX.lineTo(xy[0], xy[1]);
-  CTX.stroke();
+  const { x, y } = atrament.draw(xy[0], xy[1], prevPoint.x, prevPoint.y);
+  prevPoint = { x, y };
+  
+  // CTX.lineTo(xy[0], xy[1]);
+  // CTX.stroke();
   update_canvasTexture();
-  OLDXY = xy;
+  // OLDXY = xy;
 
   event.preventDefault(); // disable scroll or fancy stuffs
 }
 function onMouseUp(event){
   if (MOUSESTATE!==MOUSESTATES.drag) return;
   MOUSESTATE = MOUSESTATES.idle;
+  atrament.endStroke(prevPoint.x, prevPoint.y);
 }
 //END MOUSE/TOUCH EVENTS FUNCTIONS
 
 
-function update_canvasTexture(){
+export function update_canvasTexture(){
+  console.log('updating canvas', CANVASTEXTURENEEDSUPDATE)
   CANVASTEXTURENEEDSUPDATE = true;
 }
 
 // entry point - launched by body.onload():
-export default function main(){
+export default function main(canvasPassed) {
   JEEFACEFILTERAPI.init({
     canvasId: 'jeeFaceFilterCanvas',
     NNC:  neuralNetworkModel,
-    callbackReady: function(errCode, spec){
+    callbackReady: function(errCode, spec) {
       if (errCode){
         console.log('AN ERROR HAPPENS. SORRY BRO :( . ERR =', errCode);
         return;
       }
 
       console.log('INFO: JEEFACEFILTERAPI IS READY');
-      init_scene(spec);
+      const at = init_scene(spec, canvasPassed);
       init_eventListeners();
     }, //end callbackReady()
 
