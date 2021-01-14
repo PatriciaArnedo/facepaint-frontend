@@ -385,7 +385,7 @@ function onMouseUp(event) {
 
 
 export function update_canvasTexture() {
-  console.log('updating canvas', CANVASTEXTURENEEDSUPDATE)
+  // console.log('updating canvas', CANVASTEXTURENEEDSUPDATE)
   CANVASTEXTURENEEDSUPDATE = true;
 }
 
