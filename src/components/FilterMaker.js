@@ -1,33 +1,46 @@
 import React from 'react'
 import FaceFilter from './FaceFilter'
-import { atrament } from "./FaceFilterSource"
+import main from "./FaceFilterSource"
 
 
 class FilterMaker extends React.Component {
 
     state = {
-        weight: 2,
+        weight: 10,
         color: '#ffffff',
         mode: "draw",
         smoothing: 1.3,
         adaptiveStroke: true,
-        recordStrokes: true
+        recordStrokes: true,
+        atrament: undefined,
     }
 
+    setAtrament = () => {
+        // if (!this.state.atrament) {
+        //     return
+        // }
+        this.state.atrament.weight = parseInt(this.state.weight)
+        this.state.atrament.color = this.state.color
+        this.state.atrament.mode = this.state.mode
+        this.state.atrament.smoothing = this.state.smoothing
+        this.state.atrament.adaptiveStroke = this.state.adaptiveStroke
+        this.state.atrament.recordStrokes = this.state.recordStrokes
+    }
 
     componentDidMount() {
-        setTimeout(() => {
-            atrament.weight = parseInt(this.state.weight)
-            atrament.color = this.state.color
-            atrament.mode = this.state.mode
-            atrament.smoothing = this.state.smoothing
-            atrament.adaptiveStroke = this.state.adaptiveStroke
-            atrament.recordStrokes = this.state.recordStrokes
-        }, 5 * 1000)
+        const canvas = document.createElement('canvas');
+        main(canvas).then((atrament) => {
+            this.setState({atrament}, this.setAtrament)
+        })
     }
 
     handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value })
+        this.setState({ [e.target.name]: e.target.value },this.setAtrament)
+    }
+
+    clickHandler = (e) => {
+        e.preventDefault()
+        this.state.atrament.clear()
     }
 
     render() {
@@ -60,6 +73,7 @@ class FilterMaker extends React.Component {
                             value={this.state.color}
                             onChange={this.handleChange} />
                     </label>
+                    <button clickHandler={this.clickHandler}>Clear Canvas</button>
                 </form>
             </div >
         )

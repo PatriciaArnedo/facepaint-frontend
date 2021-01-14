@@ -26,9 +26,9 @@ const SETTINGS = {
   pivotOffsetYZ: [0.2, 0.2], // XYZ of the distance between the center of the cube and the pivot
   detectionThreshold: 0.75, // sensibility, between 0 and 1. Less -> more sensitive
   detectionHysteresis: 0.05,
-  scale: [1, 1.24], // scale of the 2D canvas along horizontal and vertical 2D axis
+  scale: [2, 2.58], // scale of the 2D canvas along horizontal and vertical 2D axis
   offsetYZ: [-0.1, -0.2], // offset of the 2D canvas along vertical and depth 3D axis
-  canvasSizePx: 512 // resolution of the 2D canvas in pixels
+  canvasSizePx: 512 // resolution of the 2D canvas in pixels originally 512
 };
 
 let prevPoint = null
@@ -391,86 +391,90 @@ export function update_canvasTexture() {
 
 // entry point - launched by body.onload():
 export default function main(canvasPassed) {
-  JEEFACEFILTERAPI.init({
-    canvasId: 'jeeFaceFilterCanvas',
-    NNC: neuralNetworkModel,
-    maxFacesDetected: 1,
-    callbackReady: function (errCode, spec) {
-      if (errCode) {
-        console.log('AN ERROR HAPPENS. SORRY BRO :( . ERR =', errCode);
-        return;
-      }
-
-      console.log('INFO: JEEFACEFILTERAPI IS READY');
-      const at = init_scene(spec, canvasPassed);
-      init_eventListeners();
-    }, //end callbackReady()
-
-    // called at each render iteration (drawing loop):
-    callbackTrack: function (detectState) {
-      if (ISDETECTED && detectState.detected < SETTINGS.detectionThreshold - SETTINGS.detectionHysteresis) {
-        // DETECTION LOST
-        detect_callback(false);
-        ISDETECTED = false;
-      } else if (!ISDETECTED && detectState.detected > SETTINGS.detectionThreshold + SETTINGS.detectionHysteresis) {
-        // FACE DETECTED
-        detect_callback(true);
-        ISDETECTED = true;
-      }
-
-      // render the video screen:
-      GL.viewport(0, 0, CV.width, CV.height);
-      GL.useProgram(SHADERVIDEO.program);
-      GL.uniformMatrix2fv(SHADERVIDEO.videoTransformMat2, false, VIDEOTRANSFORMMAT2);
-      GL.bindTexture(GL.TEXTURE_2D, VIDEOTEXTURE);
-      GL.drawElements(GL.TRIANGLES, 3, GL.UNSIGNED_SHORT, 0);
-
-      if (ISDETECTED) {
-        const aspect = CV.width / CV.height;
-
-        // move the cube in order to fit the head:
-        const tanFOV = Math.tan(aspect * SETTINGS.cameraFOV * Math.PI / 360); // tan(FOV/2), in radians
-        const W = detectState.s;  // relative width of the detection window (1-> whole width of the detection window)
-        const D = 1 / (2 * W * tanFOV); // distance between the front face of the cube and the camera
-
-        // coords in 2D of the center of the detection window in the viewport:
-        const xv = detectState.x;
-        const yv = detectState.y;
-
-        // coords in 3D of the center of the cube (in the view coordinates system):
-        const z = -D - 0.5;   // minus because view coordinate system Z goes backward. -0.5 because z is the coord of the center of the cube (not the front face)
-        const x = xv * D * tanFOV;
-        const y = yv * D * tanFOV / aspect;
-
-        // move and rotate the cube:
-        set_mat4Position(MOVMATRIX, x, y + SETTINGS.pivotOffsetYZ[0], z + SETTINGS.pivotOffsetYZ[1]);
-        set_mat4RotationXYZ(MOVMATRIX, detectState.rx + SETTINGS.rotationOffsetX, detectState.ry, detectState.rz);
-
-        // render the canvas above:
-        GL.clear(GL.DEPTH_BUFFER_BIT);
-        GL.enable(GL.BLEND);
-        GL.blendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
-        GL.useProgram(SHADERCANVAS.program);
-        GL.enableVertexAttribArray(SHADERCANVAS.position);
-        GL.enableVertexAttribArray(SHADERCANVAS.uv);
-        GL.uniformMatrix4fv(SHADERCANVAS.movMatrix, false, MOVMATRIX);
-        if (PROJMATRIXNEEDSUPDATE) {
-          update_projMatrix();
+  return new Promise((resolve, reject) => {
+    JEEFACEFILTERAPI.init({
+      canvasId: 'jeeFaceFilterCanvas',
+      NNC: neuralNetworkModel,
+      maxFacesDetected: 1,
+      callbackReady: function (errCode, spec) {
+        if (errCode) {
+          reject(errCode)
+          console.log('AN ERROR HAPPENS. SORRY BRO :( . ERR =', errCode);
+          return;
         }
-        GL.bindTexture(GL.TEXTURE_2D, CANVASTEXTURE);
-        if (CANVASTEXTURENEEDSUPDATE) {
-          GL.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, CANVAS2D);
-          CANVASTEXTURENEEDSUPDATE = false;
+
+        console.log('INFO: JEEFACEFILTERAPI IS READY');
+        const at = init_scene(spec, canvasPassed);
+        init_eventListeners()
+        resolve(at)
+      }, //end callbackReady()
+
+      // called at each render iteration (drawing loop):
+      callbackTrack: function (detectState) {
+        if (ISDETECTED && detectState.detected < SETTINGS.detectionThreshold - SETTINGS.detectionHysteresis) {
+          // DETECTION LOST
+          detect_callback(false);
+          ISDETECTED = false;
+        } else if (!ISDETECTED && detectState.detected > SETTINGS.detectionThreshold + SETTINGS.detectionHysteresis) {
+          // FACE DETECTED
+          detect_callback(true);
+          ISDETECTED = true;
         }
-        GL.bindBuffer(GL.ARRAY_BUFFER, VBO_VERTEX);
-        GL.vertexAttribPointer(SHADERCANVAS.position, 3, GL.FLOAT, false, 20, 0);
-        GL.vertexAttribPointer(SHADERCANVAS.uv, 2, GL.FLOAT, false, 20, 12);
-        GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, VBO_FACES);
-        GL.drawElements(GL.TRIANGLES, 6, GL.UNSIGNED_SHORT, 0);
-        GL.disableVertexAttribArray(SHADERCANVAS.uv);
-        GL.disableVertexAttribArray(SHADERCANVAS.position);
-        GL.disable(GL.BLEND);
-      } //end if face detected
-    } //end callbackTrack()
-  }); //end JEEFACEFILTERAPI.init call
+
+        // render the video screen:
+        GL.viewport(0, 0, CV.width, CV.height);
+        GL.useProgram(SHADERVIDEO.program);
+        GL.uniformMatrix2fv(SHADERVIDEO.videoTransformMat2, false, VIDEOTRANSFORMMAT2);
+        GL.bindTexture(GL.TEXTURE_2D, VIDEOTEXTURE);
+        GL.drawElements(GL.TRIANGLES, 3, GL.UNSIGNED_SHORT, 0);
+
+        if (ISDETECTED) {
+          const aspect = CV.width / CV.height;
+
+          // move the cube in order to fit the head:
+          const tanFOV = Math.tan(aspect * SETTINGS.cameraFOV * Math.PI / 360); // tan(FOV/2), in radians
+          const W = detectState.s;  // relative width of the detection window (1-> whole width of the detection window)
+          const D = 1 / (2 * W * tanFOV); // distance between the front face of the cube and the camera
+
+          // coords in 2D of the center of the detection window in the viewport:
+          const xv = detectState.x;
+          const yv = detectState.y;
+
+          // coords in 3D of the center of the cube (in the view coordinates system):
+          const z = -D - 0.5;   // minus because view coordinate system Z goes backward. -0.5 because z is the coord of the center of the cube (not the front face)
+          const x = xv * D * tanFOV;
+          const y = yv * D * tanFOV / aspect;
+
+          // move and rotate the cube:
+          set_mat4Position(MOVMATRIX, x, y + SETTINGS.pivotOffsetYZ[0], z + SETTINGS.pivotOffsetYZ[1]);
+          set_mat4RotationXYZ(MOVMATRIX, detectState.rx + SETTINGS.rotationOffsetX, detectState.ry, detectState.rz);
+
+          // render the canvas above:
+          GL.clear(GL.DEPTH_BUFFER_BIT);
+          GL.enable(GL.BLEND);
+          GL.blendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
+          GL.useProgram(SHADERCANVAS.program);
+          GL.enableVertexAttribArray(SHADERCANVAS.position);
+          GL.enableVertexAttribArray(SHADERCANVAS.uv);
+          GL.uniformMatrix4fv(SHADERCANVAS.movMatrix, false, MOVMATRIX);
+          if (PROJMATRIXNEEDSUPDATE) {
+            update_projMatrix();
+          }
+          GL.bindTexture(GL.TEXTURE_2D, CANVASTEXTURE);
+          if (CANVASTEXTURENEEDSUPDATE) {
+            GL.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, CANVAS2D);
+            CANVASTEXTURENEEDSUPDATE = false;
+          }
+          GL.bindBuffer(GL.ARRAY_BUFFER, VBO_VERTEX);
+          GL.vertexAttribPointer(SHADERCANVAS.position, 3, GL.FLOAT, false, 20, 0);
+          GL.vertexAttribPointer(SHADERCANVAS.uv, 2, GL.FLOAT, false, 20, 12);
+          GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, VBO_FACES);
+          GL.drawElements(GL.TRIANGLES, 6, GL.UNSIGNED_SHORT, 0);
+          GL.disableVertexAttribArray(SHADERCANVAS.uv);
+          GL.disableVertexAttribArray(SHADERCANVAS.position);
+          GL.disable(GL.BLEND);
+        } //end if face detected
+      } //end callbackTrack()
+    }); //end JEEFACEFILTERAPI.init call
+  })
 }
