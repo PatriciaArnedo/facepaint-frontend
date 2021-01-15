@@ -1,19 +1,35 @@
 import React from 'react'
 import MainContainer from './MainContainer'
 import Header from '../components/Header'
+import WelcomePage from '../components/WelcomePage'
+
+import { Route, Switch, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 
 
-function RootContainer() {
+function RootContainer(props) {
 
 
     return (
         <div className="parent">
-        <Header />
-        <MainContainer />
+            <Header />
+
+            <Switch>
+                <Route path="/welcome" render={() => <WelcomePage />} />
+                <Route path="/home" render={() => <MainContainer />} />
+            </Switch>
+            {props.user ? <Redirect to="/home" /> : <Redirect to="/welcome" />}
+
         </div>
     )
 
 }
 
-export default RootContainer
+function msp(state) {
+    return {
+        user: state.user,
+    }
+}
+
+export default (connect(msp)(RootContainer))

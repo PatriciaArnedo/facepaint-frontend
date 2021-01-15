@@ -10,6 +10,8 @@
     .header { grid-area: 1 / 1 / 2 / 7; }
     .filter-gallery { grid-area: 2 / 1 / 10 / 2; }
     .filter-maker { grid-area: 2 / 2 / 10 / 7; }
+    .welcome { grid-area: 2 / 1 / 10 / 7; }
+
 
 
 /* Face Filter CSS */
@@ -21,7 +23,7 @@
     left: 50%;
     top: 50%;
     transform:  rotateY(180deg);
-    display: inline-block
+    display: inline-block;
     /* width: 100vmin; */
     /* transform: translate(-50%, -50%) */
     /* position: absolute;  */
@@ -30,6 +32,28 @@
 /* Header CSS */
 .header{
     background-color: rgb(0, 200, 255);
+    display: inline-flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    align-content: stretch;
+    align-items: center;
+}
+
+.app-name{
+    display:inline-block;
+    margin-left: 40px;
+
+}
+
+.user-greeting{
+    margin-left: 900px;
+}
+
+/* Welcome Page CSS */
+
+.welcome{
+    text-align: center;
 }
 
 /* Filter Gallery CSS */
@@ -39,7 +63,19 @@
 
 /* Filter Maker CSS */
 .filter-maker{
-    text-align: center;
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    flex-shrink: 0;
 }
 
+/* Form CSS */
+
+#logout-btn{
+    margin-right: 40px;
+}
+
+.login-form{
+    margin-right: 40px;
+}
 

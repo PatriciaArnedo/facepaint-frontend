@@ -1,6 +1,8 @@
 import React from 'react'
 import FaceFilter from './FaceFilter'
-import main from "./FaceFilterSource"
+import main, {update_canvasTexture} from "./FaceFilterSource"
+import { connect } from 'react-redux'
+
 
 
 class FilterMaker extends React.Component {
@@ -13,6 +15,7 @@ class FilterMaker extends React.Component {
         adaptiveStroke: true,
         recordStrokes: true,
         atrament: undefined,
+        canvas: document.createElement('canvas'),
     }
 
     setAtrament = () => {
@@ -29,12 +32,19 @@ class FilterMaker extends React.Component {
         this.setState({atrament})
     }
 
-    componentDidMount() {
-        const canvas = document.createElement('canvas');
-        main(canvas).then((atrament) => {
-            this.setState({atrament}, this.setAtrament)
-        })
+    componentDidMount = () => {
+        if(this.props.user) {
+            main(this.state.canvas).then((atrament) => {
+                this.setState({atrament}, this.setAtrament)
+            })
+        }
     }
+
+    // componentWillUnmount = () => {
+    //     if(!this.props.user){
+    //         this.abortController.abort()
+    //     }
+    // }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value },this.setAtrament)
@@ -42,15 +52,19 @@ class FilterMaker extends React.Component {
 
     clickHandler = (e) => {
         e.preventDefault()
+        
         this.state.atrament.clear()
+        update_canvasTexture()
     }
 
     render() {
         return (
             <div className="filter-maker">
+                <div>
                 <h1>Make a Filter</h1>
                 <FaceFilter />
-                <form style={{display:"inline-block"}}>
+                </div>
+                <form id="drawing-form" style={{display:"inline-block"}}>
                     <label>
                         Choose a Mode:
                         <select name="mode" value={this.state.mode} onChange={this.handleChange}>
@@ -59,6 +73,7 @@ class FilterMaker extends React.Component {
                             <option value="fill">Fill</option>
                         </select>
                     </label>
+                    <br />
                     <label>
                         Stroke Thickness:
                     <input
@@ -67,6 +82,7 @@ class FilterMaker extends React.Component {
                             value={this.state.weight}
                             onChange={this.handleChange} />
                     </label>
+                    <br />
                     <label>
                         Stroke Color:
                     <input
@@ -75,7 +91,8 @@ class FilterMaker extends React.Component {
                             value={this.state.color}
                             onChange={this.handleChange} />
                     </label>
-                    <button clickHandler={this.clickHandler}>Clear Canvas</button>
+                    <br />
+                    <button onClick={this.clickHandler}>Clear Canvas</button>
                 </form>
             </div >
         )
@@ -83,4 +100,11 @@ class FilterMaker extends React.Component {
 
 }
 
-export default FilterMaker
+function msp(state){
+    return {
+        user: state.user
+    }
+}
+
+
+export default connect(msp)(FilterMaker)

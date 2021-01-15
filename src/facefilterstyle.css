@@ -1,0 +1,29 @@
+
+/* body {overflow: auto; overflow-y: auto;
+  background-color: white;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: contain;
+  margin: 0px;} */
+
+#jeeFaceFilterCanvas {
+  z-index: 10;
+  max-height: 75%;
+  max-width: 75%;
+  left: 50%;
+  top: 50%;
+  transform:  rotateY(180deg);
+  /* width: 100vmin; */
+  /* transform: translate(-50%, -50%) */
+  /* position: absolute;  */
+} 
+
+
+
+/* @media (max-width: 787px) {
+  #jeeFaceFilterCanvas {
+    right: 0px;
+    top: 60px;
+    transform: rotateY(180deg);
+  }
+} */
