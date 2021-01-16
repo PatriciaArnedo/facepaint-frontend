@@ -32,7 +32,7 @@ class Header extends React.Component {
     render() {
         return (
             <div className="header">
-                <h1 className="app-name">FacePaint</h1>
+                <h1 id="app-name">FacePaint</h1>
                 {this.loggedInHandler()}
             </div>
         )

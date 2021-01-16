@@ -31,6 +31,11 @@ const SETTINGS = {
   canvasSizePx: 512 // resolution of the 2D canvas in pixels originally 512
 };
 
+ 
+// export const cameraCanvas = document.createElement('canvas')
+// cameraCanvas.width=600 
+// cameraCanvas.height=600
+
 let prevPoint = null
 export let atrament = null
 // some globalz:
@@ -43,6 +48,23 @@ let MOVMATRIX = create_mat4Identity(), MOVMATRIXINV = create_mat4Identity();
 let ZPLANE = 0, YPLANE = 0;
 let ISDETECTED = false;
 
+let eventListenersEnabled = true
+export const setEventListnerEnabled = (enabled) => {
+  eventListenersEnabled = enabled
+}
+
+export const loadImageToCanvas = (imgSrc) => {
+    if (!CTX) {
+      console.warn('refusing to load image to canvas as CTX has not been set')
+      return
+    }
+    const img = new Image()
+    img.src = imgSrc;
+    img.onload = function(){
+      CTX.drawImage(img, 0, 0, img.width, img.height, 0, 0, CANVAS2D.width, CANVAS2D.height);
+      update_canvasTexture();
+    }
+}
 
 // callback: launched if a face is detected or lost.
 function detect_callback(isDetected) {
@@ -191,14 +213,7 @@ function init_scene(spec, canvasPassed) {
   CANVAS2D.width = SETTINGS.canvasSizePx;
   CANVAS2D.height = Math.round(SETTINGS.canvasSizePx * SETTINGS.scale[1] / SETTINGS.scale[0]);
   CTX = CANVAS2D.getContext('2d');
-  // CTX.strokeStyle = SETTINGS.strokeStyle;
-  // CTX.lineWidth = 4;
-  //   const frameImage = new Image()
-  //   frameImage.src = '/frame.png';
-  //   frameImage.onload = function(){
-  //     CTX.drawImage(frameImage, 0, 0, frameImage.width, frameImage.height, 0, 0, CANVAS2D.width, CANVAS2D.height);
-  //     update_canvasTexture();
-  //   }
+  
 
   atrament = new Atrament(CANVAS2D);
 
@@ -347,6 +362,9 @@ function get_eventLoc(event) { // return the position of the picked point in pix
 } //end get_eventLoc()
 
 function onMouseDown(event) {
+  if (!eventListenersEnabled) {
+    return
+  }
   if (MOUSESTATE !== MOUSESTATES.idle || !ISDETECTED) return;
   MOUSESTATE = MOUSESTATES.drag;
 
@@ -358,6 +376,9 @@ function onMouseDown(event) {
   // CTX.moveTo(OLDXY[0], OLDXY[1]);
 }
 function onMouseMove(event) {
+  if (!eventListenersEnabled) {
+    return
+  }
   if (MOUSESTATE !== MOUSESTATES.drag) return;
   if (!ISDETECTED) {
     onMouseUp(event);
@@ -376,6 +397,9 @@ function onMouseMove(event) {
   event.preventDefault(); // disable scroll or fancy stuffs
 }
 function onMouseUp(event) {
+  if (!eventListenersEnabled) {
+    return
+  }
   if (MOUSESTATE !== MOUSESTATES.drag) return;
   MOUSESTATE = MOUSESTATES.idle;
   //end stroke on atrament on mouse up
@@ -389,10 +413,17 @@ export function update_canvasTexture() {
   CANVASTEXTURENEEDSUPDATE = true;
 }
 
+let mainCalled = false
 // entry point - launched by body.onload():
 export default function main(canvasPassed) {
   return new Promise((resolve, reject) => {
+    if(mainCalled){
+      console.warn("Main Called More Than Once! BEWARE!")
+      return resolve(atrament)
+    }
+    mainCalled = true
     JEEFACEFILTERAPI.init({
+      // canvas: cameraCanvas,
       canvasId: 'jeeFaceFilterCanvas',
       NNC: neuralNetworkModel,
       maxFacesDetected: 1,
@@ -406,7 +437,7 @@ export default function main(canvasPassed) {
         console.log('INFO: JEEFACEFILTERAPI IS READY');
         const at = init_scene(spec, canvasPassed);
         init_eventListeners()
-        resolve(at)
+        return resolve(at)
       }, //end callbackReady()
 
       // called at each render iteration (drawing loop):

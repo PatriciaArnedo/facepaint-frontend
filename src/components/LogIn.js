@@ -30,7 +30,7 @@ class LogIn extends React.Component {
         return (
             <div>
                 <div>
-                    <form className="login-form" onSubmit={this.submitHandler}>
+                    <form id="login-form" onSubmit={this.submitHandler}>
 
                         <input
                             type="text"

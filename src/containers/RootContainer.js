@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 
 function RootContainer(props) {
 
-
     return (
         <div className="parent">
             <Header />
@@ -18,6 +17,8 @@ function RootContainer(props) {
             <Switch>
                 <Route path="/welcome" render={() => <WelcomePage />} />
                 <Route path="/home" render={() => <MainContainer />} />
+                <Route path="/new-filter" render={() => <MainContainer />} />
+                <Route path="/filter-gallery" render={() => <MainContainer />} />
             </Switch>
             {props.user ? <Redirect to="/home" /> : <Redirect to="/welcome" />}
 

@@ -1,24 +1,15 @@
 import React from 'react'
+// import { cameraCanvas } from './FaceFilterSource'
 
 
-class FaceFilter extends React.Component {
+const FaceFilter = () => {
 
-
-    componentDidMount() {
-
-        
-    
-    }
-
-    render() {
-
-        return (
-            <div className="video-canvas">
-                <canvas id='jeeFaceFilterCanvas' width="600" height="600" />
-            </div>
-        )
-    }
-
+    return (
+        <div className="video-canvas">
+            {/* cameraCanvas */}
+            <canvas id='jeeFaceFilterCanvas' width="600" height="600" />
+        </div>
+    )
 }
 
 export default FaceFilter

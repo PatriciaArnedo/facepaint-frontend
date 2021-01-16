@@ -5,7 +5,7 @@ function WelcomePage (props) {
 
     return (
       <div className="welcome">
-        <h1>Welcome to FacePaint</h1>
+        <h1 id="welcome-text">Welcome to FacePaint</h1>
         <SignUp />
       </div>
     )

@@ -1,18 +1,37 @@
 import React from 'react'
 import FilterMaker from '../components/FilterMaker'
-import FilterContainer from './FilterContainer'
+import SidebarMenu from '../components/SidebarMenu'
+import FilterGallery from './FilterGallery'
+import { withRouter } from 'react-router-dom'
 
 
-function MainContainer() {
+
+function MainContainer(props) {
 
 
     return (
         <>
-        <FilterContainer />
-        <FilterMaker />
+            <SidebarMenu />
+            {props.match.path === '/home' ?
+                null
+                :
+                null
+            }
+
+            {props.match.path === '/new-filter' ?
+                <FilterMaker />
+                :
+                null
+            }
+
+            {props.match.path === '/filter-gallery' ?
+                <FilterGallery />
+                :
+                null
+            }
         </>
     )
 
 }
 
-export default MainContainer
+export default withRouter(MainContainer)

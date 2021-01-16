@@ -64,5 +64,6 @@ export const logIn = (userObj) => {
 
 export const logOut = () => {
     localStorage.removeItem("USER_DATA")
+    window.location.reload()
     return { type: LOG_OUT }
 }
