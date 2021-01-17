@@ -1,6 +1,6 @@
 import React from 'react'
 import FaceFilterCanvas from './FaceFilterCanvas'
-import { cameraStartup, loadImageToCanvas } from "../FaceFilterLibrary/FaceFilterSource"
+import { cameraStartup } from "../FaceFilterLibrary/FaceFilterSource"
 import { connect } from 'react-redux'
 
 

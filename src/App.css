@@ -84,10 +84,20 @@
 }
 
 #filter-thumb {
-    max-width: 150px;
+    max-width: 120px;
 }
 
-
+#filter-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    overflow: auto;
+    height: 600px;
+    max-width: 450px;
+}
 /* Form CSS */
 
 #logout-btn{

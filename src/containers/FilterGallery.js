@@ -19,7 +19,6 @@ class FilterGallery extends React.Component {
         return (
             <div className="filter-gallery">
                 <div>
-                    <h2>Filter Gallery</h2>
                     <FilterTryOn />
                 </div>
                 <div>

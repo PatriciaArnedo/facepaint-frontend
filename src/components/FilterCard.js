@@ -14,9 +14,8 @@ function FilterCard(props){
     
     return(
         <div>
-            <h4>{props.filterObj.name}</h4>
-            <br />
             <img onClick={mapImgToFace} id ="filter-thumb" src={props.filterObj.img} alt="Filter"/>
+            <h4>{props.filterObj.name}</h4>
         </div>
     )
 
