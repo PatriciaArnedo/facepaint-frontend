@@ -8,6 +8,7 @@ class Header extends React.Component {
 
 
 
+    //handles dummy auth by running login function on refresh
     componentDidMount = () => {
         this.props.submitHandler(undefined)
     }
@@ -17,6 +18,7 @@ class Header extends React.Component {
     }
 
     loggedInHandler = () => {
+        //conditionally renders log out button and user greeting
         if(this.props.user){
             return (
                 <>

@@ -74,17 +74,19 @@
     flex-shrink: 0;
 }
 
-#filter-thumb {
-    max-width: 330px;
-}
 
-/* Filter Try On CSS */
-.filter-try-on{
+/* Filter Gallery CSS */
+.filter-gallery{
     display: flex;
     flex-direction: row; 
     justify-content: space-around;
     flex-shrink: 0;
 }
+
+#filter-thumb {
+    max-width: 150px;
+}
+
 
 /* Form CSS */
 

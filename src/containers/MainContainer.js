@@ -1,5 +1,5 @@
 import React from 'react'
-import FilterMaker from '../components/FilterMaker'
+import CreateFilter from '../components/CreateFilter'
 import SidebarMenu from '../components/SidebarMenu'
 import FilterGallery from './FilterGallery'
 import { withRouter } from 'react-router-dom'
@@ -19,7 +19,7 @@ function MainContainer(props) {
             }
 
             {props.match.path === '/new-filter' ?
-                <FilterMaker />
+                <CreateFilter />
                 :
                 null
             }

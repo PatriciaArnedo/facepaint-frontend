@@ -1,13 +1,5 @@
 /* eslint-disable */
 
-"use strict";
-
-
-import * as JEEFACEFILTERAPI from "facefilter/dist/jeelizFaceFilter.module.js"
-import neuralNetworkModel from "facefilter/neuralNets/NN_DEFAULT.json"
-import * as Atrament from "atrament"
-
-
 /*
 The code of this demonstration may seems complicated but it is not
 If you want to play only with the 2D canvas displayed above the head,
@@ -17,54 +9,51 @@ You should call update_canvasTexture(); after in order to update the 3D canvas
 at the next rendering.
 */
 
+"use strict";
+import * as JEEFACEFILTERAPI from "facefilter/dist/jeelizFaceFilter.module.js"
+// ** import neural network that will be used 
+import neuralNetworkModel from "facefilter/neuralNets/NN_DEFAULT.json"
+// ** import entire atrament library
+import * as Atrament from "atrament"
 
-// SETTINGS of this demo:
+
+// SETTINGS
 const SETTINGS = {
-  strokeStyle: 'red',
   rotationOffsetX: 0, // negative -> look upper. in radians
   cameraFOV: 40,    // in degrees, 3D camera FOV
   pivotOffsetYZ: [0.2, 0.2], // XYZ of the distance between the center of the cube and the pivot
   detectionThreshold: 0.75, // sensibility, between 0 and 1. Less -> more sensitive
   detectionHysteresis: 0.05,
-  scale: [2, 2.58], // scale of the 2D canvas along horizontal and vertical 2D axis
+  // ** scale controls the height and width of the inner canvas
+  scale: [1.5, 2], // scale of the 2D canvas along horizontal and vertical 2D axis
   offsetYZ: [-0.1, -0.2], // offset of the 2D canvas along vertical and depth 3D axis
-  canvasSizePx: 512 // resolution of the 2D canvas in pixels originally 512
+  // ** canvassizepx is the resolution - the lower it is the larger the brush at lower numbers 
+  canvasSizePx: 1024 // resolution of the 2D canvas in pixels originally 512
 };
 
- 
-// export const cameraCanvas = document.createElement('canvas')
-// cameraCanvas.width=600 
-// cameraCanvas.height=600
+// ** setting atrament to be set to a canvas in init_scene function
+let atrament = null
 
+// ** global variables that came with this spaghetti code -_- 
 let prevPoint = null
-export let atrament = null
-// some globalz:
 let CV = null, CANVAS2D = null, CTX = null, GL = null, CANVASTEXTURE = null, CANVASTEXTURENEEDSUPDATE = false;
 let PROJMATRIX = null, PROJMATRIXNEEDSUPDATE = true;
 let VBO_VERTEX = null, VBO_FACES = null, SHADERCANVAS = null;
 let SHADERVIDEO = null, VIDEOTEXTURE = null, VIDEOTRANSFORMMAT2 = null;
 let MOVMATRIX = create_mat4Identity(), MOVMATRIXINV = create_mat4Identity();
-
 let ZPLANE = 0, YPLANE = 0;
 let ISDETECTED = false;
 
+// ** custom function that is exported to be used by react components. 
+// ** toggles eventlistenerenabled variable which is used in event listener functions
 let eventListenersEnabled = true
 export const setEventListnerEnabled = (enabled) => {
   eventListenersEnabled = enabled
 }
 
-export const loadImageToCanvas = (imgSrc) => {
-    if (!CTX) {
-      console.warn('refusing to load image to canvas as CTX has not been set')
-      return
-    }
-    const img = new Image()
-    img.src = imgSrc;
-    img.onload = function(){
-      CTX.drawImage(img, 0, 0, img.width, img.height, 0, 0, CANVAS2D.width, CANVAS2D.height);
-      update_canvasTexture();
-    }
-}
+
+//---------The following is the library's spaghetti code----------//
+
 
 // callback: launched if a face is detected or lost.
 function detect_callback(isDetected) {
@@ -200,6 +189,7 @@ function update_projMatrix() {
 //END WEBGL HELPERS
 
 
+// ** this function is called in main, takes canvas created in react as canvaspassed argument
 //build the 3D. called once when Jeeliz Face Filter is OK
 function init_scene(spec, canvasPassed) {
   // affect some globalz:
@@ -214,8 +204,6 @@ function init_scene(spec, canvasPassed) {
   CANVAS2D.height = Math.round(SETTINGS.canvasSizePx * SETTINGS.scale[1] / SETTINGS.scale[0]);
   CTX = CANVAS2D.getContext('2d');
   
-
-  atrament = new Atrament(CANVAS2D);
 
   // create the WebGL texture with the canvas:
   CANVASTEXTURE = GL.createTexture();
@@ -297,10 +285,15 @@ function init_scene(spec, canvasPassed) {
   GL.disableVertexAttribArray(shpCanvas, SHADERCANVAS.position);
   GL.disableVertexAttribArray(shpCanvas, SHADERCANVAS.uv);
 
+  //------------------!!ATRAMENT GETS DEFINED!!---------------------//
+  // ** CANVAS2D gets turned into atrament canvas
+  atrament = new Atrament(CANVAS2D);
+  // ** atrament gets returned here and later returned by main to be used by react component
   return atrament
 } //end init_scene()
 
 
+//-----------------Event Listeners--------------------//
 
 //BEGIN MOUSE/TOUCH EVENTS FUNCTIONS
 const MOUSESTATES = {
@@ -362,6 +355,7 @@ function get_eventLoc(event) { // return the position of the picked point in pix
 } //end get_eventLoc()
 
 function onMouseDown(event) {
+  // ** checks variable to enable/disable event listeners
   if (!eventListenersEnabled) {
     return
   }
@@ -376,6 +370,7 @@ function onMouseDown(event) {
   // CTX.moveTo(OLDXY[0], OLDXY[1]);
 }
 function onMouseMove(event) {
+  // ** checks variable to enable/disable event listeners
   if (!eventListenersEnabled) {
     return
   }
@@ -397,6 +392,7 @@ function onMouseMove(event) {
   event.preventDefault(); // disable scroll or fancy stuffs
 }
 function onMouseUp(event) {
+  // ** checks variable to enable/disable event listeners
   if (!eventListenersEnabled) {
     return
   }
@@ -408,22 +404,88 @@ function onMouseUp(event) {
 //END MOUSE/TOUCH EVENTS FUNCTIONS
 
 
+//----------Exported and custom functions-----------//
+
 export function update_canvasTexture() {
-  // console.log('updating canvas', CANVASTEXTURENEEDSUPDATE)
+  // ** this function is used in react when clearing the canvas/trying on filters
   CANVASTEXTURENEEDSUPDATE = true;
 }
 
+// ** custom function that is exported to be used by react components. 
+//** uses code from facefilter library to map filter image to inner canvas
+export const loadImageToCanvas = (imgSrc) => {
+  if (!CTX) {
+    console.warn('refusing to load image to canvas as CTX has not been set')
+    return
+  }
+  atrament.clear()
+  const img = new Image()
+  img.src = imgSrc;
+  img.onload = function(){
+    CTX.drawImage(img, 0, 0, img.width, img.height, 0, 0, CANVAS2D.width, CANVAS2D.height);
+    update_canvasTexture();
+  }
+}
+
+// ** this function stops the facefilter from running, exported to be used in react
+export async function cameraShutdown() {
+  await JEEFACEFILTERAPI.destroy()
+}
+
+// ** this exported function starts up the facefilter in react 
+export async function cameraStartup(canvasPassed) {
+  // ** these globals needed to be reset in order to restart the face filter
+  prevPoint = null
+  atrament = null
+  CV = null
+  CANVAS2D = null
+  CTX = null
+  GL = null
+  CANVASTEXTURE = null
+  CANVASTEXTURENEEDSUPDATE = false;
+  PROJMATRIX = null
+  PROJMATRIXNEEDSUPDATE = true;
+  VBO_VERTEX = null
+  VBO_FACES = null
+  SHADERCANVAS = null;
+  SHADERVIDEO = null
+  VIDEOTEXTURE = null
+  VIDEOTRANSFORMMAT2 = null;
+  MOVMATRIX = create_mat4Identity()
+  MOVMATRIXINV = create_mat4Identity();
+  ZPLANE = 0
+  YPLANE = 0;
+  ISDETECTED = false;
+
+  // ** if main has not been called, it calls main
+  if (!mainCalled) {
+    return main(canvasPassed)
+  }
+  // ** else it stops main and starts up main again, otherwise the facefilter will not start on re-renders
+  return JEEFACEFILTERAPI.destroy().then(() => {
+    mainCalled = false
+    return main(canvasPassed)
+  })
+}
+
 let mainCalled = false
-// entry point - launched by body.onload():
+// ** main function that runs the face filter
 export default function main(canvasPassed) {
+  // ** reset CANVAS2D to act on the passed canvas, was running into bugs on rerender
+  if (CANVAS2D) {
+    canvasPassed = CANVAS2D
+  }
+
+  // ** returns a promise to handle async functions
   return new Promise((resolve, reject) => {
     if(mainCalled){
       console.warn("Main Called More Than Once! BEWARE!")
       return resolve(atrament)
     }
     mainCalled = true
+    
     JEEFACEFILTERAPI.init({
-      // canvas: cameraCanvas,
+      //takes the canvas created in the facefiltercanvas react component
       canvasId: 'jeeFaceFilterCanvas',
       NNC: neuralNetworkModel,
       maxFacesDetected: 1,
@@ -433,11 +495,11 @@ export default function main(canvasPassed) {
           console.log('AN ERROR HAPPENS. SORRY BRO :( . ERR =', errCode);
           return;
         }
-
         console.log('INFO: JEEFACEFILTERAPI IS READY');
-        const at = init_scene(spec, canvasPassed);
+        // ** init_scene returns atrament
+        const atrament = init_scene(spec, canvasPassed);
         init_eventListeners()
-        return resolve(at)
+        return resolve(atrament)
       }, //end callbackReady()
 
       // called at each render iteration (drawing loop):
@@ -508,4 +570,5 @@ export default function main(canvasPassed) {
       } //end callbackTrack()
     }); //end JEEFACEFILTERAPI.init call
   })
+  
 }
