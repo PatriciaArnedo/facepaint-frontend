@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_FILTERS } from './actionTypes'
+import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_FILTERS, DELETE_FILTER } from './actionTypes'
 
 export const signUp = (userObj) => {
     return function (dispatch) {
@@ -99,3 +99,16 @@ export const getFilters = (userId) => {
         })
     }
 }
+
+export const deleteFilter = (filterId) => {
+    return function(dispatch) {
+        fetch(`http://localhost:3000/api/v1/filters/${filterId}`,{
+            method: "DELETE"
+        })
+        .then(r => r.json())
+        .then(dispatch({type: DELETE_FILTER, payload: filterId}))
+        .catch(console.log)
+    }
+}
+
+

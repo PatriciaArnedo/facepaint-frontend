@@ -92,11 +92,17 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-content: center;
-    align-items: center;
     overflow: auto;
     height: 600px;
     max-width: 450px;
+}
+
+#delete-button {
+    margin: 10px;
+}
+
+.centered-div {
+    text-align: center;
 }
 /* Form CSS */
 

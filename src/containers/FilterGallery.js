@@ -21,8 +21,9 @@ class FilterGallery extends React.Component {
                 <div>
                     <FilterTryOn />
                 </div>
-                <div>
+                <div className="centered-div">
                     <h3>Your Filters</h3>
+                   
                     <div id="filter-container">
                         {this.renderFilters()}
                     </div>
@@ -41,7 +42,7 @@ function msp(state) {
 
 function mdp(dispatch) {
     return {
-        getFilters: (userId) => dispatch(getFilters(userId))
+        getFilters: (userId) => dispatch(getFilters(userId)),
     }
 }
 

@@ -363,7 +363,7 @@ function onMouseDown(event) {
   MOUSESTATE = MOUSESTATES.drag;
 
   OLDXY = get_eventLoc(event);
-  //use mousedown event to draw on atrament canvas
+  // ** use mousedown event to draw on atrament canvas
   atrament.beginStroke(OLDXY[0], OLDXY[1]);
   prevPoint = { x: OLDXY[0], y: OLDXY[1] }
   // CTX.beginPath();
@@ -380,7 +380,7 @@ function onMouseMove(event) {
     return;
   }
   const xy = get_eventLoc(event);
-  //use mouse move event to draw path on atrament canvas
+  // ** use mouse move event to draw path on atrament canvas
   const { x, y } = atrament.draw(xy[0], xy[1], prevPoint.x, prevPoint.y);
   prevPoint = { x, y };
 
@@ -410,6 +410,12 @@ export function update_canvasTexture() {
   // ** this function is used in react when clearing the canvas/trying on filters
   CANVASTEXTURENEEDSUPDATE = true;
 }
+
+// ** custom function that is exported to be used by react components 
+// export function changeOpacity(opacity) {
+//   CTX.globalAlpha = opacity
+// }
+
 
 // ** custom function that is exported to be used by react components. 
 //** uses code from facefilter library to map filter image to inner canvas

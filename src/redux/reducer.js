@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_FILTERS } from './actionTypes'
+import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_FILTERS, DELETE_FILTER } from './actionTypes'
 import { combineReducers } from 'redux'
 
 
@@ -40,6 +40,8 @@ function filterReducer(currentState = defaultState.filters, action) {
             return [...currentState, action.payload]
         case GET_FILTERS:
             return action.payload
+        case DELETE_FILTER:
+            return currentState.filter(filter => filter.id != action.payload)
         default:
             return currentState
     }

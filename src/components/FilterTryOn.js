@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 
 
-class FilterMaker extends React.Component {
+class FilterTryOn extends React.Component {
 
     state = {
         //atrament will be stored in state after being returned from camerastartup function
@@ -43,4 +43,4 @@ function msp(state) {
 }
 
 
-export default connect(msp)(FilterMaker)
+export default connect(msp)(FilterTryOn)
