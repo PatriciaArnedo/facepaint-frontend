@@ -42,9 +42,12 @@
 }
 
 #app-name{
-    display:inline-block;
     margin-left: 40px;
+}
 
+.header a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 
 .user-greeting{

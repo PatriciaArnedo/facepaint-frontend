@@ -2,6 +2,7 @@ import React from 'react'
 import LogIn from './LogIn'
 import { logOut, logIn } from '../redux/actions'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 
 class Header extends React.Component {
@@ -19,11 +20,11 @@ class Header extends React.Component {
 
     loggedInHandler = () => {
         //conditionally renders log out button and user greeting
-        if(this.props.user){
+        if (this.props.user) {
             return (
                 <>
-                <h3 className="user-greeting">Hi {this.props.user}</h3>
-                <button id="logout-btn" className="button" onClick={this.logOutHandler}>Log Out</button>
+                    <h3 className="user-greeting">Hi {this.props.user}</h3>
+                    <button id="logout-btn" className="button" onClick={this.logOutHandler}>Log Out</button>
                 </>
             )
         } else {
@@ -34,7 +35,9 @@ class Header extends React.Component {
     render() {
         return (
             <div className="header">
-                <h1 id="app-name">FacePaint</h1>
+                <NavLink to={this.props.user ? '/home' : '/welcome'}>
+                    <h1 id="app-name">Face Paint</h1>
+                </NavLink>
                 {this.loggedInHandler()}
             </div>
         )
