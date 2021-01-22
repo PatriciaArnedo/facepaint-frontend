@@ -7,12 +7,21 @@ import FilterCard from '../components/FilterCard'
 
 class SavedFilters extends React.Component {
 
+    state ={
+        searchTerm: ""
+    }
+
     componentDidMount() {
         this.props.getSavedFilters(this.props.userId)
     }
 
     renderFilters = () => {
-        return this.props.savedFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={true} />)
+        const filteredFilters = this.props.savedFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={true} />)
+    }
+
+    searchOnChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     render() {
@@ -23,7 +32,14 @@ class SavedFilters extends React.Component {
                 </div>
                 <div className="centered-div">
                     <h3>My Saved Filters</h3>
-                   
+                    <input
+                        id="form-input"
+                        type="text"
+                        value={this.state.searchTerm}
+                        onChange={this.searchOnChange}
+                        name="searchTerm"
+                        placeholder="Search Filters by Name"
+                    />
                     <div id="filter-container">
                         {this.renderFilters()}
                     </div>

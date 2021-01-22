@@ -97,8 +97,9 @@
     flex-wrap: wrap;
     justify-content: space-around;
     overflow: auto;
-    height: 550px;
+    height: 500px;
     max-width: 450px;
+    min-width: 450px;
 }
 
 #delete-button {

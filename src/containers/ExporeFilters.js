@@ -7,12 +7,21 @@ import FilterCard from '../components/FilterCard'
 
 class ExploreFilters extends React.Component {
 
+    state ={
+        searchTerm: ""
+    }
+
     componentDidMount() {
         this.props.getAllFilters(this.props.userId)
     }
 
     renderFilters = () => {
-        return this.props.allFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} />)
+        const filteredFilters = this.props.allFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={false} />)
+    }
+
+    searchOnChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     render() {
@@ -23,7 +32,14 @@ class ExploreFilters extends React.Component {
                 </div>
                 <div className="centered-div">
                     <h3>Explore Filters</h3>
-                   
+                    <input
+                        id="form-input"
+                        type="text"
+                        value={this.state.searchTerm}
+                        onChange={this.searchOnChange}
+                        name="searchTerm"
+                        placeholder="Search Filters by Name"
+                    />
                     <div id="filter-container">
                         {this.renderFilters()}
                     </div>
