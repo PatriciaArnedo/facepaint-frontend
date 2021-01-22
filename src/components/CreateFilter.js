@@ -96,7 +96,6 @@ class CreateFilter extends React.Component {
         return (
             <div className="filter-maker">
                 <div>
-                    <h2>Make a Filter</h2>
                     <FaceFilterCanvas />
                 </div>
                 <div>

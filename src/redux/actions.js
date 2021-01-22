@@ -165,13 +165,13 @@ export const saveFilter = (saveObj) => {
     }
 }
 
-export const getUsers = () => {
+export const getUsers = (userId) => {
     return function(dispatch) {
         fetch('http://localhost:3000/api/v1/users')
         .then(r => r.json())
         .then(arrayOfUsers => {
-            console.log("got array of users:", arrayOfUsers)
-            dispatch( {type: GET_USERS, payload: arrayOfUsers })
+            const newArray = arrayOfUsers.filter(user => user.id !== userId)
+            dispatch( {type: GET_USERS, payload: newArray })
         })
     }
 }

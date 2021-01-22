@@ -42,7 +42,7 @@ function FilterCard(props) {
             {props.belongsToUser ?
                 props.isSavedFilter ? <h5>@{props.filterObj.username}</h5> : null
                 :
-                <h5>@{props.filterObj.username}</h5>
+                props.isUserCard ? null : <h5>@{props.filterObj.username}</h5>
             }
             {props.belongsToUser ?
                 <button onClick={deleteClickHandler} >Delete Filter</button>

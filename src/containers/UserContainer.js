@@ -8,17 +8,20 @@ class UserContainer extends React.Component {
 
 
     componentDidMount (){
-        this.props.getUsers()
+        this.props.getUsers(this.props.userId)
     }
 
     renderUsers = () => {
-        this.props.users.map(userObj => <UserCard  key={userObj.id} userObj={userObj} />)
+        return this.props.users.map(userObj => <UserCard  key={userObj.id} userObj={userObj} />)
     }
 
     render(){
         return(
             <div className="user-gallery">
                 <h1>Discover Artists</h1>
+                <div className="user-container">
+                {this.renderUsers()}
+                </div>
             </div>
         )
     }
@@ -27,13 +30,14 @@ class UserContainer extends React.Component {
 
 function msp(state){
     return{
-        users: state.users
+        users: state.users,
+        userId:state.userId
     }
 }
 
 function mdp(dispatch){
 return {
-        getUsers: () => dispatch(getUsers()),
+        getUsers: (userId) => dispatch(getUsers(userId)),
     }
 }
 
