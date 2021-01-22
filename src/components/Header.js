@@ -25,15 +25,16 @@ class Header extends React.Component {
             return (
                 <>
                     <button onClick={() => this.clickHandler("new")} >Create Filter</button>
-                    <button onClick={() => this.clickHandler("gallery")} >My Filters</button>
                     <button onClick={() => this.clickHandler("home")} >Explore Filters</button>
-                    <button onClick={() => this.clickHandler("saved")} >Saved Filters</button>
                     <button onClick={() => this.clickHandler("discover")} >Discover Artists</button>
+                    <button onClick={() => this.clickHandler("gallery")} >My Filters</button>
+                    <button onClick={() => this.clickHandler("saved")} >Saved Filters</button>
                     <h3 className="user-greeting">@{this.props.user}</h3>
                     <button id="logout-btn" className="button" onClick={this.logOutHandler}>Log Out</button>
                 </>
             )
         } else {
+            
             return <LogIn />
         }
     }

@@ -20,7 +20,7 @@ function RootContainer(props) {
                 <Route path="/filter-gallery" render={() => <MainContainer />} />
                 <Route path="/discover-artists" render={() => <MainContainer />} />
                 <Route path="/saved-filters" render={() => <MainContainer />} />
-
+                
             </Switch>
             {props.user ? <Redirect to="/home" /> : <Redirect to="/welcome" />}
 

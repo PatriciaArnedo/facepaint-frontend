@@ -44,10 +44,13 @@ function FilterCard(props) {
                 :
                 props.isUserCard ? null : <h5>@{props.filterObj.username}</h5>
             }
-            {props.belongsToUser ?
-                <button onClick={deleteClickHandler} >Delete Filter</button>
+            {props.user ?
+                props.belongsToUser ?
+                    <button onClick={deleteClickHandler} >Delete Filter</button>
+                    :
+                    <button onClick={saveClickHandler} >Save Filter</button>
                 :
-                <button onClick={saveClickHandler} >Save Filter</button>
+                null
             }
         </div>
     )
@@ -63,7 +66,8 @@ function mdp(dispatch) {
 
 function msp(state) {
     return {
-        userId: state.userId
+        userId: state.userId,
+        user: state.user
     }
 }
 
