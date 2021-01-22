@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, SAVE_FILTER, DELETE_SAVED_FILTER} from './actionTypes'
+import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, DELETE_SAVED_FILTER, GET_USERS} from './actionTypes'
 import { combineReducers } from 'redux'
 
 
@@ -7,7 +7,8 @@ const defaultState = {
     userId: 0,
     userFilters: [],
     allFilters: [],
-    savedFilters: []
+    savedFilters: [],
+    users: []
 }
 
 function userReducer(currentState = defaultState.user, action) {
@@ -43,7 +44,7 @@ function userFilterReducer(currentState = defaultState.userFilters, action) {
         case GET_USER_FILTERS:
             return action.payload
         case DELETE_USER_FILTER:
-            return currentState.filter(filter => filter.id != action.payload)
+            return currentState.filter(filter => filter.id !== action.payload)
         default:
             return currentState
     }
@@ -63,7 +64,16 @@ function savedFilterReducer(currentState = defaultState.savedFilters, action) {
         case GET_SAVED_FILTERS:
             return action.payload
         case DELETE_SAVED_FILTER:
-            return currentState.filter(savedFilter => savedFilter.id != action.payload)
+            return currentState.filter(savedFilter => savedFilter.id !== action.payload)
+        default:
+            return currentState
+    }
+}
+
+function usersReducer(currentState = defaultState.users, action) {
+    switch (action.type) {
+        case GET_USERS:
+            return action.payload
         default:
             return currentState
     }
@@ -74,7 +84,8 @@ const rootReducer = combineReducers({
     userId: userIdReducer,
     userFilters: userFilterReducer,
     allFilters: allFilterReducer,
-    savedFilters: savedFilterReducer
+    savedFilters: savedFilterReducer,
+    users: usersReducer
 })
 
 export default rootReducer

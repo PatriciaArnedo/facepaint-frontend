@@ -4,7 +4,7 @@ import { logOut, logIn } from '../redux/actions'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
-import { setEventListnerEnabled } from '../FaceFilterLibrary/FaceFilterSource'
+import { setEventListnerEnabled, cameraShutdown } from '../FaceFilterLibrary/FaceFilterSource'
 
 class Header extends React.Component {
 
@@ -28,7 +28,8 @@ class Header extends React.Component {
                     <button onClick={() => this.clickHandler("gallery")} >My Filters</button>
                     <button onClick={() => this.clickHandler("home")} >Explore Filters</button>
                     <button onClick={() => this.clickHandler("saved")} >Saved Filters</button>
-                    <h3 className="user-greeting">Hi {this.props.user}</h3>
+                    <button onClick={() => this.clickHandler("discover")} >Discover Artists</button>
+                    <h3 className="user-greeting">@{this.props.user}</h3>
                     <button id="logout-btn" className="button" onClick={this.logOutHandler}>Log Out</button>
                 </>
             )
@@ -58,6 +59,12 @@ class Header extends React.Component {
                 setEventListnerEnabled(false)
                 this.props.history.push('/saved-filters')
                 break
+            case "discover":
+                cameraShutdown()
+                this.props.history.push('/discover-artists')
+                break
+            default:
+                return
         }
     }
 

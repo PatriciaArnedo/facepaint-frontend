@@ -4,6 +4,7 @@ import FilterGallery from './FilterGallery'
 import { withRouter } from 'react-router-dom'
 import ExporeFilters from './ExporeFilters'
 import SavedFilters from './SavedFilters'
+import UserContainer from './UserContainer'
 
 
 
@@ -32,11 +33,11 @@ function MainContainer(props) {
                 null
             }
 
-            {/* {props.match.path === '/explore-filters' ?
-                <ExporeFilters />
+            {props.match.path === '/discover-artists' ?
+                <UserContainer />
                 :
                 null
-            } */}
+            }
 
             {props.match.path === '/saved-filters' ?
                 <SavedFilters />

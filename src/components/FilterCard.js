@@ -15,7 +15,7 @@ function FilterCard(props) {
     }
 
     const deleteClickHandler = () => {
-        if(props.isSavedFilter){
+        if (props.isSavedFilter) {
             props.deleteSavedFilter(props.filterObj.id)
             atrament.clear()
             update_canvasTexture()
@@ -39,6 +39,11 @@ function FilterCard(props) {
         <div className="filter-card">
             <img onClick={mapImgToFace} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
             <h4>{props.filterObj.name}</h4>
+            {props.belongsToUser ?
+                props.isSavedFilter ? <h5>@{props.filterObj.username}</h5> : null
+                :
+                <h5>@{props.filterObj.username}</h5>
+            }
             {props.belongsToUser ?
                 <button onClick={deleteClickHandler} >Delete Filter</button>
                 :

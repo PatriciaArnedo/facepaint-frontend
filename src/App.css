@@ -9,6 +9,7 @@
     
     .header { grid-area: 1 / 1 / 2 / 7; }
     .filter-gallery { grid-area: 2 / 1 / 14 / 7; }
+    .user-gallery { grid-area: 2 / 1 / 14 / 7; }
     .filter-maker { grid-area: 2 / 1 / 14 / 7; }
     .welcome { grid-area: 2 / 1 / 14 / 7; }
 
@@ -22,9 +23,6 @@
     top: 50%;
     transform:  rotateY(180deg);
     display: inline-block;
-    /* width: 100vmin; */
-    /* transform: translate(-50%, -50%) */
-    /* position: absolute;  */
     min-width:590px;
   } 
 
@@ -89,6 +87,8 @@
 
 #filter-thumb {
     max-width: 120px;
+    margin:10px 0px 0px 0px;
+
 }
 
 #filter-container{
@@ -97,7 +97,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     overflow: auto;
-    height: 500px;
+    height: 460px;
     max-width: 450px;
     min-width: 450px;
 }
@@ -134,5 +134,3 @@
 
 
 /* Code Cemetery  */
-
- /* .sidebar-menu { grid-area: 2 / 1 / 14 / 2; } */

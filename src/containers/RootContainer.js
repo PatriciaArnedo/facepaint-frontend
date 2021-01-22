@@ -18,7 +18,7 @@ function RootContainer(props) {
                 <Route path="/home" render={() => <MainContainer />} />
                 <Route path="/new-filter" render={() => <MainContainer />} />
                 <Route path="/filter-gallery" render={() => <MainContainer />} />
-                {/* <Route path="/explore-filters" render={() => <MainContainer />} /> */}
+                <Route path="/discover-artists" render={() => <MainContainer />} />
                 <Route path="/saved-filters" render={() => <MainContainer />} />
 
             </Switch>
