@@ -29,12 +29,13 @@ class Header extends React.Component {
                     <button onClick={() => this.clickHandler("discover")} >Discover Artists</button>
                     <button onClick={() => this.clickHandler("gallery")} >My Filters</button>
                     <button onClick={() => this.clickHandler("saved")} >Saved Filters</button>
-                    <h3 className="user-greeting">@{this.props.user}</h3>
+                    <NavLink to={'/edit-account'}>
+                        <h3 className="user-greeting">@{this.props.user}</h3>
+                    </NavLink>
                     <button id="logout-btn" className="button" onClick={this.logOutHandler}>Log Out</button>
                 </>
             )
         } else {
-            
             return <LogIn />
         }
     }
@@ -74,7 +75,7 @@ class Header extends React.Component {
         return (
             <div className="header">
                 <NavLink to={this.props.user ? '/home' : '/welcome'}>
-                    <h1 id="app-name">Face Paint</h1>
+                    <h1 id="app-name">facepaint</h1>
                 </NavLink>
                 {this.loggedInHandler()}
             </div>

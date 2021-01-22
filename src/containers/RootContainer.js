@@ -5,6 +5,7 @@ import WelcomePage from '../components/WelcomePage'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import UserProfile from '../components/UserProfile'
+import EditAccount from '../components/EditAccount'
 
 
 
@@ -21,15 +22,25 @@ function RootContainer(props) {
                 <Route path="/filter-gallery" render={() => <MainContainer />} />
                 <Route path="/discover-artists" render={() => <MainContainer />} />
                 <Route path="/saved-filters" render={() => <MainContainer />} />
+                <Route path="/edit-account" render={() => <EditAccount />} />
                 <Route path='/user/:id' render={({ match }) => {
                     let userId = parseInt(match.params.id)
                     let foundUser = props.users.find(user => user.id === userId)
-
                     return (
                         <>
                             {props.users.length === 0 ? <h1>Loading....</h1>
                                 :
                                 <UserProfile userObj={foundUser} />
+                            }
+                        </>
+                    )
+                }} />
+                <Route path='/my-profile/' render={() => {
+                    return (
+                        <>
+                            {props.userObj ? <UserProfile userObj={props.userObj} />
+                                :
+                                <h1>Loading....</h1>
                             }
                         </>
                     )
@@ -40,14 +51,17 @@ function RootContainer(props) {
 
         </div>
     )
-
 }
 
 function msp(state) {
     return {
         user: state.user,
-        users: state.users
+        users: state.users,
+        userId: state.userId,
+        userObj: state.userObj
     }
 }
+
+
 
 export default (connect(msp)(RootContainer))

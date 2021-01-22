@@ -13,6 +13,7 @@
     .user-profile { grid-area: 2 / 1 / 14 / 7; }
     .filter-maker { grid-area: 2 / 1 / 14 / 7; }
     .welcome { grid-area: 2 / 1 / 14 / 7; }
+    .edit-account { grid-area: 2 / 1 / 14 / 7; }
 
 /* Face Filter CSS */
 
@@ -168,6 +169,16 @@ a {
     max-width: 500px;
     min-width: 500px;
     max-height: 450px;
+}
+
+/* Edit Account CSS */
+
+.edit-account{
+    text-align: center;
+}
+
+.editable{
+    display: inline-block;
 }
 
 /* Code Cemetery  */

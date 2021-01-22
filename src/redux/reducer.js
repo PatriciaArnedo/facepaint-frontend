@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, DELETE_SAVED_FILTER, GET_USERS} from './actionTypes'
+import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, DELETE_SAVED_FILTER, GET_USERS, GET_USER} from './actionTypes'
 import { combineReducers } from 'redux'
 
 
@@ -8,7 +8,8 @@ const defaultState = {
     userFilters: [],
     allFilters: [],
     savedFilters: [],
-    users: []
+    users: [],
+    userObj: null
 }
 
 function userReducer(currentState = defaultState.user, action) {
@@ -79,13 +80,23 @@ function usersReducer(currentState = defaultState.users, action) {
     }
 }
 
+function userObjReducer(currentState = defaultState.userObj, action) {
+    switch (action.type) {
+        case GET_USER:
+            return action.payload
+        default:
+            return currentState
+    }
+}
+
 const rootReducer = combineReducers({
     user: userReducer,
     userId: userIdReducer,
     userFilters: userFilterReducer,
     allFilters: allFilterReducer,
     savedFilters: savedFilterReducer,
-    users: usersReducer
+    users: usersReducer,
+    userObj: userObjReducer
 })
 
 export default rootReducer

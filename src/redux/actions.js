@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, DELETE_SAVED_FILTER, SAVE_FILTER, GET_USERS} from './actionTypes'
+import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, DELETE_SAVED_FILTER, SAVE_FILTER, GET_USERS, GET_USER} from './actionTypes'
 
 export const signUp = (userObj) => {
     return function (dispatch) {
@@ -172,6 +172,16 @@ export const getUsers = (userId) => {
         .then(arrayOfUsers => {
             const newArray = arrayOfUsers.filter(user => user.id !== userId)
             dispatch( {type: GET_USERS, payload: newArray })
+        })
+    }
+}
+
+export const getUser = (userId) => {
+    return function(dispatch) {
+        fetch(`http://localhost:3000/api/v1/users/${userId}`)
+        .then(r => r.json())
+        .then(userObj => {
+            dispatch( {type: GET_USER, payload: userObj })
         })
     }
 }
