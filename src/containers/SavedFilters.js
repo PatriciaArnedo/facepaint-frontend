@@ -1,7 +1,7 @@
 import React from 'react'
 import FilterTryOn from '../components/FilterTryOn'
 import { connect } from 'react-redux'
-import { getSavedFilters } from '../redux/actions'
+import { getSavedFilters, getUsers } from '../redux/actions'
 import FilterCard from '../components/FilterCard'
 
 
@@ -13,6 +13,7 @@ class SavedFilters extends React.Component {
 
     componentDidMount() {
         this.props.getSavedFilters(this.props.userId)
+        this.props.getUsers(this.props.userId)
     }
 
     renderFilters = () => {
@@ -25,6 +26,7 @@ class SavedFilters extends React.Component {
     }
 
     render() {
+        console.log(this.props.savedFilters)
         return (
             <div className="filter-gallery">
                 <div>
@@ -52,13 +54,15 @@ class SavedFilters extends React.Component {
 function msp(state) {
     return {
         savedFilters: state.savedFilters,
-        userId: state.userId
+        userId: state.userId,
+        users: state.users
     }
 }
 
 function mdp(dispatch) {
     return {
         getSavedFilters: (userId) => dispatch(getSavedFilters(userId)),
+        getUsers: (userId) => dispatch(getUsers(userId))
     }
 }
 

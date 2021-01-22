@@ -1,7 +1,7 @@
 import React from 'react'
 import FilterTryOn from '../components/FilterTryOn'
 import { connect } from 'react-redux'
-import { getAllFilters } from '../redux/actions'
+import { getAllFilters, getUsers } from '../redux/actions'
 import FilterCard from '../components/FilterCard'
 
 
@@ -13,6 +13,7 @@ class ExploreFilters extends React.Component {
 
     componentDidMount() {
         this.props.getAllFilters(this.props.userId)
+        this.props.getUsers(this.props.userId)
     }
 
     renderFilters = () => {
@@ -52,13 +53,15 @@ class ExploreFilters extends React.Component {
 function msp(state) {
     return {
         allFilters: state.allFilters,
-        userId: state.userId
+        userId: state.userId,
+        users: state.users
     }
 }
 
 function mdp(dispatch) {
     return {
         getAllFilters: (userId) => dispatch(getAllFilters(userId)),
+        getUsers: (userId) => dispatch(getUsers(userId))
     }
 }
 

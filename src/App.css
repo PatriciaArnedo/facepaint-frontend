@@ -10,6 +10,7 @@
     .header { grid-area: 1 / 1 / 2 / 7; }
     .filter-gallery { grid-area: 2 / 1 / 14 / 7; }
     .user-gallery { grid-area: 2 / 1 / 14 / 7; }
+    .user-profile { grid-area: 2 / 1 / 14 / 7; }
     .filter-maker { grid-area: 2 / 1 / 14 / 7; }
     .welcome { grid-area: 2 / 1 / 14 / 7; }
 
@@ -102,6 +103,11 @@
     text-align: center;
 }
 
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
 /* Form CSS */
 
 #logout-btn{
@@ -143,6 +149,25 @@
     align-items: center;
 }
 
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
 
+.profile-filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    max-width: 500px;
+    min-width: 500px;
+    max-height: 450px;
+}
 
 /* Code Cemetery  */

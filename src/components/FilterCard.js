@@ -2,6 +2,7 @@ import React from 'react'
 import { loadImageToCanvas, atrament, update_canvasTexture } from "../FaceFilterLibrary/FaceFilterSource"
 import { connect } from 'react-redux'
 import { deleteFilter, saveFilter, deleteSavedFilter } from '../redux/actions'
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -40,9 +41,16 @@ function FilterCard(props) {
             <img onClick={mapImgToFace} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
             <h4>{props.filterObj.name}</h4>
             {props.belongsToUser ?
-                props.isSavedFilter ? <h5>@{props.filterObj.username}</h5> : null
+                props.isSavedFilter ? 
+                <NavLink to={`/user/${props.filterObj.id_user}`}>
+                <h5>@{props.filterObj.username}</h5> 
+                </NavLink>
+                : null
                 :
-                props.isUserCard ? null : <h5>@{props.filterObj.username}</h5>
+                props.isUserCard ? null : 
+                <NavLink to={`/user/${props.filterObj.user.id}`}>
+                <h5>@{props.filterObj.username}</h5> 
+                </NavLink>
             }
             {props.user ?
                 props.belongsToUser ?
