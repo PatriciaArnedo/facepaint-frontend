@@ -32,7 +32,7 @@ const SETTINGS = {
 };
 
 // ** setting atrament to be set to a canvas in init_scene function
-let atrament = null
+export let atrament = null
 
 // ** global variables that came with this spaghetti code -_- 
 let prevPoint = null

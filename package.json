@@ -15,6 +15,7 @@
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^2.0.2",
     "thunk": "0.0.1",
     "web-vitals": "^0.2.4"
   },

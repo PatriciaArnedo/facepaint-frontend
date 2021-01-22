@@ -1,18 +1,18 @@
 import React from 'react'
 import FilterTryOn from '../components/FilterTryOn'
 import { connect } from 'react-redux'
-import { getUserFilters } from '../redux/actions'
+import { getAllFilters } from '../redux/actions'
 import FilterCard from '../components/FilterCard'
 
 
-class FilterGallery extends React.Component {
+class ExploreFilters extends React.Component {
 
     componentDidMount() {
-        this.props.getUserFilters(this.props.userId)
+        this.props.getAllFilters(this.props.userId)
     }
 
     renderFilters = () => {
-        return this.props.userFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={false} />)
+        return this.props.allFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} />)
     }
 
     render() {
@@ -22,7 +22,7 @@ class FilterGallery extends React.Component {
                     <FilterTryOn />
                 </div>
                 <div className="centered-div">
-                    <h3>My Filters</h3>
+                    <h3>Explore Filters</h3>
                    
                     <div id="filter-container">
                         {this.renderFilters()}
@@ -35,15 +35,15 @@ class FilterGallery extends React.Component {
 
 function msp(state) {
     return {
-        userFilters: state.userFilters,
+        allFilters: state.allFilters,
         userId: state.userId
     }
 }
 
 function mdp(dispatch) {
     return {
-        getUserFilters: (userId) => dispatch(getUserFilters(userId)),
+        getAllFilters: (userId) => dispatch(getAllFilters(userId)),
     }
 }
 
-export default connect(msp, mdp)(FilterGallery)
+export default connect(msp, mdp)(ExploreFilters)

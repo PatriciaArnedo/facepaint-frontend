@@ -1,8 +1,9 @@
 import React from 'react'
 import CreateFilter from '../components/CreateFilter'
-import SidebarMenu from '../components/SidebarMenu'
 import FilterGallery from './FilterGallery'
 import { withRouter } from 'react-router-dom'
+import ExporeFilters from './ExporeFilters'
+import SavedFilters from './SavedFilters'
 
 
 
@@ -11,9 +12,10 @@ function MainContainer(props) {
 
     return (
         <>
-            <SidebarMenu />
+            {/* <SidebarMenu /> */}
             {props.match.path === '/home' ?
-                null
+                <ExporeFilters />
+
                 :
                 null
             }
@@ -26,6 +28,18 @@ function MainContainer(props) {
 
             {props.match.path === '/filter-gallery' ?
                 <FilterGallery />
+                :
+                null
+            }
+
+            {/* {props.match.path === '/explore-filters' ?
+                <ExporeFilters />
+                :
+                null
+            } */}
+
+            {props.match.path === '/saved-filters' ?
+                <SavedFilters />
                 :
                 null
             }

@@ -2,18 +2,15 @@
 .parent {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: repeat(13, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     }
     
     .header { grid-area: 1 / 1 / 2 / 7; }
-    .sidebar-menu { grid-area: 2 / 1 / 11 / 2; }
-    .filter-gallery { grid-area: 2 / 2 / 11 / 7; }
-    .filter-maker { grid-area: 2 / 2 / 11 / 7; }
-    .welcome { grid-area: 2 / 1 / 11 / 7; }
-
-
+    .filter-gallery { grid-area: 2 / 1 / 14 / 7; }
+    .filter-maker { grid-area: 2 / 1 / 14 / 7; }
+    .welcome { grid-area: 2 / 1 / 14 / 7; }
 
 /* Face Filter CSS */
 
@@ -37,12 +34,14 @@
     display: inline-flex;
     flex-direction: row;
     justify-content: space-between;
-    align-content: stretch;
     align-items: center;
 }
 
 #app-name{
     margin-left: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
 }
 
 .header a {
@@ -51,7 +50,9 @@
 }
 
 .user-greeting{
-    margin-left: 900px;
+    color: rgb(255, 255, 255);
+    margin-left: 300px;
+    margin-top: 15px;
 }
 
 /* Welcome Page CSS */
@@ -74,7 +75,7 @@
     display: flex;
     flex-direction: row; 
     justify-content: space-around;
-    flex-shrink: 0;
+    margin-top:50px;
 }
 
 
@@ -83,7 +84,7 @@
     display: flex;
     flex-direction: row; 
     justify-content: space-around;
-    flex-shrink: 0;
+    margin-top:50px;
 }
 
 #filter-thumb {
@@ -96,7 +97,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     overflow: auto;
-    height: 600px;
+    height: 550px;
     max-width: 450px;
 }
 
@@ -117,10 +118,20 @@
     margin-right: 40px;
 }
 
-#drawing-form {
+.drawing-form {
     text-align: center;
 }
 
-#form-input{
-    margin: 10px;
+.save-filter-form {
+    text-align: center;
 }
+
+#form-input {
+    margin:20px 0px 20px 0px;
+}
+
+
+
+/* Code Cemetery  */
+
+ /* .sidebar-menu { grid-area: 2 / 1 / 14 / 2; } */

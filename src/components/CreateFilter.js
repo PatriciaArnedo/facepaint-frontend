@@ -5,12 +5,13 @@ import { cameraStartup, update_canvasTexture } from "../FaceFilterLibrary/FaceFi
 import { connect } from 'react-redux'
 
 
+
 class CreateFilter extends React.Component {
 
     state = {
         //Initial drawing settings 
         weight: 10,
-        color: '#ffffff',
+        color: '#000000',
         mode: "draw",
         smoothing: 1.3,
         adaptiveStroke: true,
@@ -44,8 +45,8 @@ class CreateFilter extends React.Component {
         this.setState({ atrament })
 
         //event listener for drawn stroke from atrament library
-         this.state.atrament.addEventListener('strokerecorded', ({ stroke }) => this.setState({points: stroke.points.length})
-    )
+        this.state.atrament.addEventListener('strokerecorded', ({ stroke }) => this.setState({ points: stroke.points.length })
+        )
     }
 
     componentDidMount = () => {
@@ -73,7 +74,7 @@ class CreateFilter extends React.Component {
         this.state.atrament.clear()
         //facefilter libray updatecanvastexture function must be called for change to take effect
         update_canvasTexture()
-        this.setState({ 
+        this.setState({
             points: 0,
             dataURL: null
         })
@@ -82,9 +83,9 @@ class CreateFilter extends React.Component {
     saveClickHandler = (e) => {
         e.preventDefault()
         //atrament library toimage function saves the canvas as a dataurl
-        if(this.state.points > 0){
+        if (this.state.points > 0) {
             let dataURL = this.state.atrament.toImage("image/png")
-            this.setState({ dataURL : dataURL })
+            this.setState({ dataURL: dataURL })
         } else {
             window.alert("Please Draw a Filter before Saving!")
         }
@@ -99,11 +100,11 @@ class CreateFilter extends React.Component {
                     <FaceFilterCanvas />
                 </div>
                 <div>
-                    <form id="drawing-form" style={{ display: "inline-block" }}>
+                    <form className="drawing-form" style={{ display: "inline-block" }}>
                         <h2>Drawing Controls</h2>
 
                         <label>
-                            Stroke Color:
+                            Stroke Color:&#32;
                             <input
                                 id="form-input"
                                 name="color"
@@ -112,13 +113,17 @@ class CreateFilter extends React.Component {
                                 onChange={this.handleChange} />
                         </label>
                         <br />
-
                         <label>
-                            Choose a Mode:
-                            <select id="form-input" name="mode" value={this.state.mode} onChange={this.handleChange}>
+                            Drawing Mode:
+                            <select
+                                id="form-input"
+                                name="mode"
+                                value={this.state.mode}
+                                placeholder="Select a Mode"
+                                onChange={this.handleChange}>
                                 <option value="draw">Draw</option>
                                 <option value="erase">Erase</option>
-                                <option value="fill">Fill</option>
+                                <option value="fill">fill</option>
                             </select>
                         </label>
                         <br />
@@ -149,6 +154,5 @@ function msp(state) {
         userId: state.userId
     }
 }
-
 
 export default connect(msp)(CreateFilter)

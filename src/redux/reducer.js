@@ -1,11 +1,13 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_FILTERS, DELETE_FILTER } from './actionTypes'
+import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, SAVE_FILTER, DELETE_SAVED_FILTER} from './actionTypes'
 import { combineReducers } from 'redux'
 
 
 const defaultState = {
     user: null,
     userId: 0,
-    filters: []
+    userFilters: [],
+    allFilters: [],
+    savedFilters: []
 }
 
 function userReducer(currentState = defaultState.user, action) {
@@ -34,14 +36,34 @@ function userIdReducer(currentState = defaultState.userId, action) {
     }
 }
 
-function filterReducer(currentState = defaultState.filters, action) {
+function userFilterReducer(currentState = defaultState.userFilters, action) {
     switch (action.type) {
         case POST_FILTER:
             return [...currentState, action.payload]
-        case GET_FILTERS:
+        case GET_USER_FILTERS:
             return action.payload
-        case DELETE_FILTER:
+        case DELETE_USER_FILTER:
             return currentState.filter(filter => filter.id != action.payload)
+        default:
+            return currentState
+    }
+}
+
+function allFilterReducer(currentState = defaultState.allFilters, action) {
+    switch (action.type) {
+        case GET_ALL_FILTERS:
+            return action.payload
+        default:
+            return currentState
+    }
+}
+
+function savedFilterReducer(currentState = defaultState.savedFilters, action) {
+    switch (action.type) {
+        case GET_SAVED_FILTERS:
+            return action.payload
+        case DELETE_SAVED_FILTER:
+            return currentState.filter(savedFilter => savedFilter.id != action.payload)
         default:
             return currentState
     }
@@ -50,7 +72,9 @@ function filterReducer(currentState = defaultState.filters, action) {
 const rootReducer = combineReducers({
     user: userReducer,
     userId: userIdReducer,
-    filters: filterReducer
+    userFilters: userFilterReducer,
+    allFilters: allFilterReducer,
+    savedFilters: savedFilterReducer
 })
 
 export default rootReducer

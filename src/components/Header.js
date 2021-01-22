@@ -2,8 +2,9 @@ import React from 'react'
 import LogIn from './LogIn'
 import { logOut, logIn } from '../redux/actions'
 import { connect } from 'react-redux'
+import { withRouter } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
-
+import { setEventListnerEnabled } from '../FaceFilterLibrary/FaceFilterSource'
 
 class Header extends React.Component {
 
@@ -23,6 +24,10 @@ class Header extends React.Component {
         if (this.props.user) {
             return (
                 <>
+                    <button onClick={() => this.clickHandler("new")} >Create Filter</button>
+                    <button onClick={() => this.clickHandler("gallery")} >My Filters</button>
+                    <button onClick={() => this.clickHandler("home")} >Explore Filters</button>
+                    <button onClick={() => this.clickHandler("saved")} >Saved Filters</button>
                     <h3 className="user-greeting">Hi {this.props.user}</h3>
                     <button id="logout-btn" className="button" onClick={this.logOutHandler}>Log Out</button>
                 </>
@@ -31,6 +36,31 @@ class Header extends React.Component {
             return <LogIn />
         }
     }
+
+    clickHandler = (string) => {
+        //seteventlistener function from face filter library toggles event listeners to enable/disable drawing
+        //enables/disables drawing when user clicks
+        console.log(string)
+        switch (string) {
+            case "new":
+                setEventListnerEnabled(true)
+                this.props.history.push('/new-filter')
+                break
+            case "gallery":
+                setEventListnerEnabled(false)
+                this.props.history.push('/filter-gallery')
+                break
+            case "home":
+                setEventListnerEnabled(false)
+                this.props.history.push('/home')
+                break
+            case "saved":
+                setEventListnerEnabled(false)
+                this.props.history.push('/saved-filters')
+                break
+        }
+    }
+
 
     render() {
         return (
@@ -54,4 +84,6 @@ const mdp = (dispatch) => ({
     submitHandler: (userObj) => dispatch(logIn(userObj))
 })
 
-export default connect(msp, mdp)(Header)
+export default withRouter(connect(msp, mdp)(Header))
+
+

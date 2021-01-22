@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { postFilter } from '../redux/actions'
+import { atrament, update_canvasTexture } from "../FaceFilterLibrary/FaceFilterSource"
+
 
 
 
@@ -12,11 +14,13 @@ class SaveFilterForm extends React.Component {
         name: ""
     }
 
+    imgSrc = this.state.img
+
     changeHandler = (e) => {
         this.setState({ [e.target.name]: e.target.value })
         this.forceUpdate()
+        this.imgSrc = this.state.img
     }
-
 
     submitHandler = (e) => {
         e.preventDefault()
@@ -29,28 +33,33 @@ class SaveFilterForm extends React.Component {
                 img: "",
                 name: ""
             })
+            atrament.clear()
+            update_canvasTexture()
             window.alert("Your filter was saved!")
+            this.imgSrc = "https://i.imgur.com/px6x12m.png"
         }
     }
+
 
     render() {
         return (
             <div>
                 <div>
-                    <form id="save-filter-form" onSubmit={this.submitHandler}>
+                    <form className="save-filter-form" onSubmit={this.submitHandler}>
 
                         <input
+                            id="form-input"
                             type="text"
                             value={this.state.name}
                             name={"name"}
                             onChange={this.changeHandler}
                             placeholder="Name Your Filter"
                         />
-                        <button>Save Filter</button>
+                        <button id="form-input" >Save Filter</button>
                     </form>
                 </div>
                 {this.props.img ?
-                        <img id="filter-thumb" src={this.props.img} alt="filter img" />
+                        <img id="filter-thumb" src={this.imgSrc} alt="filter img" />
                         :
                         null}
             </div>

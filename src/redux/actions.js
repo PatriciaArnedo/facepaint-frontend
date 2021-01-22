@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_FILTERS, DELETE_FILTER } from './actionTypes'
+import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, DELETE_SAVED_FILTER, SAVE_FILTER} from './actionTypes'
 
 export const signUp = (userObj) => {
     return function (dispatch) {
@@ -88,14 +88,38 @@ export const postFilter = (filterObj) => {
     }
 }
 
-export const getFilters = (userId) => {
+export const getUserFilters = (userId) => {
     return function(dispatch) {
         fetch('http://localhost:3000/api/v1/filters')
         .then(r => r.json())
         .then(arrayOfFilters => {
             const newArray = arrayOfFilters.filter(filter => filter.user.id === userId)
             console.log("got array of length:", newArray.length)
-            dispatch( {type: GET_FILTERS, payload: newArray })
+            dispatch( {type: GET_USER_FILTERS, payload: newArray })
+        })
+    }
+}
+
+export const getAllFilters = (userId) => {
+    return function(dispatch) {
+        fetch('http://localhost:3000/api/v1/filters')
+        .then(r => r.json())
+        .then(arrayOfFilters => {
+            const newArray = arrayOfFilters.filter(filter => filter.user.id !== userId)
+            console.log("got array of length:", newArray.length)
+            dispatch( {type: GET_ALL_FILTERS, payload: newArray })
+        })
+    }
+}
+
+export const getSavedFilters = (userId) => {
+    return function(dispatch) {
+        fetch('http://localhost:3000/api/v1/save_filters')
+        .then(r => r.json())
+        .then(arrayOfFilters => {
+            const newArray = arrayOfFilters.filter(filter => filter.user_id === userId)
+            console.log("got array of length:", newArray.length)
+            dispatch( {type: GET_SAVED_FILTERS, payload: newArray })
         })
     }
 }
@@ -106,9 +130,37 @@ export const deleteFilter = (filterId) => {
             method: "DELETE"
         })
         .then(r => r.json())
-        .then(dispatch({type: DELETE_FILTER, payload: filterId}))
+        .then(dispatch({type: DELETE_USER_FILTER, payload: filterId}))
         .catch(console.log)
     }
 }
 
+export const deleteSavedFilter = (SaveId) => {
+    return function(dispatch) {
+        fetch(`http://localhost:3000/api/v1/save_filters/${SaveId}`,{
+            method: "DELETE"
+        })
+        .then(r => r.json())
+        .then(dispatch({type: DELETE_SAVED_FILTER, payload: SaveId}))
+        .catch(console.log)
+    }
+}
 
+export const saveFilter = (saveObj) => {
+    return function(dispatch) {
+        fetch("http://localhost:3000/api/v1/save_filters",{
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json",
+                "Accepts":"application/json"
+            },
+            body: JSON.stringify(saveObj)
+        })
+        .then(r => r.json())
+        .then(newSaveObj => {
+            console.log(newSaveObj)
+            dispatch({type: SAVE_FILTER, payload: newSaveObj})
+        })
+        .catch(console.log)
+    }
+}

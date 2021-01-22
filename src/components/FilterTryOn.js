@@ -28,7 +28,6 @@ class FilterTryOn extends React.Component {
         return (
             <div className="filter-try-on">
                 <div>
-                    <h2>Try Filters</h2>
                     <FaceFilterCanvas />
                 </div>
             </div >
