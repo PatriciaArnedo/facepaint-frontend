@@ -38,9 +38,9 @@ function FilterCard(props) {
     const saveCountHandler = (num) => {
         switch(num) {
             case 1: 
-                return <h5>{`${num} save`}</h5>
+                return <p>{`${num} save`}</p>
             default:
-                return <h5>{`${num} saves`}</h5>
+                return <p>{`${num} saves`}</p>
         }
     }
 
@@ -51,13 +51,13 @@ function FilterCard(props) {
             {props.belongsToUser ?
                 props.isSavedFilter ? 
                 <NavLink to={`/user/${props.filterObj.id_user}`}>
-                <h5>@{props.filterObj.username}</h5> 
+                <p>@{props.filterObj.username}</p> 
                 </NavLink>
                 : null
                 :
                 props.isUserCard ? saveCountHandler(props.filterObj.save_count) : 
                 <NavLink to={`/user/${props.filterObj.user.id}`}>
-                <h5>@{props.filterObj.username}</h5>
+                <p>@{props.filterObj.username}</p>
                 </NavLink>
             }
             {props.user ?

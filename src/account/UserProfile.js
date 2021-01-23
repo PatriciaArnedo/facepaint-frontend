@@ -9,8 +9,10 @@ class UserProfile extends React.Component {
     }
 
     renderFilters = () => {
-        const filteredFilters = this.props.userObj.filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} />)
+        if(this.props.userObj.filters){
+            const filteredFilters = this.props.userObj.filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+            return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} />)
+        }
     }
 
     searchOnChange = (e) => {
@@ -20,8 +22,13 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div className="user-profile">
+                <div className="user-details">
                 <h3>@{this.props.userObj.username}</h3>
+                <p>{this.props.userObj.name}</p>
+                <p>instagram: {this.props.userObj.instagram}</p>
+                <p>{this.props.userObj.bio}</p>
                 <h5>{this.props.userObj.save_count} Total Saves</h5>
+                </div>
                 <input
                         id="form-input"
                         type="text"

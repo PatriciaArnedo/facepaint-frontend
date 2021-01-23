@@ -7,7 +7,7 @@ import FilterCard from '../filterfiles/FilterCard'
 
 class ExploreFilters extends React.Component {
 
-    state ={
+    state = {
         searchTerm: ""
     }
 
@@ -17,8 +17,9 @@ class ExploreFilters extends React.Component {
     }
 
     renderFilters = () => {
-        const filteredFilters = this.props.allFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false}/>)
+        const sortedFilters = this.props.allFilters.sort((a, b) => a.save_count > b.save_count ? -1 : 1)
+        const filteredFilters = sortedFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false} />)
     }
 
     searchOnChange = (e) => {

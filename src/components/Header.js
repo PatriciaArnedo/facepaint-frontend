@@ -17,6 +17,7 @@ class Header extends React.Component {
 
     logOutHandler = () => {
         this.props.logOut()
+        this.props.history.push("/welcome")
     }
 
     loggedInHandler = () => {

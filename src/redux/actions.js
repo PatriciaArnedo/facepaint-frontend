@@ -19,8 +19,8 @@ export const signUp = (userObj) => {
                     localStorage.setItem("USER_DATA", JSON.stringify(data))
                     dispatch({ type: SIGN_UP, payload: data })
                 } else {
-                    console.log("user sign up failed")
-                    window.alert("Please Enter a Username and Password")
+                    // console.log(data)
+                    window.alert(data.error)
                 }
             })
             .catch(console.log)

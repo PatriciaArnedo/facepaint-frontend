@@ -30,7 +30,7 @@ class EditAccount extends React.Component {
                 {this.props.userObj.username ?
                     this.state.beenClicked ?
                         <>
-                            <h4 className="editable">username: @{this.props.userObj.username}</h4>
+                            <p className="editable">username: @{this.props.userObj.username}</p>
                             <EditAccountForm clickHandler={this.clickHandler}/>
                             <br />
                             <br />
@@ -39,10 +39,10 @@ class EditAccount extends React.Component {
                         </>
                         :
                         <>
-                            <h4 className="editable">username: @{this.props.userObj.username}</h4>
-                            <h4 className="editable">name: {this.props.userObj.name}</h4>
-                            <h4 className="editable">instagram: {this.props.userObj.instagram}</h4>
-                            <h4 className="editable">bio: {this.props.userObj.bio}</h4>
+                            <p className="editable">username: @{this.props.userObj.username}</p>
+                            <p className="editable">name: {this.props.userObj.name}</p>
+                            <p className="editable">instagram: {this.props.userObj.instagram}</p>
+                            <p className="editable">bio: {this.props.userObj.bio}</p>
                             <button onClick={this.clickHandler}>{this.state.beenClicked ? "Cancel" : "Edit"}</button>
                         </>
                     :
