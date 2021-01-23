@@ -7,6 +7,7 @@ class SignUp extends React.Component {
 
   state = {
     username: "",
+    name: "",
     password: ""
   }
 
@@ -19,6 +20,7 @@ class SignUp extends React.Component {
     this.props.submitHandler(this.state)
     this.setState({
       username: "",
+      name: "",
       password: ""
     })
 
@@ -37,6 +39,13 @@ class SignUp extends React.Component {
               placeholder="Username"
             />
             <input
+              type="text"
+              value={this.state.name}
+              name="name"
+              onChange={this.changeHandler}
+              placeholder="Name"
+            />
+            <input
               type="password"
               value={this.state.password}
               name="password"
@@ -44,7 +53,7 @@ class SignUp extends React.Component {
               placeholder="Password"
             />
             <button>Sign Up</button>
-          </form> 
+          </form>
         </div>
       </div>
     )

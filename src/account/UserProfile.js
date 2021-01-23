@@ -25,7 +25,7 @@ class UserProfile extends React.Component {
                 <div className="user-details">
                 <h3>@{this.props.userObj.username}</h3>
                 <p>{this.props.userObj.name}</p>
-                <p>instagram: {this.props.userObj.instagram}</p>
+                {this.props.userObj.instagram ? <p>instagram: {this.props.userObj.instagram}</p> : null }
                 <p>{this.props.userObj.bio}</p>
                 <h5>{this.props.userObj.save_count} Total Saves</h5>
                 </div>
