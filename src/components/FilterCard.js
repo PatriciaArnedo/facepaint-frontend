@@ -35,6 +35,16 @@ function FilterCard(props) {
         props.saveFilter(saveObj)
     }
 
+    const saveCountHandler = (num) => {
+        console.log("save count", num)
+        switch(num) {
+            case 1: 
+                return <h5>{`${num} save`}</h5>
+            default:
+                return <h5>{`${num} saves`}</h5>
+        }
+    }
+
     return (
         <div className="filter-card">
             <img onClick={mapImgToFace} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
@@ -46,9 +56,9 @@ function FilterCard(props) {
                 </NavLink>
                 : null
                 :
-                props.isUserCard ? null : 
+                props.isUserCard ? saveCountHandler(props.filterObj.save_count) : 
                 <NavLink to={`/user/${props.filterObj.user.id}`}>
-                <h5>@{props.filterObj.username}</h5> 
+                <h5>@{props.filterObj.username}</h5>
                 </NavLink>
             }
             {props.user ?

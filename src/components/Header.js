@@ -43,7 +43,6 @@ class Header extends React.Component {
     clickHandler = (string) => {
         //seteventlistener function from face filter library toggles event listeners to enable/disable drawing
         //enables/disables drawing when user clicks
-        console.log(string)
         switch (string) {
             case "new":
                 setEventListnerEnabled(true)
