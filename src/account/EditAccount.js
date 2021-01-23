@@ -2,48 +2,60 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUser, updateUser } from '../redux/actions'
-import { useEffect, useState } from 'react'
+import EditAccountForm from './EditAccountForm'
 
-function EditAccount(props) {
 
-    const [beenClicked, beenClickedSetter] = useState(false)
+class EditAccount extends React.Component {
 
-    useEffect(() => {
-        if (!props.userObj && props.userId) {
-            props.getUser(props.userId)
-        } else {
-            console.log("userObj in edit account", props.userObj)
-        }
-    })
+    state = {
+        beenClicked: false,
+    }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
-        if (!beenClicked) {
-            beenClickedSetter(true)
-        } else {
-            beenClickedSetter(false)
+    componentDidMount() {
+        if (!this.props.userObj.username && this.props.userId) {
+            this.props.getUser(this.props.userId)
         }
     }
 
-    return (
-        <div className="edit-account">
-            <h2>Edit Account</h2>
-            {props.userObj ?
-                <>
-                    <h4 className="editable">username: @{props.userObj.username}</h4>
-                    <h4 className="editable">name: {props.userObj.name}</h4>
-                    <h4 className="editable">instagram: {props.userObj.instagram}</h4>
-                    <h4 className="editable">bio: {props.userObj.bio}</h4>
-                    <button onClick={submitHandler}>{beenClicked ? "Cancel" : "Edit"}</button>
-                </>
-                :
-                <h3>Loading...</h3>
-            }
-            <NavLink to={`/my-profile`}>
-                <h3>View My Profile</h3>
-            </NavLink>
-        </div>
-    )
+    clickHandler = () => {
+        this.setState({ beenClicked: !this.state.beenClicked })
+    }
+
+
+
+    render() {
+        return (
+            <div className="edit-account">
+                <h2>Edit Account</h2>
+                {this.props.userObj.username ?
+                    this.state.beenClicked ?
+                        <>
+                            <h4 className="editable">username: @{this.props.userObj.username}</h4>
+                            <EditAccountForm clickHandler={this.clickHandler}/>
+                            <br />
+                            <br />
+                            <button onClick={this.clickHandler}>{this.state.beenClicked ? "Cancel" : "Edit"}</button>
+
+                        </>
+                        :
+                        <>
+                            <h4 className="editable">username: @{this.props.userObj.username}</h4>
+                            <h4 className="editable">name: {this.props.userObj.name}</h4>
+                            <h4 className="editable">instagram: {this.props.userObj.instagram}</h4>
+                            <h4 className="editable">bio: {this.props.userObj.bio}</h4>
+                            <button onClick={this.clickHandler}>{this.state.beenClicked ? "Cancel" : "Edit"}</button>
+                        </>
+                    :
+                    <h3>Loading...</h3>
+                }
+                <br />
+                <br />
+                <NavLink to={`/my-profile`}>
+                    <h3>View My Profile</h3>
+                </NavLink>
+            </div>
+        )
+    }
 }
 
 function msp(state) {

@@ -1,8 +1,8 @@
 import React from 'react'
-import FilterTryOn from '../components/FilterTryOn'
+import FilterTryOn from '../camerafiles/FilterTryOn'
 import { connect } from 'react-redux'
 import { getAllFilters, getUsers } from '../redux/actions'
-import FilterCard from '../components/FilterCard'
+import FilterCard from '../filterfiles/FilterCard'
 
 
 class ExploreFilters extends React.Component {

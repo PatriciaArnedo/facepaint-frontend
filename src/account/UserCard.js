@@ -1,5 +1,5 @@
 import React from 'react'
-import FilterCard from './FilterCard'
+import FilterCard from '../filterfiles/FilterCard'
 import { NavLink } from 'react-router-dom'
 
 

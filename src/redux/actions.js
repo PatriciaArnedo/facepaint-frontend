@@ -199,7 +199,7 @@ export const getUser = (userId) => {
 
 export const updateUser = (userObj, userId) => {
     return function (dispatch) {
-      fetch(`http://localhost:3000/api/v1/readings/${userId}`, {
+      fetch(`http://localhost:3000/api/v1/users/${userId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -208,8 +208,10 @@ export const updateUser = (userObj, userId) => {
       })
         .then(response => response.json())
         .then(newUserObj => {
-          console.log('Success updated reading:', newUserObj)
-          dispatch({type: UPDATE_USER, payload: newUserObj})
+            if (newUserObj.id){
+                console.log('Success updated user:', newUserObj)
+                dispatch({type: UPDATE_USER, payload: newUserObj})
+            }
         })
         .catch(console.log)
     }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { loadImageToCanvas, atrament, update_canvasTexture } from "../facefilter/FaceFilterSource"
+import { loadImageToCanvas, atrament, update_canvasTexture } from "../camerafiles/FaceFilterSource"
 import { connect } from 'react-redux'
 import { deleteFilter, saveFilter, deleteSavedFilter } from '../redux/actions'
 import { NavLink } from 'react-router-dom'

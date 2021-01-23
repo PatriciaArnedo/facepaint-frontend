@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getUsers } from '../redux/actions'
-import UserCard from '../components/UserCard'
+import UserCard from '../account/UserCard'
 
 
 class UserContainer extends React.Component {

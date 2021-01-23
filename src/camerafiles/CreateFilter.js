@@ -1,5 +1,5 @@
 import React from 'react'
-import FaceFilterCanvas from '../components/FaceFilterCanvas'
+import FaceFilterCanvas from './FaceFilterCanvas'
 import SaveFilterForm from '../filterfiles/SaveFilterForm'
 import { cameraStartup, update_canvasTexture, cameraShutdown } from "./FaceFilterSource"
 import { connect } from 'react-redux'

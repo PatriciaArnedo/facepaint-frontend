@@ -1,8 +1,8 @@
 import React from 'react'
-import FilterTryOn from '../components/FilterTryOn'
+import FilterTryOn from '../camerafiles/FilterTryOn'
 import { connect } from 'react-redux'
 import { getUserFilters } from '../redux/actions'
-import FilterCard from '../components/FilterCard'
+import FilterCard from '../filterfiles/FilterCard'
 
 
 class FilterGallery extends React.Component {

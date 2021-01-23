@@ -4,7 +4,7 @@ import { logOut, logIn } from '../redux/actions'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
-import { setEventListnerEnabled, cameraShutdown } from '../facefilter/FaceFilterSource'
+import { setEventListnerEnabled, cameraShutdown } from '../camerafiles/FaceFilterSource'
 
 class Header extends React.Component {
 
