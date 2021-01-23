@@ -1,5 +1,5 @@
 import React from 'react'
-import { loadImageToCanvas, atrament, update_canvasTexture } from "../FaceFilterLibrary/FaceFilterSource"
+import { loadImageToCanvas, atrament, update_canvasTexture } from "../facefilter/FaceFilterSource"
 import { connect } from 'react-redux'
 import { deleteFilter, saveFilter, deleteSavedFilter } from '../redux/actions'
 import { NavLink } from 'react-router-dom'
@@ -36,7 +36,6 @@ function FilterCard(props) {
     }
 
     const saveCountHandler = (num) => {
-        console.log("save count", num)
         switch(num) {
             case 1: 
                 return <h5>{`${num} save`}</h5>

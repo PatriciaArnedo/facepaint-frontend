@@ -1,9 +1,9 @@
 import React from 'react'
 import CreateFilter from '../components/CreateFilter'
-import FilterGallery from './FilterGallery'
+import FilterGallery from '../filterfiles/FilterGallery'
 import { withRouter } from 'react-router-dom'
-import ExporeFilters from './ExporeFilters'
-import SavedFilters from './SavedFilters'
+import ExporeFilters from '../filterfiles/ExploreFilters'
+import SavedFilters from '../filterfiles/SavedFilters'
 import UserContainer from './UserContainer'
 
 

@@ -4,8 +4,8 @@ import Header from '../components/Header'
 import WelcomePage from '../components/WelcomePage'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import UserProfile from '../components/UserProfile'
-import EditAccount from '../components/EditAccount'
+import UserProfile from '../account/UserProfile'
+import EditAccount from '../account/EditAccount'
 
 
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import LogIn from './LogIn'
+import LogIn from '../account/LogIn'
 import { logOut, logIn } from '../redux/actions'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
-import { setEventListnerEnabled } from '../FaceFilterLibrary/FaceFilterSource'
+import { setEventListnerEnabled, cameraShutdown } from '../facefilter/FaceFilterSource'
 
 class Header extends React.Component {
 
@@ -29,7 +29,7 @@ class Header extends React.Component {
                     <button onClick={() => this.clickHandler("discover")} >Discover Artists</button>
                     <button onClick={() => this.clickHandler("gallery")} >My Filters</button>
                     <button onClick={() => this.clickHandler("saved")} >Saved Filters</button>
-                    <NavLink to={'/edit-account'}>
+                    <NavLink to={'/edit-account'} onClick={this.accountClickHandler}>
                         <h3 className="user-greeting">@{this.props.user}</h3>
                     </NavLink>
                     <button id="logout-btn" className="button" onClick={this.logOutHandler}>Log Out</button>
@@ -38,6 +38,12 @@ class Header extends React.Component {
         } else {
             return <LogIn />
         }
+    }
+
+    accountClickHandler = () => {
+        cameraShutdown()
+        .then(console.log("camera shut down"))
+        .catch(console.log)
     }
 
     clickHandler = (string) => {
@@ -61,6 +67,9 @@ class Header extends React.Component {
                 this.props.history.push('/saved-filters')
                 break
             case "discover":
+                cameraShutdown()
+                    .then(console.log("camera shut down"))
+                    .catch(console.log)
                 this.props.history.push('/discover-artists')
                 break
             default:

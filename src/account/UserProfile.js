@@ -1,5 +1,5 @@
 import React from 'react'
-import FilterCard from './FilterCard'
+import FilterCard from '../components/FilterCard'
 
 
 class UserProfile extends React.Component {

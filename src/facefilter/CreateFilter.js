@@ -1,7 +1,7 @@
 import React from 'react'
-import FaceFilterCanvas from './FaceFilterCanvas'
-import SaveFilterForm from './SaveFilterForm'
-import { cameraStartup, update_canvasTexture, cameraShutdown } from "../FaceFilterLibrary/FaceFilterSource"
+import FaceFilterCanvas from '../components/FaceFilterCanvas'
+import SaveFilterForm from '../filterfiles/SaveFilterForm'
+import { cameraStartup, update_canvasTexture, cameraShutdown } from "./FaceFilterSource"
 import { connect } from 'react-redux'
 
 
@@ -58,11 +58,14 @@ class CreateFilter extends React.Component {
                 //setstate with the returned atrament library
                 this.setState({ atrament: atrament }, this.setAtrament)
             })
+            .catch(console.log)
         }
     }
 
     componentWillUnmount(){
         cameraShutdown()
+        .then(console.log("camera shut down"))
+        .catch(console.log)
     }
 
 

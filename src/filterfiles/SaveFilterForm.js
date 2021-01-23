@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { postFilter } from '../redux/actions'
-import { atrament, update_canvasTexture } from "../FaceFilterLibrary/FaceFilterSource"
+import { atrament, update_canvasTexture } from "../facefilter/FaceFilterSource"
 
 
 
