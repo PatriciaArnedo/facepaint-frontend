@@ -1,6 +1,6 @@
 import React from 'react'
 import FaceFilterCanvas from './FaceFilterCanvas'
-import { cameraStartup } from "../FaceFilterLibrary/FaceFilterSource"
+import { cameraStartup, cameraShutdown } from "../FaceFilterLibrary/FaceFilterSource"
 import { connect } from 'react-redux'
 
 
@@ -22,6 +22,10 @@ class FilterTryOn extends React.Component {
                 console.log("camera is ready")
             })
         }
+    }
+
+    componentWillUnmount(){
+        cameraShutdown()
     }
 
     render() {

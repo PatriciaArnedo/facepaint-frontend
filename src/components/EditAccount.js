@@ -7,7 +7,9 @@ import { useEffect } from 'react'
 function EditAccount(props) {
 
     useEffect(() => {
-        props.getUser(props.userId)
+        if(!props.userObj){
+            props.getUser(props.userId)
+        }
     })
     return (
         <div className="edit-account">

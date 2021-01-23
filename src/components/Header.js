@@ -4,7 +4,7 @@ import { logOut, logIn } from '../redux/actions'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
-import { setEventListnerEnabled, cameraShutdown } from '../FaceFilterLibrary/FaceFilterSource'
+import { setEventListnerEnabled } from '../FaceFilterLibrary/FaceFilterSource'
 
 class Header extends React.Component {
 
@@ -62,7 +62,6 @@ class Header extends React.Component {
                 this.props.history.push('/saved-filters')
                 break
             case "discover":
-                cameraShutdown()
                 this.props.history.push('/discover-artists')
                 break
             default:
