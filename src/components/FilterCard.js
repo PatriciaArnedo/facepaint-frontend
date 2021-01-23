@@ -33,7 +33,6 @@ function FilterCard(props) {
             user_id: props.userId
         }
         props.saveFilter(saveObj)
-        window.alert("Added to Your Saved Filters!")
     }
 
     return (

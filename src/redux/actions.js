@@ -158,8 +158,12 @@ export const saveFilter = (saveObj) => {
         })
         .then(r => r.json())
         .then(newSaveObj => {
-            console.log(newSaveObj)
-            dispatch({type: SAVE_FILTER, payload: newSaveObj})
+            if (newSaveObj.id){
+                dispatch({type: SAVE_FILTER, payload: newSaveObj})
+                window.alert("Filter added to your saved filters.")
+            } else {
+                window.alert("You already saved this filter.")
+            }
         })
         .catch(console.log)
     }

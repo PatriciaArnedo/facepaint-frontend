@@ -21,6 +21,7 @@ class UserProfile extends React.Component {
         return (
             <div className="user-profile">
                 <h3>@{this.props.userObj.username}</h3>
+                <h5>{this.props.userObj.save_count} Saves</h5>
                 <input
                         id="form-input"
                         type="text"

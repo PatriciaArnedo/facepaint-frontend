@@ -174,12 +174,17 @@ a {
 /* Edit Account CSS */
 
 .edit-account{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: flex-start;
 }
 
-.editable{
+/* .editable{
     display: inline-block;
-}
+} */
 
 /* Code Cemetery  */
 
