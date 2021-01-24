@@ -1,7 +1,7 @@
 import React from 'react'
 import { loadImageToCanvas, atrament, update_canvasTexture } from "../camerafiles/FaceFilterSource"
 import { connect } from 'react-redux'
-import { deleteFilter, saveFilter, deleteSavedFilter } from '../redux/actions'
+import { deleteFilter, saveFilter, deleteSavedFilter, getUsers } from '../redux/actions'
 import { NavLink } from 'react-router-dom'
 
 
@@ -33,6 +33,7 @@ function FilterCard(props) {
             user_id: props.userId
         }
         props.saveFilter(saveObj)
+        props.getUsers(props.userId)
     }
 
     const saveCountHandler = (num) => {
@@ -76,7 +77,8 @@ function mdp(dispatch) {
     return {
         deleteFilter: (filterId) => dispatch(deleteFilter(filterId)),
         deleteSavedFilter: (saveId) => dispatch(deleteSavedFilter(saveId)),
-        saveFilter: (saveObj) => dispatch(saveFilter(saveObj))
+        saveFilter: (saveObj) => dispatch(saveFilter(saveObj)),
+        getUsers: (userId) => dispatch(getUsers(userId)),
     }
 }
 
