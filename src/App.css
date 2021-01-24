@@ -154,7 +154,7 @@ a {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
     align-items: center;
 }
@@ -163,8 +163,6 @@ a {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
     align-items: center;
     max-width: 500px;
     min-width: 500px;
