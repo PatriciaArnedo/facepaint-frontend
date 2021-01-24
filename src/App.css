@@ -62,7 +62,12 @@
 /* Welcome Page CSS */
 
 .welcome{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: center;
 }
 
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { logIn } from '../redux/actions'
-
-
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext'
 
 class LogIn extends React.Component {
 
@@ -29,26 +29,29 @@ class LogIn extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                    <form id="login-form" onSubmit={this.submitHandler}>
-
-                        <input
+                <form id="login-form" onSubmit={this.submitHandler}>
+                    <span className="p-float-label">
+                        <InputText
                             type="text"
                             value={this.state.username}
                             name="username"
                             onChange={this.changeHandler}
-                            placeholder="Username"
                         />
-                        <input
+                        <label htmlhtmlFor="in">Username</label>
+                    </span>
+                    <br />
+                    <span className="p-float-label">
+                        <InputText
                             type="password"
                             value={this.state.password}
                             name="password"
                             onChange={this.changeHandler}
-                            placeholder="Password"
                         />
-                        <button>Log In</button>
-                    </form>
-                </div>
+                        <label htmlhtmlFor="in">Password</label>
+                    </span>
+                    <br />
+                    <Button label="Log In" />
+                </form>
             </div>
         )
     }

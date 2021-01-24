@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { signUp } from '../redux/actions'
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext'
 
 
 class SignUp extends React.Component {
@@ -30,29 +32,40 @@ class SignUp extends React.Component {
     return (
       <div>
         <div>
-          <form id="signup-form" onSubmit={this.submitHandler}>
-            <input
-              type="text"
-              value={this.state.username}
-              name="username"
-              onChange={this.changeHandler}
-              placeholder="Username"
-            />
-            <input
-              type="text"
-              value={this.state.name}
-              name="name"
-              onChange={this.changeHandler}
-              placeholder="Name"
-            />
-            <input
-              type="password"
-              value={this.state.password}
-              name="password"
-              onChange={this.changeHandler}
-              placeholder="Password"
-            />
-            <button>Sign Up</button>
+          <form onSubmit={this.submitHandler}>
+            <span className="p-float-label">
+              <InputText
+                type="text"
+                value={this.state.username}
+                name="username"
+                onChange={this.changeHandler}
+              />
+              <label htmlhtmlFor="in">Username</label>
+            </span>
+            <br />
+            <span className="p-float-label">
+              <InputText
+                type="text"
+                value={this.state.name}
+                name="name"
+                onChange={this.changeHandler}
+              />
+              <label htmlhtmlFor="in">Name</label>
+            </span>
+            <br />
+
+            <span className="p-float-label">
+              <InputText
+                type="password"
+                value={this.state.password}
+                name="password"
+                onChange={this.changeHandler}
+              />
+              <label htmlhtmlFor="in">Password</label>
+            </span>
+            <br />
+
+            <Button label="Sign Up" />
           </form>
         </div>
       </div>
