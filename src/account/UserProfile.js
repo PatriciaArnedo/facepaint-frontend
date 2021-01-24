@@ -9,7 +9,7 @@ class UserProfile extends React.Component {
     }
 
     renderFilters = () => {
-        if (this.props.userObj.filters.length) {
+        if (this.props.userObj.filters && this.props.userObj.filters.length) {
             const filteredFilters = this.props.userObj.filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
             return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} />)
         } else {
@@ -18,7 +18,7 @@ class UserProfile extends React.Component {
     }
 
     renderSavedFilters = () => {
-        if (this.props.userObj.save_filters.length) {
+        if (this.props.userObj.save_filters && this.props.userObj.save_filters.length) {
             const filteredFilters = this.props.userObj.save_filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
             return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} />)
         } else {

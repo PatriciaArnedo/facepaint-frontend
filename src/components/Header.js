@@ -15,7 +15,7 @@ class Header extends React.Component {
         items: [
             { label: 'Explore', icon: 'pi pi-fw pi-home', command: () => this.clickHandler("home")},
             { label: 'My Filters', icon: 'pi pi-fw pi-palette', command: () => this.clickHandler("gallery") },
-            { label: 'My Saved Filters', icon: 'pi pi-fw pi-bookmark', command: () => this.clickHandler("saved") },
+            { label: 'Saved Filters', icon: 'pi pi-fw pi-bookmark', command: () => this.clickHandler("saved") },
             { label: 'Discover Artists', icon: 'pi pi-fw pi-eye', command: () => this.clickHandler("discover") },
         ],
       
