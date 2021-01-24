@@ -50,12 +50,12 @@ class UserProfile extends React.Component {
                 />
                 <br />
                 <TabView>
-                    <TabPanel header={`@${this.props.userObj.username}'s Filters`}>
+                    <TabPanel header={`Filters`} leftIcon="pi pi-fw pi-palette">
                         <div className="profile-filters">
                             {this.renderFilters()}
                         </div>
                     </TabPanel>
-                    <TabPanel header="Saved Filters">
+                    <TabPanel header="Saved Filters" leftIcon="pi pi-fw pi-bookmark">
                         <div className="profile-filters">
                             {this.renderSavedFilters()}
                         </div>

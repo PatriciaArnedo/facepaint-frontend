@@ -63,9 +63,9 @@ function FilterCard(props) {
             }
             {props.user ?
                 props.belongsToUser ?
-                    <button onClick={deleteClickHandler} >Delete Filter</button>
+                    <button onClick={deleteClickHandler} >Delete</button>
                     :
-                    <button onClick={saveClickHandler} >Save Filter</button>
+                    <button onClick={saveClickHandler} >Save</button>
                 :
                 null
             }
