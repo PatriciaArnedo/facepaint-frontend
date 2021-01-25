@@ -38,8 +38,8 @@ function FilterCard(props) {
     }
 
     const saveCountHandler = (num) => {
-        switch(num) {
-            case 1: 
+        switch (num) {
+            case 1:
                 return `${num} save`
             default:
                 return `${num} saves`
@@ -48,34 +48,38 @@ function FilterCard(props) {
 
     return (
         <div className="filter-card">
-            <img onClick={filterClickHandler} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
-            <Divider style={{margin:"0"}}/>
+            {props.isUserCard ?
+                <img id="filter-thumb" src={props.filterObj.img} alt="Filter" />
+                :
+                <img onClick={filterClickHandler} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
+            }
+            <Divider style={{ margin: "0" }} />
             <div className="filter-card-footer">
-            
-            {props.belongsToUser ?
-                props.isSavedFilter ? 
-                <NavLink to={`/user/${props.filterObj.id_user}`}>
-                @{props.filterObj.username}
-                </NavLink>
-                : null
-                :
-                props.isUserCard ? saveCountHandler(props.filterObj.save_count) : 
-                <NavLink to={`/user/${props.filterObj.user.id}`}>
-                <strong>@{props.filterObj.username}</strong>
-                </NavLink>
-            }
-            
-            <span className="filter-name">
-            {props.filterObj.name}
-            </span>
-            {props.user ?
-                props.belongsToUser ?
-                    <Button onClick={deleteClickHandler} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-danger" />
+
+                {props.belongsToUser ?
+                    props.isSavedFilter ?
+                        <NavLink to={`/user/${props.filterObj.id_user}`}>
+                            @{props.filterObj.username}
+                        </NavLink>
+                        : null
                     :
-                    <Button onClick={saveClickHandler} icon="pi pi-bookmark" className="p-button-rounded p-button-text " />
-                :
-                null
-            }
+                    props.isUserCard ? saveCountHandler(props.filterObj.save_count) :
+                        <NavLink to={`/user/${props.filterObj.user.id}`}>
+                            <strong>@{props.filterObj.username}</strong>
+                        </NavLink>
+                }
+
+                <span className="filter-name">
+                    {props.filterObj.name}
+                </span>
+                {props.user ?
+                    props.belongsToUser ?
+                        <Button onClick={deleteClickHandler} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-danger" />
+                        :
+                        <Button onClick={saveClickHandler} icon="pi pi-bookmark" className="p-button-rounded p-button-text " />
+                    :
+                    null
+                }
             </div>
         </div>
     )
