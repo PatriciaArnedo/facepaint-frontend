@@ -5,7 +5,6 @@ import { cameraStartup, update_canvasTexture, cameraShutdown } from "./FaceFilte
 import { connect } from 'react-redux'
 
 
-
 class CreateFilter extends React.Component {
 
     state = {
@@ -100,6 +99,7 @@ class CreateFilter extends React.Component {
 
 
     render() {
+        console.log("drawing mode", this.state?.atrament?.mode)
         return (
             <div className="filter-maker">
                 <div>
@@ -129,7 +129,7 @@ class CreateFilter extends React.Component {
                                 onChange={this.handleChange}>
                                 <option value="draw">Draw</option>
                                 <option value="erase">Erase</option>
-                                <option value="fill">fill</option>
+                                <option value='fill'>fill</option>
                             </select>
                         </label>
                         <br />

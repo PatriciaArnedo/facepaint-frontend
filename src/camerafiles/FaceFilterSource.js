@@ -436,9 +436,13 @@ export const loadImageToCanvas = (imgSrc) => {
 // ** this function stops the facefilter from running, exported to be used in react
 export async function cameraShutdown() {
   console.log("before camera shut down in source")
+  if (!mainCalled) {
+    return
+  }
   await JEEFACEFILTERAPI.destroy()
-  console.log("camera shut down in source")
   mainCalled = false
+  console.log("camera shut down in source")
+  
 }
 
 // ** this exported function starts up the facefilter in react 

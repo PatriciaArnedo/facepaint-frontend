@@ -2,9 +2,13 @@ import { SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS,
          GET_SAVED_FILTERS, GET_ALL_FILTERS, DELETE_USER_FILTER, 
          DELETE_SAVED_FILTER, SAVE_FILTER, GET_USERS, GET_USER, UPDATE_USER} from './actionTypes'
 
+
+const backendBaseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000"
+console.log('backendBaseUrl', backendBaseUrl)
+
 export const signUp = (userObj) => {
     return function (dispatch) {
-        fetch("http://localhost:3000/api/v1/users/", {
+        fetch(`${backendBaseUrl}/api/v1/users/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +44,7 @@ export const logIn = (userObj) => {
             return
         }
 
-        fetch(`http://localhost:3000/api/v1/users/login/`, {
+        fetch(`${backendBaseUrl}/api/v1/users/login/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -71,7 +75,7 @@ export const logOut = () => {
 
 export const postFilter = (filterObj) => {
     return function(dispatch) {
-        fetch('http://localhost:3000/api/v1/filters', {
+        fetch('${backendBaseUrl}/api/v1/filters', {
             method: "POST",
             headers: {
                 "Content-Type":"application/json",
@@ -92,7 +96,7 @@ export const postFilter = (filterObj) => {
 
 export const getUserFilters = (userId) => {
     return function(dispatch) {
-        fetch('http://localhost:3000/api/v1/filters')
+        fetch('${backendBaseUrl}/api/v1/filters')
         .then(r => r.json())
         .then(arrayOfFilters => {
             const newArray = arrayOfFilters.filter(filter => filter.user.id === userId)
@@ -105,7 +109,7 @@ export const getUserFilters = (userId) => {
 
 export const getAllFilters = (userId) => {
     return function(dispatch) {
-        fetch('http://localhost:3000/api/v1/filters')
+        fetch('${backendBaseUrl}/api/v1/filters')
         .then(r => r.json())
         .then(arrayOfFilters => {
             const newArray = arrayOfFilters.filter(filter => filter.user.id !== userId)
@@ -118,7 +122,7 @@ export const getAllFilters = (userId) => {
 
 export const getSavedFilters = (userId) => {
     return function(dispatch) {
-        fetch('http://localhost:3000/api/v1/save_filters')
+        fetch('${backendBaseUrl}/api/v1/save_filters')
         .then(r => r.json())
         .then(arrayOfFilters => {
             const newArray = arrayOfFilters.filter(filter => filter.user_id === userId)
@@ -131,7 +135,7 @@ export const getSavedFilters = (userId) => {
 
 export const deleteFilter = (filterId) => {
     return function(dispatch) {
-        fetch(`http://localhost:3000/api/v1/filters/${filterId}`,{
+        fetch(`${backendBaseUrl}/api/v1/filters/${filterId}`,{
             method: "DELETE"
         })
         .then(r => r.json())
@@ -142,7 +146,7 @@ export const deleteFilter = (filterId) => {
 
 export const deleteSavedFilter = (SaveId) => {
     return function(dispatch) {
-        fetch(`http://localhost:3000/api/v1/save_filters/${SaveId}`,{
+        fetch(`${backendBaseUrl}/api/v1/save_filters/${SaveId}`,{
             method: "DELETE"
         })
         .then(r => r.json())
@@ -153,7 +157,7 @@ export const deleteSavedFilter = (SaveId) => {
 
 export const saveFilter = (saveObj) => {
     return function(dispatch) {
-        fetch("http://localhost:3000/api/v1/save_filters",{
+        fetch(`${backendBaseUrl}/api/v1/save_filters`,{
             method: "POST",
             headers:{
                 "Content-Type":"application/json",
@@ -176,7 +180,7 @@ export const saveFilter = (saveObj) => {
 
 export const getUsers = (userId) => {
     return function(dispatch) {
-        fetch('http://localhost:3000/api/v1/users')
+        fetch(`${backendBaseUrl}/api/v1/users`)
         .then(r => r.json())
         .then(arrayOfUsers => {
             const newArray = arrayOfUsers.filter(user => user.id !== userId)
@@ -188,7 +192,7 @@ export const getUsers = (userId) => {
 
 export const getUser = (userId) => {
     return function(dispatch) {
-        fetch(`http://localhost:3000/api/v1/users/${userId}`)
+        fetch(`${backendBaseUrl}/api/v1/users/${userId}`)
         .then(r => r.json())
         .then(userObj => {
             dispatch( {type: GET_USER, payload: userObj })
@@ -199,7 +203,7 @@ export const getUser = (userId) => {
 
 export const updateUser = (userObj, userId) => {
     return function (dispatch) {
-      fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      fetch(`${backendBaseUrl}/api/v1/users/${userId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
