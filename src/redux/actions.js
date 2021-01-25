@@ -27,7 +27,7 @@ export const signUp = (userObj) => {
                     window.alert(data.error)
                 }
             })
-            .catch(console.log)
+            .catch(console.error)
     }
 }
 
@@ -75,7 +75,7 @@ export const logOut = () => {
 
 export const postFilter = (filterObj) => {
     return function(dispatch) {
-        fetch('${backendBaseUrl}/api/v1/filters', {
+        fetch(`${backendBaseUrl}/api/v1/filters`, {
             method: "POST",
             headers: {
                 "Content-Type":"application/json",
@@ -96,7 +96,7 @@ export const postFilter = (filterObj) => {
 
 export const getUserFilters = (userId) => {
     return function(dispatch) {
-        fetch('${backendBaseUrl}/api/v1/filters')
+        fetch(`${backendBaseUrl}/api/v1/filters`)
         .then(r => r.json())
         .then(arrayOfFilters => {
             const newArray = arrayOfFilters.filter(filter => filter.user.id === userId)
@@ -109,7 +109,7 @@ export const getUserFilters = (userId) => {
 
 export const getAllFilters = (userId) => {
     return function(dispatch) {
-        fetch('${backendBaseUrl}/api/v1/filters')
+        fetch(`${backendBaseUrl}/api/v1/filters`)
         .then(r => r.json())
         .then(arrayOfFilters => {
             const newArray = arrayOfFilters.filter(filter => filter.user.id !== userId)
@@ -122,7 +122,7 @@ export const getAllFilters = (userId) => {
 
 export const getSavedFilters = (userId) => {
     return function(dispatch) {
-        fetch('${backendBaseUrl}/api/v1/save_filters')
+        fetch(`${backendBaseUrl}/api/v1/save_filters`)
         .then(r => r.json())
         .then(arrayOfFilters => {
             const newArray = arrayOfFilters.filter(filter => filter.user_id === userId)
