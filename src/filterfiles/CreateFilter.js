@@ -177,7 +177,7 @@ class CreateFilter extends React.Component {
 const options = [
     { key: "draw", text: "Draw", value: "draw" },
     { key: "erase", text: "Erase", value: "erase" },
-    { key: "fill", text: "Fill", value: "fill" },
+    // { key: "fill", text: "Fill", value: "fill" },
 ]
 
 function msp(state) {
