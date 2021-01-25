@@ -14,7 +14,7 @@ RUN npm install
 
 COPY . .
 
-ENV REACT_APP_BASE_URL="https://facepaint-backend-mad3zevtda-ue.a.run.app/"
+ENV REACT_APP_BASE_URL="https://facepaint-backend-mad3zevtda-ue.a.run.app"
 
 RUN npm run build
 
