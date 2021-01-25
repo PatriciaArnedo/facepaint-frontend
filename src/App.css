@@ -166,8 +166,8 @@ a {
     margin-right: 40px;
 }
 
-#login-form{
-    margin-left: 1000px;
+#login-btn{
+    margin-left: 1100px;
 }
 
 .drawing-form {
@@ -303,6 +303,7 @@ input[type="color"]::-webkit-color-swatch {
     justify-content: center;
     align-content: center;
     text-align: center;
+    border-radius: 2%;
   }
 
 /* Code Cemetery  */

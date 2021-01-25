@@ -28,31 +28,35 @@ class LogIn extends React.Component {
 
     render() {
         return (
-            <div>
-                <form id="login-form" onSubmit={this.submitHandler}>
-                    <span className="p-float-label">
-                        <InputText
-                            type="text"
-                            value={this.state.username}
-                            name="username"
-                            onChange={this.changeHandler}
-                        />
-                        <label htmlhtmlFor="in">Username</label>
-                    </span>
-                    <br />
+            <div className="modal">
+                <div className="modal-content">
+                    <form id="login-form" onSubmit={this.submitHandler}>
+                        <span className="p-float-label">
+                            <InputText
+                                type="text"
+                                value={this.state.username}
+                                name="username"
+                                onChange={this.changeHandler}
+                            />
+                            <label htmlhtmlFor="in">Username</label>
+                        </span>
+                        <br />
 
-                    <span className="p-float-label">
-                        <InputText
-                            type="password"
-                            value={this.state.password}
-                            name="password"
-                            onChange={this.changeHandler}
-                        />
-                        <label htmlhtmlFor="in">Password</label>
-                    </span>
+                        <span className="p-float-label">
+                            <InputText
+                                type="password"
+                                value={this.state.password}
+                                name="password"
+                                onChange={this.changeHandler}
+                            />
+                            <label htmlhtmlFor="in">Password</label>
+                        </span>
+                        <br />
+                        <Button label="Log In" />
+                    </form>
                     <br />
-                    <Button label="Log In" />
-                </form>
+                    <Button onClick={this.props.cancelHandler} className="p-button-warning" label="Cancel" />
+                </div>
             </div>
         )
     }

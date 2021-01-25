@@ -20,7 +20,7 @@ class Header extends React.Component {
             { label: 'Saved Filters', icon: 'pi pi-fw pi-bookmark', command: () => this.clickHandler("saved") },
             { label: 'Discover Artists', icon: 'pi pi-fw pi-eye', command: () => this.clickHandler("discover") },
         ],
-
+        showModal: false
     }
 
     //handles dummy auth by running login function on refresh
@@ -31,6 +31,7 @@ class Header extends React.Component {
     logOutHandler = () => {
         this.props.logOut()
         this.props.history.push("/welcome")
+        this.setState({ showModal: false })
     }
 
     loggedInHandler = () => {
@@ -48,8 +49,12 @@ class Header extends React.Component {
                 </>
             )
         } else {
-            return <LogIn />
+            return <Button id="login-btn" className="button p-button-rounded" onClick={this.logInHandler} label="Log In" />
         }
+    }
+
+    logInHandler = () => {
+        this.setState({ showModal: !this.state.showModal })
     }
 
     accountClickHandler = () => {
@@ -92,16 +97,21 @@ class Header extends React.Component {
 
     render() {
         return (
-            <div className ="header-container">
-            <div className="header">
-                <NavLink to={this.props.user ? '/home' : '/welcome'}>
-                    <h1 id="app-name">facepaint</h1>
-                </NavLink>
+            <div className="header-container">
+                <div className="header">
+                    <NavLink to={this.props.user ? '/home' : '/welcome'}>
+                        <h1 id="app-name">facepaint</h1>
+                    </NavLink>
 
-                {this.loggedInHandler()}
-                <br />
-            </div>
-            <Divider style={{ marginTop: "-11px" }} />
+                    {this.loggedInHandler()}
+                    <br />
+                </div>
+                <Divider style={{ marginTop: "-11px" }} />
+                {this.state.showModal ?
+                    <LogIn cancelHandler={this.logInHandler}/>
+                    :
+                    null
+                }
             </div>
         )
     }
