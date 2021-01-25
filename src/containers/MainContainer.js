@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateFilter from '../camerafiles/CreateFilter'
+import CreateFilter from '../filterfiles/CreateFilter'
 import FilterGallery from '../filterfiles/FilterGallery'
 import { withRouter } from 'react-router-dom'
 import ExporeFilters from '../filterfiles/ExploreFilters'

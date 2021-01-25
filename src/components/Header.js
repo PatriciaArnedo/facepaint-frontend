@@ -101,7 +101,7 @@ class Header extends React.Component {
                 {this.loggedInHandler()}
                 <br />
             </div>
-            <Divider style={{ marginTop: "-9px" }} />
+            <Divider style={{ marginTop: "-11px" }} />
             </div>
         )
     }

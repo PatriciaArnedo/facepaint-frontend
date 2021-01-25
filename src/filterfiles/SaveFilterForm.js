@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { postFilter } from '../redux/actions'
 import { atrament, update_canvasTexture } from "../camerafiles/FaceFilterSource"
-
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext'
 
 
 
@@ -24,8 +25,10 @@ class SaveFilterForm extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        if(!this.state.img){
+        if (!this.state.img) {
             window.alert("No Filter Found")
+        } else if(this.state.name.length === 0){
+            window.alert("Please Name Your Filter Before Saving")
         } else {
             this.props.submitHandler(this.state)
             this.setState({
@@ -37,31 +40,35 @@ class SaveFilterForm extends React.Component {
             update_canvasTexture()
             window.alert("Your filter was saved!")
             this.imgSrc = "https://i.imgur.com/px6x12m.png"
+            this.props.cancelHandler()
         }
     }
 
 
     render() {
         return (
-            <div>
+            <div className="modal">
+                <div className="modal-content">
+                    <h3>Save Your Filter</h3>
+                            {this.props.img ?
+                                <img id="filter-thumb" src={this.imgSrc} alt="filter img" />
+                                :
+                                null}
                 <div>
                     <form className="save-filter-form" onSubmit={this.submitHandler}>
-
-                        <input
-                            id="form-input"
-                            type="text"
-                            value={this.state.name}
-                            name={"name"}
-                            onChange={this.changeHandler}
-                            placeholder="Name Your Filter"
-                        />
-                        <button id="form-input" >Save Filter</button>
+                        <span className="p-float-label">
+                            <InputText
+                                value={this.state.name}
+                                name={"name"}
+                                onChange={this.changeHandler}
+                            />
+                            <label htmlhtmlFor="in">Name Your Filter</label>
+                        </span>
+                        <Button id="form-input" label="Save Filter" />
                     </form>
+                        <Button className="p-button-warning" onClick={this.props.cancelHandler} id="form-input" label="Cancel" />
                 </div>
-                {this.props.img ?
-                        <img id="filter-thumb" src={this.imgSrc} alt="filter img" />
-                        :
-                        null}
+                </div>
             </div>
         )
     }

@@ -1,8 +1,10 @@
 import React from 'react'
-import FaceFilterCanvas from './FaceFilterCanvas'
-import SaveFilterForm from '../filterfiles/SaveFilterForm'
-import { cameraStartup, update_canvasTexture, cameraShutdown } from "./FaceFilterSource"
+import FaceFilterCanvas from '../camerafiles/FaceFilterCanvas'
+import SaveFilterForm from './SaveFilterForm'
+import { cameraStartup, update_canvasTexture, cameraShutdown } from "../camerafiles/FaceFilterSource"
 import { connect } from 'react-redux'
+import { Dropdown } from 'semantic-ui-react'
+import { Button } from 'primereact/button';
 
 
 class CreateFilter extends React.Component {
@@ -10,7 +12,7 @@ class CreateFilter extends React.Component {
     state = {
         //Initial drawing settings 
         weight: 10,
-        color: '#000000',
+        color: '#1f96f0',
         mode: "draw",
         smoothing: 1.3,
         adaptiveStroke: true,
@@ -20,7 +22,8 @@ class CreateFilter extends React.Component {
         //create canvas element to pass to camera startup
         canvas: document.createElement('canvas'),
         dataURL: null,
-        points: 0
+        points: 0,
+        beenClicked: false
     }
 
     setAtrament = () => {
@@ -57,20 +60,25 @@ class CreateFilter extends React.Component {
                 //setstate with the returned atrament library
                 this.setState({ atrament: atrament }, this.setAtrament)
             })
-            .catch(console.log)
+                .catch(console.log)
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         cameraShutdown()
-        .then(console.log("camera shut down"))
-        .catch(console.log)
+            .then(console.log("camera shut down"))
+            .catch(console.log)
     }
 
 
     handleChange = (e) => {
         //handles controlled form for drawing controls
         this.setState({ [e.target.name]: e.target.value }, this.setAtrament)
+    }
+
+    handleDropdown = (e, data) => {
+        //handles controlled form for drawing controls
+        this.setState({ [data.name]: data.value }, this.setAtrament)
     }
 
     canvasClearClickHandler = (e) => {
@@ -91,68 +99,86 @@ class CreateFilter extends React.Component {
         //atrament library toimage function saves the canvas as a dataurl
         if (this.state.points > 0) {
             let dataURL = this.state.atrament.toImage("image/png")
-            this.setState({ dataURL: dataURL })
+            this.setState({
+                dataURL: dataURL,
+                beenClicked: !this.state.beenClicked
+            })
         } else {
             window.alert("Please Draw a Filter before Saving!")
         }
     }
 
+    cancelHandler = () => {
+        this.setState({
+            beenClicked: !this.state.beenClicked
+        })
+    }
 
     render() {
         console.log("drawing mode", this.state?.atrament?.mode)
         return (
             <div className="filter-maker">
-                <div>
+                <div className="camera-card">
                     <FaceFilterCanvas />
                 </div>
                 <div>
                     <form className="drawing-form" style={{ display: "inline-block" }}>
                         <h2>Drawing Controls</h2>
+                            Color:<br />
+                        <input
+                            id="form-input"
+                            name="color"
+                            type="color"
+                            value={this.state.color}
+                            onChange={this.handleChange} />
 
-                        <label>
-                            Stroke Color:&#32;
-                            <input
-                                id="form-input"
-                                name="color"
-                                type="color"
-                                value={this.state.color}
-                                onChange={this.handleChange} />
-                        </label>
                         <br />
                         <label>
                             Drawing Mode:
-                            <select
+                            <Dropdown
+                                fluid
+                                selection
                                 id="form-input"
                                 name="mode"
                                 value={this.state.mode}
                                 placeholder="Select a Mode"
-                                onChange={this.handleChange}>
-                                <option value="draw">Draw</option>
-                                <option value="erase">Erase</option>
-                                <option value='fill'>fill</option>
-                            </select>
+                                onChange={this.handleDropdown}
+                                options={options}
+                            />
                         </label>
                         <br />
                         <label>
-                            Stroke Thickness:
+                            Thickness:
                             <input
                                 id="form-input"
                                 name="weight"
-                                type="number"
+                                type="range"
+                                min="1"
+                                max="100"
                                 value={this.state.weight}
                                 onChange={this.handleChange} />
                         </label>
                         <br />
-                        <button id="form-input" onClick={this.canvasClearClickHandler}>Clear Canvas</button>
-                        <button id="form-input" onClick={this.saveClickHandler}>Save Filter</button>
+                        <Button className="p-button-warning" style={{ marginRight: "10px" }} id="form-input" onClick={this.canvasClearClickHandler} label="Clear Canvas" />
+                        <Button id="form-input" onClick={this.saveClickHandler} label="Save Filter" />
                     </form>
                     <br />
-                    <SaveFilterForm key={this.state.dataURL} img={this.state.dataURL} />
+                    {this.state.beenClicked ?
+                        <SaveFilterForm key={this.state.dataURL} img={this.state.dataURL} cancelHandler={this.cancelHandler}/>
+                        :
+                        null
+                    }
                 </div>
             </div >
         )
     }
 }
+
+const options = [
+    { key: "draw", text: "Draw", value: "draw" },
+    { key: "erase", text: "Erase", value: "erase" },
+    { key: "fill", text: "Fill", value: "fill" },
+]
 
 function msp(state) {
     return {

@@ -40,6 +40,7 @@ class LogIn extends React.Component {
                         <label htmlhtmlFor="in">Username</label>
                     </span>
                     <br />
+
                     <span className="p-float-label">
                         <InputText
                             type="password"

@@ -40,9 +40,9 @@ function FilterCard(props) {
     const saveCountHandler = (num) => {
         switch(num) {
             case 1: 
-                return <p>{`${num} save`}</p>
+                return `${num} save`
             default:
-                return <p>{`${num} saves`}</p>
+                return `${num} saves`
         }
     }
 
