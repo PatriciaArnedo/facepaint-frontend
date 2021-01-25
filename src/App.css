@@ -62,7 +62,7 @@
 
 .user-greeting{
     color: rgb(255, 110, 214);
-    margin: 10px 10px 10px 390px;
+    margin: 10px 10px 10px 310px;
 }
 
 #create-btn {
@@ -216,6 +216,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
     border-radius: 5%;
     box-shadow: 0 2px 2px 1px rgba(0,0,0,0.2);
 }
+
 input[type="color"]::-webkit-color-swatch {
     border: none;
     border-radius: 5%;
