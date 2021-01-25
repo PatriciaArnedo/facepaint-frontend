@@ -8,7 +8,8 @@ import FilterCard from '../filterfiles/FilterCard'
 class FilterGallery extends React.Component {
 
     state ={
-        searchTerm: ""
+        searchTerm: "",
+        name:""
     }
 
     componentDidMount() {
@@ -17,18 +18,24 @@ class FilterGallery extends React.Component {
 
     renderFilters = () => {
         const filteredFilters = this.props.userFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={false} isUserCard={false}/>)
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName}/>)
     }
 
     searchOnChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
+    renderFilterName = (name) => {
+        this.setState({name})
+    }
+
     render() {
         return (
             <div className="filter-gallery">
-                <div>
+                <div className="camera-card">
                     <FilterTryOn />
+                    <br />
+                    <b>{this.state.name}</b>
                 </div>
                 <div className="centered-div">
                     <h3>My Filters</h3>

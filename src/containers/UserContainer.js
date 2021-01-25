@@ -15,7 +15,8 @@ class UserContainer extends React.Component {
     }
 
     renderUsers = () => {
-        const filteredUsers = this.props.users.filter(user => user.username.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        const activeUsers = this.props.users.filter(user => user.filters.length > 0)
+        const filteredUsers = activeUsers.filter(user => user.username.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         return filteredUsers.map(userObj => <UserCard key={userObj.id} userObj={userObj} />)
     }
 

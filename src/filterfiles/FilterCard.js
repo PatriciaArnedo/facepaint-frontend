@@ -3,16 +3,17 @@ import { loadImageToCanvas, atrament, update_canvasTexture } from "../camerafile
 import { connect } from 'react-redux'
 import { deleteFilter, saveFilter, deleteSavedFilter, getUsers } from '../redux/actions'
 import { NavLink } from 'react-router-dom'
-
+import { Button } from 'primereact/button';
+import { Divider } from 'primereact/divider';
 
 
 function FilterCard(props) {
 
 
-    const mapImgToFace = () => {
+    const filterClickHandler = () => {
         //uses loadImagetoCanvas function from facefilter library to try drawn filter on
-
         loadImageToCanvas(props.filterObj.img)
+        props.renderFilterName(props.filterObj.name)
     }
 
     const deleteClickHandler = () => {
@@ -47,28 +48,35 @@ function FilterCard(props) {
 
     return (
         <div className="filter-card">
-            <img onClick={mapImgToFace} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
-            <h4>{props.filterObj.name}</h4>
+            <img onClick={filterClickHandler} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
+            <Divider style={{margin:"0"}}/>
+            <div className="filter-card-footer">
+            
             {props.belongsToUser ?
                 props.isSavedFilter ? 
                 <NavLink to={`/user/${props.filterObj.id_user}`}>
-                <p>@{props.filterObj.username}</p> 
+                @{props.filterObj.username}
                 </NavLink>
                 : null
                 :
                 props.isUserCard ? saveCountHandler(props.filterObj.save_count) : 
                 <NavLink to={`/user/${props.filterObj.user.id}`}>
-                <p>@{props.filterObj.username}</p>
+                <strong>@{props.filterObj.username}</strong>
                 </NavLink>
             }
+            
+            <span className="filter-name">
+            {props.filterObj.name}
+            </span>
             {props.user ?
                 props.belongsToUser ?
-                    <button onClick={deleteClickHandler} >Delete</button>
+                    <Button onClick={deleteClickHandler} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-danger" />
                     :
-                    <button onClick={saveClickHandler} >Save</button>
+                    <Button onClick={saveClickHandler} icon="pi pi-bookmark" className="p-button-rounded p-button-text " />
                 :
                 null
             }
+            </div>
         </div>
     )
 }
