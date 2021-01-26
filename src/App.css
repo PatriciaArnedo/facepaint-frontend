@@ -303,11 +303,12 @@ input[type="color"]::-webkit-color-swatch {
 
 .edit-account{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-content: center;
+    align-content: flex-start;
     align-items: flex-start;
+    margin: 100px 0px 0px 200px;
 }
 
 /* .editable{

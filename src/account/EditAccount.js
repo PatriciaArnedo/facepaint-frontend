@@ -27,35 +27,39 @@ class EditAccount extends React.Component {
     render() {
         return (
             <div className="edit-account">
-                <h2>My Account</h2>
-                {this.props.userObj.username ?
-                    this.state.beenClicked ?
-                        <>
-                            <p className="editable">username: @{this.props.userObj.username}</p>
-                            <EditAccountForm clickHandler={this.clickHandler}/>
-                            <br />
-                            <br />
-                            <button onClick={this.clickHandler}>{this.state.beenClicked ? "Cancel" : "Edit"}</button>
+                <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="profile-avatar" />
+                <div className="account-details">
+                    <h2>My Account</h2>
+                    {this.props.userObj.username ?
+                        this.state.beenClicked ?
+                            <>
+                                <p className="editable">username: @{this.props.userObj.username}</p>
+                                <EditAccountForm clickHandler={this.clickHandler} />
+                                <br />
+                                <br />
+                                <button onClick={this.clickHandler}>{this.state.beenClicked ? "Cancel" : "Edit"}</button>
 
-                        </>
+                            </>
+                            :
+                            <>
+                                <p className="editable">username: @{this.props.userObj.username}</p>
+                                <p className="editable">name: {this.props.userObj.name}</p>
+                                <p className="editable">instagram: {this.props.userObj.instagram}</p>
+                                <p className="editable">bio: {this.props.userObj.bio}</p>
+                                <button onClick={this.clickHandler}>{this.state.beenClicked ? "Cancel" : "Edit"}</button>
+                            </>
                         :
-                        <>
-                            <p className="editable">username: @{this.props.userObj.username}</p>
-                            <p className="editable">name: {this.props.userObj.name}</p>
-                            <p className="editable">instagram: {this.props.userObj.instagram}</p>
-                            <p className="editable">bio: {this.props.userObj.bio}</p>
-                            <button onClick={this.clickHandler}>{this.state.beenClicked ? "Cancel" : "Edit"}</button>
-                        </>
-                    :
-                    <h3>Loading...</h3>
-                }
-                <br />
-                <br />
-                <NavLink to={`/my-profile`}>
-                    <h3>View My Profile</h3>
-                </NavLink>
-                <br />
-                <ImageUpload />
+                        <h3>Loading...</h3>
+                    }
+                    <br />
+                    <br />
+                    <NavLink to={`/my-profile`}>
+                        <h3>View My Profile</h3>
+                    </NavLink>
+                    <br />
+                    <h4>Upload a Profile Picture</h4>
+                    <ImageUpload />
+                </div>
             </div>
         )
     }
