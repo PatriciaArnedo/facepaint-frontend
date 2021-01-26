@@ -1,6 +1,6 @@
 import React from 'react'
 import LogIn from '../account/LogIn'
-import { logOut, logIn } from '../redux/actions'
+import { logOut, logIn, getUser } from '../redux/actions'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
@@ -26,12 +26,22 @@ class Header extends React.Component {
     //handles dummy auth by running login function on refresh
     componentDidMount = () => {
         this.props.submitHandler(undefined)
+        if(!this.props.userObj.avatar){
+            this.props.getUser(this.props.userId)
+        }
     }
 
     logOutHandler = () => {
         this.props.logOut()
         this.props.history.push("/welcome")
         this.setState({ showModal: false })
+    }
+
+    avatarOnClick = () => {
+        this.props.history.push('/edit-account')
+        cameraShutdown()
+        .then(console.log("camera shut down"))
+        .catch(console.log)
     }
 
     loggedInHandler = () => {
@@ -41,9 +51,7 @@ class Header extends React.Component {
             return (
                 <>
                     <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({ activeItem: e.value })} />
-                    <NavLink to={'/edit-account'} onClick={this.accountClickHandler}>
-                        <h2 className="user-greeting">@{this.props.user}</h2>
-                    </NavLink>
+                    <img onClick={this.avatarOnClick} className="header-avatar" src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"}/>
                     <Button id="create-btn" className="p-button-rounded p-button-outlined" onClick={() => this.clickHandler("new")} icon="pi pi-pencil" label="New Filter" />
                     <Button id="logout-btn" className="button p-button-rounded" onClick={this.logOutHandler} label="Log Out" />
                 </>
@@ -55,12 +63,6 @@ class Header extends React.Component {
 
     logInHandler = () => {
         this.setState({ showModal: !this.state.showModal })
-    }
-
-    accountClickHandler = () => {
-        cameraShutdown()
-            .then(console.log("camera shut down"))
-            .catch(console.log)
     }
 
     clickHandler = (string) => {
@@ -120,12 +122,17 @@ class Header extends React.Component {
 
 
 const msp = (state) => {
-    return { user: state.user }
+    return { 
+        user: state.user,
+        userObj: state.userObj,
+        userId: state.userId
+    }
 }
 
 const mdp = (dispatch) => ({
     logOut: () => dispatch(logOut()),
-    submitHandler: (userObj) => dispatch(logIn(userObj))
+    submitHandler: (userObj) => dispatch(logIn(userObj)),
+    getUser: (userId) => dispatch(getUser(userId))
 })
 
 export default withRouter(connect(msp, mdp)(Header))

@@ -18,9 +18,8 @@ class ExploreFilters extends React.Component {
     }
 
     renderFilters = () => {
-        const sortedFilters = this.props.allFilters.sort((a, b) => a.save_count > b.save_count ? -1 : 1)
-        const filteredFilters = sortedFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName}/>)
+        const filteredFilters = this.props.allFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName} />)
     }
 
     searchOnChange = (e) => {
@@ -28,7 +27,7 @@ class ExploreFilters extends React.Component {
     }
 
     renderFilterName = (name) => {
-        this.setState({name})
+        this.setState({ name })
     }
 
     render() {

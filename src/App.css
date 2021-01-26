@@ -73,6 +73,16 @@
     margin: 0px 20px 0px 20px;
 }
 
+.header-avatar{
+    border-radius: 50%;
+    max-width: 32px;
+    margin-left: 400px;
+}
+
+.header-avatar:hover{
+    cursor: pointer;
+}
+
 /* Welcome Page CSS */
 
 .welcome{

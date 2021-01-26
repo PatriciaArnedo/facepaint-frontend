@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUser, updateUser } from '../redux/actions'
 import EditAccountForm from './EditAccountForm'
+import ImageUpload from './ImageUpload'
 
 
 class EditAccount extends React.Component {
@@ -53,6 +54,8 @@ class EditAccount extends React.Component {
                 <NavLink to={`/my-profile`}>
                     <h3>View My Profile</h3>
                 </NavLink>
+                <br />
+                <ImageUpload />
             </div>
         )
     }
