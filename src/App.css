@@ -60,14 +60,6 @@
     text-decoration: none;
 }
 
-.user-greeting{
-    color: rgb(255, 110, 214);
-    margin: 10px 10px 10px 330px;
-    overflow: hidden;
-    max-width: 9ch;
-    text-overflow: ellipsis;
-    white-space: nowrap; 
-}
 
 #create-btn {
     margin: 0px 20px 0px 20px;
@@ -169,7 +161,7 @@ a {
 
 .filter-name{
     overflow: hidden;
-    max-width: 9ch;
+    max-width: 8ch;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -214,7 +206,6 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    /* -webkit-appearance: none; */
     appearance: none;
     width: 30px;
     height: 30px;
@@ -224,7 +215,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="color"] {
-	/* -webkit-appearance: none; */
 	border: none;
 	width: 60px;
     height: 30px;
@@ -296,7 +286,6 @@ input[type="color"]::-webkit-color-swatch {
     flex-direction: row;
     align-items: center;
     align-content: flex-start;
-    /* justify-content: center; */
 }
 
 /* Edit Account CSS */
@@ -311,9 +300,6 @@ input[type="color"]::-webkit-color-swatch {
     margin: 100px 0px 0px 200px;
 }
 
-/* .editable{
-    display: inline-block;
-} */
 
 /* Modal CSS */
 

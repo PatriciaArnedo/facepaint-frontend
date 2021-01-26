@@ -29,12 +29,22 @@ function FilterCard(props) {
     }
 
     const saveClickHandler = () => {
-        const saveObj = {
-            filter_id: props.filterObj.id,
-            user_id: props.userId
+        if (props.isOtherSavedFilter) {
+            let saveObj = {
+                filter_id: props.filterObj.filter_id,
+                user_id: props.userId
+            }
+            props.saveFilter(saveObj)
+            props.getUsers(props.userId)
+        } else {
+            let saveObj = {
+                filter_id: props.filterObj.id,
+                user_id: props.userId
+            }
+            props.saveFilter(saveObj)
+            props.getUsers(props.userId)
         }
-        props.saveFilter(saveObj)
-        props.getUsers(props.userId)
+       
     }
 
     const saveCountHandler = (num) => {

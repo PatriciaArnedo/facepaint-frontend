@@ -18,7 +18,7 @@ class FilterGallery extends React.Component {
 
     renderFilters = () => {
         const filteredFilters = this.props.userFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName}/>)
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={true} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName} isOtherSavedFilter={false}/>)
     }
 
     searchOnChange = (e) => {

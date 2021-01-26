@@ -19,7 +19,7 @@ class ExploreFilters extends React.Component {
 
     renderFilters = () => {
         const filteredFilters = this.props.allFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName} />)
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName} isOtherSavedFilter={false}/>)
     }
 
     searchOnChange = (e) => {
