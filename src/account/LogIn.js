@@ -23,7 +23,7 @@ class LogIn extends React.Component {
             username: "",
             password: ""
         })
-
+        this.props.cancelHandler()
     }
 
     render() {

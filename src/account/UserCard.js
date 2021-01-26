@@ -12,9 +12,10 @@ function UserCard(props) {
     }
     return (
         <div className="user-card">
-            <NavLink to={`/user/${props.userObj.id}`}>
+            <NavLink style={{display:'inline-block'}} to={`/user/${props.userObj.id}`}>
             <h3>@{props.userObj.username}</h3>
             </NavLink>
+            <br />
             <div className="filter-sample">
                 {renderFilters()}
             </div>

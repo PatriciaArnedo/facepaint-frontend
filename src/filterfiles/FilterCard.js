@@ -58,14 +58,14 @@ function FilterCard(props) {
 
                 {props.belongsToUser ?
                     props.isSavedFilter ?
-                        <NavLink to={`/user/${props.filterObj.id_user}`}>
-                            @{props.filterObj.username}
+                        <NavLink className="filter-username" to={`/user/${props.filterObj.id_user}`}>
+                            <strong > @{props.filterObj.username}</strong>
                         </NavLink>
                         : null
                     :
                     props.isUserCard ? saveCountHandler(props.filterObj.save_count) :
-                        <NavLink to={`/user/${props.filterObj.user.id}`}>
-                            <strong>@{props.filterObj.username}</strong>
+                        <NavLink className="filter-username" to={`/user/${props.filterObj.user.id}`}>
+                            <strong >@{props.filterObj.username}</strong>
                         </NavLink>
                 }
 
