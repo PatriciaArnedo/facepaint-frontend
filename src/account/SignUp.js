@@ -40,7 +40,7 @@ class SignUp extends React.Component {
                 name="username"
                 onChange={this.changeHandler}
               />
-              <label htmlhtmlFor="in">Username</label>
+              <label htmlhtmlfor="in">Username</label>
             </span>
             <br />
             <span className="p-float-label">
@@ -50,7 +50,7 @@ class SignUp extends React.Component {
                 name="name"
                 onChange={this.changeHandler}
               />
-              <label htmlhtmlFor="in">Name</label>
+              <label htmlhtmlfor="in">Name</label>
             </span>
             <br />
 
@@ -61,7 +61,7 @@ class SignUp extends React.Component {
                 name="password"
                 onChange={this.changeHandler}
               />
-              <label htmlhtmlFor="in">Password</label>
+              <label htmlhtmlfor="in">Password</label>
             </span>
             <br />
 

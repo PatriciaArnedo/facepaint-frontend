@@ -281,6 +281,24 @@ input[type="color"]::-webkit-color-swatch {
     max-height: 350px;
 }
 
+.profile-avatar {
+    border-radius: 50%;
+    max-width:150px;
+    margin: 0px 50px 50px 50px
+}
+
+.user-details {
+    margin: 80px 250px 50px 0px
+}
+
+.profile-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: flex-start;
+    /* justify-content: center; */
+}
+
 /* Edit Account CSS */
 
 .edit-account{

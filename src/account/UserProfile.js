@@ -33,13 +33,15 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div className="user-profile">
+                <div className="profile-header">
+                    <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg" } className="profile-avatar" />
                 <div className="user-details">
                     <h3>@{this.props.userObj.username}</h3>
                     <p>{this.props.userObj.name}</p>
                     {this.props.userObj.instagram ? <p>instagram: {this.props.userObj.instagram}</p> : null}
                     <p>{this.props.userObj.bio}</p>
                     <h5>{this.props.userObj.save_count} Total Saves</h5>
-                </div>
+                <br />
                 <input
                     id="form-input"
                     type="text"
@@ -48,6 +50,8 @@ class UserProfile extends React.Component {
                     name="searchTerm"
                     placeholder="Search Filters by Name"
                 />
+                </div>
+                </div>
                 <br />
                 <TabView>
                     <TabPanel header={`Filters`} leftIcon="pi pi-fw pi-palette">

@@ -26,9 +26,6 @@ class Header extends React.Component {
     //handles dummy auth by running login function on refresh
     componentDidMount = () => {
         this.props.submitHandler(undefined)
-        if(!this.props.userObj.avatar){
-            this.props.getUser(this.props.userId)
-        }
     }
 
     logOutHandler = () => {

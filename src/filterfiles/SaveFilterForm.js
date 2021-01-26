@@ -62,7 +62,7 @@ class SaveFilterForm extends React.Component {
                                 name={"name"}
                                 onChange={this.changeHandler}
                             />
-                            <label htmlhtmlFor="in">Name Your Filter</label>
+                            <label htmlhtmlfor="in">Name Your Filter</label>
                         </span>
                         <Button id="form-input" label="Save Filter" />
                     </form>

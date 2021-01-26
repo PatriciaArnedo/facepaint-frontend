@@ -27,7 +27,7 @@ class EditAccount extends React.Component {
     render() {
         return (
             <div className="edit-account">
-                <h2>Edit Account</h2>
+                <h2>My Account</h2>
                 {this.props.userObj.username ?
                     this.state.beenClicked ?
                         <>

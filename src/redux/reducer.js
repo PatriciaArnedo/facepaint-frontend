@@ -94,6 +94,8 @@ function usersReducer(currentState = defaultState.users, action) {
 
 function userObjReducer(currentState = defaultState.userObj, action) {
     switch (action.type) {
+        case LOG_IN:
+            return action.payload
         case GET_USER:
             return action.payload
         case UPDATE_USER:
