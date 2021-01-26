@@ -161,7 +161,7 @@ a {
 
 .filter-name{
     overflow: hidden;
-    max-width: 8ch;
+    max-width: 5ch;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
