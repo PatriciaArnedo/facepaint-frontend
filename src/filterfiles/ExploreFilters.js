@@ -9,10 +9,11 @@ class ExploreFilters extends React.Component {
 
     state = {
         searchTerm: "",
-        name: ""
+        name: "",
     }
 
     componentDidMount() {
+        // console.log("this.props.allFilters.length", this.props.allFilters.length)
         this.props.getAllFilters(this.props.userId)
         this.props.getUsers(this.props.userId)
     }

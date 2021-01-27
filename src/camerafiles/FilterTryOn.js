@@ -25,7 +25,6 @@ class FilterTryOn extends React.Component {
             .catch(console.log)
         }
         this.props.getUsers(this.props.userId)
-
     }
 
     componentWillUnmount(){

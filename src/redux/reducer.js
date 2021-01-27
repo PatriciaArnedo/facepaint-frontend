@@ -1,7 +1,7 @@
 import {
     SIGN_UP, LOG_IN, LOG_OUT, POST_FILTER, GET_USER_FILTERS, GET_SAVED_FILTERS,
     GET_ALL_FILTERS, DELETE_USER_FILTER, DELETE_SAVED_FILTER, GET_USERS,
-    GET_USER, UPDATE_USER, UPLOAD_AVATAR
+    GET_USER, UPDATE_USER, UPLOAD_AVATAR, SAVE_FILTER
 } from './actionTypes'
 import { combineReducers } from 'redux'
 
@@ -65,6 +65,16 @@ function allFilterReducer(currentState = defaultState.allFilters, action) {
     switch (action.type) {
         case GET_ALL_FILTERS:
             return action.payload
+        case SAVE_FILTER:
+            return currentState.map(filter => {
+                if (action.payload.filter_id !== filter.id) {
+                    return filter
+                }
+                const newFilter = JSON.parse(JSON.stringify(filter))
+
+                newFilter.save_count++
+                return newFilter
+            })
         default:
             return currentState
     }
