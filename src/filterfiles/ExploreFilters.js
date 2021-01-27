@@ -39,11 +39,13 @@ class ExploreFilters extends React.Component {
                     <b>{this.state.name}</b>
                 </div>
                 <div className="centered-div">
-                    <h2>Explore Filters</h2>
-                    <span className="p-input-icon-left">
-                        <i className="pi pi-search" />
-                        <InputText id="form-input" name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Filter Name" />
-                    </span>
+                    <div className="title-search-filters">
+                        <h2>Explore filters</h2>
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search" />
+                            <InputText name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Filter Name" />
+                        </span>
+                    </div>
                     <div id="filter-container">
                         {this.renderFilters()}
                     </div>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getUsers } from '../redux/actions'
 import UserCard from '../account/UserCard'
 import { InputText } from 'primereact/inputtext';
+import { Divider } from 'primereact/divider';
 
 
 class UserContainer extends React.Component {
@@ -29,19 +30,15 @@ class UserContainer extends React.Component {
     render() {
         return (
             <div className="user-gallery">
-                <h1>Discover Artists</h1>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText id="form-input" name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Username" />
-                </span>
-                {/* <input
-                    id="form-input"
-                    type="text"
-                    value={this.state.searchTerm}
-                    onChange={this.searchOnChange}
-                    name="searchTerm"
-                    placeholder="Search by Username"
-                /> */}
+                <div className="title-search">
+                    <h1>Discover Artists</h1>
+                    <span className="p-input-icon-left">
+                        <i className="pi pi-search" />
+                        <InputText name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Username" />
+                    </span>
+                </div>
+                <Divider style={{ width: "1200px", margin: "0px 0px 30px 0px" }} />
+
                 <div className="user-container">
                     {this.renderUsers()}
                 </div>

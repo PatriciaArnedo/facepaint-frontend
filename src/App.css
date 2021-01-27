@@ -109,6 +109,17 @@
 }
 
 /* Filter Gallery CSS */
+
+.title-search-filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    margin: 0px auto 0px auto; 
+} 
+
 .filter-gallery{
     display: flex;
     flex-direction: row; 
@@ -262,6 +273,15 @@ input[type="color"]::-webkit-color-swatch {
     color: rgb(84, 84, 84);
 }
 
+.title-search {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    margin: 40px auto 20px auto; 
+}
 .user-gallery::-webkit-scrollbar {
     display: none;
   }

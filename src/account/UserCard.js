@@ -21,7 +21,7 @@ function UserCard(props) {
         <>
         <div className="user-card">
             <div className="user-card-details">
-            <img onClick={avatarClickHandler} style={{display:"inline-block"}} src={props.userObj.avatar ? props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="profile-avatar" />
+            <img onClick={avatarClickHandler} alt="user avatar" style={{display:"inline-block"}} src={props.userObj.avatar ? props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="profile-avatar" />
             <NavLink style={{ display: 'inline-block' }} to={`/user/${props.userObj.id}`}>
                 <h3>@{props.userObj.username}</h3>
             </NavLink>

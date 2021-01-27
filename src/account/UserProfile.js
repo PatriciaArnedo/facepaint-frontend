@@ -35,7 +35,7 @@ class UserProfile extends React.Component {
         return (
             <div className="user-profile">
                 <div className="profile-header">
-                    <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="profile-avatar" />
+                    <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="profile-avatar" alt="user avatar" />
                     <div className="user-details">
                         <h3>@{this.props.userObj.username}</h3>
                         <p>{this.props.userObj.name}</p>

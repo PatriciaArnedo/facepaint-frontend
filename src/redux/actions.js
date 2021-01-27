@@ -21,7 +21,7 @@ export const signUp = (userObj) => {
             .then(r => r.json())
             .then(data => {
                 if (data.id) {
-                    console.log("succesfully created user", data.username)
+                    // console.log("succesfully created user", data.username)
                     localStorage.setItem("USER_DATA", JSON.stringify(data))
                     dispatch({ type: SIGN_UP, payload: data })
                 } else {
@@ -40,7 +40,7 @@ export const logIn = (userObj) => {
             const userDataStr = localStorage.getItem("USER_DATA")
             let userDataObj = JSON.parse(userDataStr)
             if (userDataObj) {
-                console.log("user data from local storage", userDataObj)
+                // console.log("user data from local storage", userDataObj)
                 dispatch({ type: LOG_IN, payload: userDataObj })
             }
             return
@@ -57,7 +57,7 @@ export const logIn = (userObj) => {
             .then(r => r.json())
             .then(newUserObj => {
                 if (newUserObj.id) {
-                    console.log("found user", newUserObj.username)
+                    // console.log("found user", newUserObj.username)
                     localStorage.setItem("USER_DATA", JSON.stringify(newUserObj))
                     dispatch({ type: LOG_IN, payload: newUserObj })
                 } else {
@@ -223,7 +223,7 @@ export const updateUser = (userObj, userId) => {
             .then(response => response.json())
             .then(newUserObj => {
                 if (newUserObj.id) {
-                    console.log('Success updated user:', newUserObj)
+                    // console.log('Success updated user:', newUserObj)
                     dispatch({ type: UPDATE_USER, payload: newUserObj })
                 }
             })
@@ -243,7 +243,7 @@ export const uploadAvatar = (imgObj, userId) => {
             .then(response => response.json())
             .then(newUserObj => {
                 if (newUserObj.id) {
-                    console.log('Success uploaded avatar:', newUserObj)
+                    // console.log('Success uploaded avatar:', newUserObj)
                     dispatch({ type: UPLOAD_AVATAR, payload: newUserObj })
                 }
             })

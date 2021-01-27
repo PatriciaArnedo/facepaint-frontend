@@ -41,15 +41,19 @@ class Header extends React.Component {
         .catch(console.log)
     }
 
+    tabHandler = (e) => {
+        this.setState({ activeItem: e.value })
+    }
+
     loggedInHandler = () => {
 
         //conditionally renders log out button and user greeting
         if (this.props.user) {
             return (
                 <>
-                    <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({ activeItem: e.value })} />
+                    <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={this.tabHandler} />
                     <Button id="create-btn" className="p-button-rounded p-button-outlined" onClick={() => this.clickHandler("new")} icon="pi pi-pencil" label="New Filter" />
-                    <img onClick={this.avatarOnClick} className="header-avatar" src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"}/>
+                    <img onClick={this.avatarOnClick} className="header-avatar" src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} alt="user avatar"/>
                     <Button id="logout-btn" className="button p-button-rounded" onClick={this.logOutHandler} label="Log Out" />
                 </>
             )
