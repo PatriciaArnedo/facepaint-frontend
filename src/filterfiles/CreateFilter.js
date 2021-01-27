@@ -124,9 +124,9 @@ class CreateFilter extends React.Component {
                 <div className="camera-card">
                     <FaceFilterCanvas />
                 </div>
-                <div>
+                <div className="drawing-form-card">
                     <form className="drawing-form" style={{ display: "inline-block" }}>
-                        <h2>Drawing Controls</h2>
+                        <h2>Brush Settings</h2>
                             Color:<br />
                         <input
                             id="form-input"
@@ -137,7 +137,7 @@ class CreateFilter extends React.Component {
 
                         <br />
                         <label>
-                            Drawing Mode:
+                            Mode:
                             <Dropdown
                                 fluid
                                 selection
@@ -149,9 +149,8 @@ class CreateFilter extends React.Component {
                                 options={options}
                             />
                         </label>
-                        <br />
                         <label>
-                            Thickness:
+                            Stroke Size:
                             <input
                                 id="form-input"
                                 name="weight"

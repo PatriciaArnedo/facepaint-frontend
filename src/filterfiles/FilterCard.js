@@ -66,7 +66,7 @@ class FilterCard extends React.Component {
                         <img onClick={this.filterClickHandler} id="filter-thumb" src={this.props.filterObj.img} alt="Filter" />
                 }
                 < Divider style={{ margin: "0" }} />
-                 <div className="filter-card-footer" >
+                <div className="filter-card-footer" >
                     {this.saveCountHandler(this.props.filterObj.save_count)}
                     {
                         this.props.user ?
@@ -91,7 +91,15 @@ class FilterCard extends React.Component {
                                     <strong > @{this.props.filterObj.username}</strong>
                                 </NavLink>
                             :
-                            this.props.isUserCard ? <strong className="filter-username" >@{this.props.filterObj.username}</strong> :
+                            this.props.isUserCard ?
+                                this.props.isOtherSavedFilter ?
+                                    <NavLink className="filter-username" to={`/user/${this.props.filterObj.id_user}`}>
+                                        <strong > @{this.props.filterObj.username}</strong>
+                                    </NavLink>
+                                    :
+
+                                    <strong className="filter-username" >@{this.props.filterObj.username}</strong>
+                                :
                                 <NavLink className="filter-username" to={`/user/${this.props.filterObj.user.id}`}>
                                     <strong >@{this.props.filterObj.username}</strong>
                                 </NavLink>
@@ -102,7 +110,7 @@ class FilterCard extends React.Component {
                     </span>
 
                 </div >
-               
+
             </div >
         )
     }

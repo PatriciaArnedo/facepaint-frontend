@@ -48,8 +48,8 @@ class Header extends React.Component {
             return (
                 <>
                     <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({ activeItem: e.value })} />
-                    <img onClick={this.avatarOnClick} className="header-avatar" src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"}/>
                     <Button id="create-btn" className="p-button-rounded p-button-outlined" onClick={() => this.clickHandler("new")} icon="pi pi-pencil" label="New Filter" />
+                    <img onClick={this.avatarOnClick} className="header-avatar" src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"}/>
                     <Button id="logout-btn" className="button p-button-rounded" onClick={this.logOutHandler} label="Log Out" />
                 </>
             )

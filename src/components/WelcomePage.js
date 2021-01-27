@@ -15,7 +15,7 @@ class WelcomePage extends React.Component {
   render() {
     return (
       <div className="welcome">
-        <h1 id="welcome-text">Welcome to FacePaint</h1>
+        <h1 id="welcome-text">welcome to facepaint</h1>
         {this.state.showModal ? <SignUp cancelHandler={this.modalHandler}/> : null }
         <Button onClick={this.modalHandler} className="p-button-rounded" label="Get Started"/>
       </div>

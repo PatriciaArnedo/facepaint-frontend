@@ -17,9 +17,7 @@ class EditAccount extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.userObj.username && this.props.userId) {
             this.props.getUser(this.props.userId)
-        }
     }
 
     clickHandler = () => {

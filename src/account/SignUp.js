@@ -33,6 +33,7 @@ class SignUp extends React.Component {
       <div className="modal">
         <div className="modal-content">
           <h3>Sign Up to Facepaint</h3>
+          <br />
           <form onSubmit={this.submitHandler}>
             <span className="p-float-label">
               <InputText

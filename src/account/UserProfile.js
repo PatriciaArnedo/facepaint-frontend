@@ -14,7 +14,7 @@ class UserProfile extends React.Component {
             const filteredFilters = this.props.userObj.filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
             return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} isOtherSavedFilter={false} />)
         } else {
-            return <p>This User Hasn't Created Any Filters Yet</p>
+            return <p>This user hasn't created any filters yet.</p>
         }
     }
 
@@ -23,7 +23,7 @@ class UserProfile extends React.Component {
             const filteredFilters = this.props.userObj.save_filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
             return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} isOtherSavedFilter={true} />)
         } else {
-            return <p>This User Hasn't Saved Any Filters Yet</p>
+            return <p>This user hasn't saved any filters yet.</p>
         }
     }
 
@@ -41,7 +41,7 @@ class UserProfile extends React.Component {
                         <p>{this.props.userObj.name}</p>
                         {this.props.userObj.instagram ? <p>instagram: {this.props.userObj.instagram}</p> : null}
                         <p>{this.props.userObj.bio}</p>
-                        <h5>{this.props.userObj.save_count} Total Saves</h5>
+                        <p>{this.props.userObj.save_count === 1? `${this.props.userObj.save_count} total save`  : `${this.props.userObj.save_count} total saves` }</p>
                         <br />
                         <span className="p-input-icon-left">
                             <i className="pi pi-search" />
