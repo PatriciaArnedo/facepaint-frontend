@@ -297,7 +297,7 @@ input[type="color"]::-webkit-color-swatch {
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
-    margin: 100px 0px 0px 200px;
+    margin: 100px 350px 0px 350px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 1%;
@@ -335,7 +335,62 @@ input[type="color"]::-webkit-color-swatch {
     display: inline-block;
 }
 
-/* Modal CSS */
+.upload-modal {
+    /* display: none; */
+    position: fixed; 
+    z-index: 1;  
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.upload-modal-content {
+    background-color: #fefefe;
+    margin: -60px auto 0px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    /* text-align: center; */
+}
+
+ .upload-preview {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid rgb(47, 147, 255);
+    display: inline-block;
+    padding: 6px 6px;
+    height: 33px;
+    width: 125px;
+    color:white ;
+    background-color:rgb(47, 147, 255) ;
+    cursor: pointer;
+    border-radius: 2px;
+}
+    /* Modal CSS */
 
 .modal {
     /* display: none; */
@@ -349,9 +404,9 @@ input[type="color"]::-webkit-color-swatch {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+}
 
-  .modal-content {
+.modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -364,8 +419,8 @@ input[type="color"]::-webkit-color-swatch {
     align-content: center;
     text-align: center;
     border-radius: 5px;
-  }
+}
 
-/* Code Cemetery  */
+    /* Code Cemetery  */
 
-/* fuOtN7jb90Gjsld1 */
+    /* fuOtN7jb90Gjsld1 */

@@ -36,7 +36,7 @@ class EditAccount extends React.Component {
                 <div style={{ textAlign: "center" }}>
                     <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="account-avatar" alt="profile avatar" />
                     <br />
-                    <Button label="Upload Picture" />
+                    <Button onClick={this.modalHandler} label="Upload Picture" />
                     <br />
                     <br />
                     <NavLink to={`/my-profile`}>
@@ -81,9 +81,8 @@ class EditAccount extends React.Component {
                         <h3>Loading...</h3>
                     }
                     {/* <ToggleButton checked={this.state.beenClicked} onChange={this.clickHandler} onLabel="Cancel" offLabel="Edit" /> */}
-
                     <br />
-                    <ImageUpload />
+                    {this.state.showModal ? <ImageUpload cancelHandler={this.modalHandler} /> : null}
                 </div>
             </div>
         )

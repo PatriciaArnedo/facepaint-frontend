@@ -3,7 +3,7 @@ import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { connect } from 'react-redux'
 import { uploadAvatar } from '../redux/actions'
-
+import { Button } from 'primereact/button';
 
 class ImageUpload extends React.Component {
     state = {
@@ -76,19 +76,6 @@ class ImageUpload extends React.Component {
         const base64Image = canvas.toDataURL('image/jpeg')
 
         return base64Image
-        // return new Promise((resolve, reject) => {
-        //   canvas.toBlob(blob => {
-        //     if (!blob) {
-        //       //reject(new Error('Canvas is empty'));
-        //       console.error('Canvas is empty');
-        //       return;
-        //     }
-        //     blob.name = fileName;
-        //     window.URL.revokeObjectURL(this.fileUrl);
-        //     this.fileUrl = window.URL.createObjectURL(blob);
-        //     resolve(this.fileUrl);
-        //   }, 'image/jpeg');
-        // });
     }
 
     imgSaveHandler = () => {
@@ -100,40 +87,57 @@ class ImageUpload extends React.Component {
             src: null,
             croppedImageUrl: null
         })
+        this.props.cancelHandler()
+    }
+
+    cancelHandler = () => {
+        this.props.cancelHandler()
     }
 
     render() {
         const { crop, croppedImageUrl, src } = this.state;
 
         return (
-            <div style={{ textAlign: "center" }} className="ImageUpload">
-                <h4>Upload a Profile Picture</h4>
-                <div>
-                    <input type="file" accept="image/*" onChange={this.onSelectFile} />
-                </div>
-                {src && (
-                    <div style={{ maxWidth: "400px" }}>
-                        <ReactCrop
-                            src={src}
-                            crop={crop}
-                            ruleOfThirds
-                            onImageLoaded={this.onImageLoaded}
-                            onComplete={this.onCropComplete}
-                            onChange={this.onCropChange}
-                            circularCrop={true}
-                            ruleOfThirds={false}
-                        />
+            <div className="upload-modal">
+                <div className="upload-modal-content">
+                    <h2>Upload a Profile Picture</h2>
+                    <div>
+                        <label class="custom-file-upload">
+                            Choose Image <i className="pi pi-plus" style={{marginLeft:"5px"}}></i>
+                            <input type="file" accept="image/*" onChange={this.onSelectFile} />
+                        </label>
                     </div>
-                )}
-                {croppedImageUrl && (
-                    <img alt="Crop" style={{ maxWidth: '100%', borderRadius: "50%" }} src={croppedImageUrl} />
-                )}
-                <br />
-                {this.state.src ?
-                    <button onClick={this.imgSaveHandler}>Save</button>
-                    :
-                    null
-                }
+                    <br />
+                    <div className="upload-preview">
+                        <div style={{ width: "300px", marginRight: "100px" }}>
+                            {src && (
+                                <ReactCrop
+                                    src={src}
+                                    crop={crop}
+                                    onImageLoaded={this.onImageLoaded}
+                                    onComplete={this.onCropComplete}
+                                    onChange={this.onCropChange}
+                                    circularCrop={true}
+                                    ruleOfThirds={false}
+                                />
+                            )}
+                        </div>
+                        <div>
+                            {croppedImageUrl && (
+                                <img alt="Crop" style={{ width: "180px", borderRadius: "50%" }} src={croppedImageUrl} />
+                            )}
+                        </div>
+                    </div>
+                    <br />
+                    {this.state.src ?
+                        <Button onClick={this.imgSaveHandler} label="Save" />
+                        :
+                        null
+                    }
+                    <br />
+                    <Button onClick={this.cancelHandler} label="Cancel" className="p-button-warning"/>
+                </div>
+
             </div>
         );
     }
