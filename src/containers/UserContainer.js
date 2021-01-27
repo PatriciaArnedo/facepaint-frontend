@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getUsers } from '../redux/actions'
 import UserCard from '../account/UserCard'
+import { InputText } from 'primereact/inputtext';
 
 
 class UserContainer extends React.Component {
@@ -15,7 +16,8 @@ class UserContainer extends React.Component {
     }
 
     renderUsers = () => {
-        const activeUsers = this.props.users.filter(user => user.filters.length > 0)
+        let activeUsers = this.props.users.filter(user => user.filters.length > 0)
+        activeUsers = activeUsers.filter(user => user.id !== this.props.userId)
         const filteredUsers = activeUsers.filter(user => user.username.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         return filteredUsers.map(userObj => <UserCard key={userObj.id} userObj={userObj} />)
     }
@@ -28,14 +30,18 @@ class UserContainer extends React.Component {
         return (
             <div className="user-gallery">
                 <h1>Discover Artists</h1>
-                <input
+                <span className="p-input-icon-left">
+                    <i className="pi pi-search" />
+                    <InputText id="form-input" name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Username" />
+                </span>
+                {/* <input
                     id="form-input"
                     type="text"
                     value={this.state.searchTerm}
                     onChange={this.searchOnChange}
                     name="searchTerm"
                     placeholder="Search by Username"
-                />
+                /> */}
                 <div className="user-container">
                     {this.renderUsers()}
                 </div>

@@ -140,7 +140,8 @@ a {
     transition: 0.3s;
     border-radius: 1%;
     margin: 10px 10px 10px 10px;
-    max-height: 250px;
+    max-height: 270px;
+    min-height: 270px;
     text-align: center;
     max-width: 200px;
     min-width: 200px;
@@ -154,14 +155,15 @@ a {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-content: stretch;
     align-items: center;
+    padding: 0px 10px 0px 10px;
 }
 
 .filter-name{
     overflow: hidden;
-    max-width: 5ch;
+    max-width: 8ch;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -237,9 +239,14 @@ input[type="color"]::-webkit-color-swatch {
 
 .user-gallery {
     max-height: 700px;
+    width: 100%;
     overflow: auto;
     text-align: center;
 }
+
+.user-gallery::-webkit-scrollbar {
+    display: none;
+  }
 
 .user-card {
     text-align: center;
@@ -365,7 +372,7 @@ input[type="color"]::-webkit-color-swatch {
     /* text-align: center; */
 }
 
- .upload-preview {
+.upload-preview {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -373,7 +380,6 @@ input[type="color"]::-webkit-color-swatch {
     align-items: center;
     align-content: center;
 }
-
 
 input[type="file"] {
     display: none;
@@ -384,13 +390,14 @@ input[type="file"] {
     display: inline-block;
     padding: 6px 6px;
     height: 33px;
-    width: 125px;
+    width: 150px;
     color:white ;
     background-color:rgb(47, 147, 255) ;
     cursor: pointer;
     border-radius: 2px;
+    text-align: center;
 }
-    /* Modal CSS */
+/* Modal CSS */
 
 .modal {
     /* display: none; */
@@ -421,6 +428,6 @@ input[type="file"] {
     border-radius: 5px;
 }
 
-    /* Code Cemetery  */
+/* Code Cemetery  */
 
-    /* fuOtN7jb90Gjsld1 */
+/* fuOtN7jb90Gjsld1 */

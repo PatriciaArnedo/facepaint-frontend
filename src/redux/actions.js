@@ -193,8 +193,8 @@ export const getUsers = (userId) => {
         fetch(`${backendBaseUrl}/api/v1/users`)
             .then(r => r.json())
             .then(arrayOfUsers => {
-                const newArray = arrayOfUsers.filter(user => user.id !== userId)
-                dispatch({ type: GET_USERS, payload: newArray })
+                // const newArray = arrayOfUsers.filter(user => user.id !== userId)
+                dispatch({ type: GET_USERS, payload: arrayOfUsers })
             })
             .catch(console.log)
     }

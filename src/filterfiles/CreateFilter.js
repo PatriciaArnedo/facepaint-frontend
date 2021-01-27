@@ -5,6 +5,7 @@ import { cameraStartup, update_canvasTexture, cameraShutdown } from "../camerafi
 import { connect } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { Button } from 'primereact/button';
+import {getUsers } from '../redux/actions'
 
 
 class CreateFilter extends React.Component {
@@ -62,6 +63,8 @@ class CreateFilter extends React.Component {
             })
                 .catch(console.log)
         }
+        this.props.getUsers(this.props.userId)
+
     }
 
     componentWillUnmount() {
@@ -187,4 +190,11 @@ function msp(state) {
     }
 }
 
-export default connect(msp)(CreateFilter)
+function mdp(dispatch) {
+    return {
+        getUsers: (userId) => dispatch(getUsers(userId)),
+    }
+}
+
+
+export default connect(msp, mdp)(CreateFilter)

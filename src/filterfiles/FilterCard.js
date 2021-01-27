@@ -7,47 +7,47 @@ import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
 
 
-function FilterCard(props) {
+class FilterCard extends React.Component {
 
 
-    const filterClickHandler = () => {
+    filterClickHandler = () => {
         //uses loadImagetoCanvas function from facefilter library to try drawn filter on
-        loadImageToCanvas(props.filterObj.img)
-        props.renderFilterName(props.filterObj.name)
+        loadImageToCanvas(this.props.filterObj.img)
+        this.props.renderFilterName(this.props.filterObj.name)
     }
 
-    const deleteClickHandler = () => {
-        if (props.isSavedFilter) {
-            props.deleteSavedFilter(props.filterObj.id)
+    deleteClickHandler = () => {
+        if (this.props.isSavedFilter) {
+            this.props.deleteSavedFilter(this.props.filterObj.id)
             atrament.clear()
             update_canvasTexture()
         } else {
-            props.deleteFilter(props.filterObj.id)
+            this.props.deleteFilter(this.props.filterObj.id)
             atrament.clear()
             update_canvasTexture()
         }
     }
 
-    const saveClickHandler = () => {
-        if (props.isOtherSavedFilter) {
+    saveClickHandler = () => {
+        if (this.props.isOtherSavedFilter) {
             let saveObj = {
-                filter_id: props.filterObj.filter_id,
-                user_id: props.userId
+                filter_id: this.props.filterObj.filter_id,
+                user_id: this.props.userId
             }
-            props.saveFilter(saveObj)
-            props.getUsers(props.userId)
+            this.props.saveFilter(saveObj)
+            this.props.getUsers(this.props.userId)
         } else {
             let saveObj = {
-                filter_id: props.filterObj.id,
-                user_id: props.userId
+                filter_id: this.props.filterObj.id,
+                user_id: this.props.userId
             }
-            props.saveFilter(saveObj)
-            props.getUsers(props.userId)
+            this.props.saveFilter(saveObj)
+            this.props.getUsers(this.props.userId)
         }
-       
+
     }
 
-    const saveCountHandler = (num) => {
+    saveCountHandler = (num) => {
         switch (num) {
             case 1:
                 return `${num} save`
@@ -56,43 +56,56 @@ function FilterCard(props) {
         }
     }
 
-    return (
-        <div className="filter-card">
-            {props.isUserCard ?
-                <img id="filter-thumb" src={props.filterObj.img} alt="Filter" />
-                :
-                <img onClick={filterClickHandler} id="filter-thumb" src={props.filterObj.img} alt="Filter" />
-            }
-            <Divider style={{ margin: "0" }} />
-            <div className="filter-card-footer">
-
-                {props.belongsToUser ?
-                    props.isSavedFilter ?
-                        <NavLink className="filter-username" to={`/user/${props.filterObj.id_user}`}>
-                            <strong > @{props.filterObj.username}</strong>
-                        </NavLink>
-                        : null
-                    :
-                    props.isUserCard ? saveCountHandler(props.filterObj.save_count) :
-                        <NavLink className="filter-username" to={`/user/${props.filterObj.user.id}`}>
-                            <strong >@{props.filterObj.username}</strong>
-                        </NavLink>
-                }
-
-                <span className="filter-name">
-                    {props.filterObj.name}
-                </span>
-                {props.user ?
-                    props.belongsToUser ?
-                        <Button onClick={deleteClickHandler} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-danger" />
+    render() {
+        return (
+            <div className="filter-card" >
+                {
+                    this.props.isUserCard ?
+                        <img id="filter-thumb" src={this.props.filterObj.img} alt="Filter" />
                         :
-                        <Button onClick={saveClickHandler} icon="pi pi-bookmark" className="p-button-rounded p-button-text " />
-                    :
-                    null
+                        <img onClick={this.filterClickHandler} id="filter-thumb" src={this.props.filterObj.img} alt="Filter" />
                 }
-            </div>
-        </div>
-    )
+                < Divider style={{ margin: "0" }} />
+                 <div className="filter-card-footer" >
+                    {this.saveCountHandler(this.props.filterObj.save_count)}
+                    {
+                        this.props.user ?
+                            this.props.belongsToUser ?
+                                <Button onClick={this.deleteClickHandler} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-danger" />
+                                :
+                                <Button onClick={this.saveClickHandler} icon="pi pi-bookmark" className="p-button-rounded p-button-text " />
+                            :
+                            null
+                    }
+                </div>
+                < div className="filter-card-footer" >
+
+                    {
+                        this.props.belongsToUser ?
+                            this.props.isSavedFilter ?
+                                <NavLink className="filter-username" to={`/user/${this.props.filterObj.id_user}`}>
+                                    <strong > @{this.props.filterObj.username}</strong>
+                                </NavLink>
+                                :
+                                <NavLink className="filter-username" to={`/user/${this.props.userId}`}>
+                                    <strong > @{this.props.filterObj.username}</strong>
+                                </NavLink>
+                            :
+                            this.props.isUserCard ? <strong className="filter-username" >@{this.props.filterObj.username}</strong> :
+                                <NavLink className="filter-username" to={`/user/${this.props.filterObj.user.id}`}>
+                                    <strong >@{this.props.filterObj.username}</strong>
+                                </NavLink>
+                    }
+
+                    <span className="filter-name">
+                        {this.props.filterObj.name}
+                    </span>
+
+                </div >
+               
+            </div >
+        )
+    }
 }
 
 function mdp(dispatch) {
@@ -107,7 +120,8 @@ function mdp(dispatch) {
 function msp(state) {
     return {
         userId: state.userId,
-        user: state.user
+        user: state.user,
+        users: state.users
     }
 }
 

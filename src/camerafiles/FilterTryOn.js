@@ -2,6 +2,7 @@ import React from 'react'
 import FaceFilterCanvas from './FaceFilterCanvas'
 import { cameraStartup, cameraShutdown } from "./FaceFilterSource"
 import { connect } from 'react-redux'
+import {getUsers } from '../redux/actions'
 
 
 
@@ -23,6 +24,8 @@ class FilterTryOn extends React.Component {
             })
             .catch(console.log)
         }
+        this.props.getUsers(this.props.userId)
+
     }
 
     componentWillUnmount(){
@@ -52,5 +55,10 @@ function msp(state) {
     }
 }
 
+function mdp(dispatch) {
+    return {
+        getUsers: (userId) => dispatch(getUsers(userId)),
+    }
+}
 
-export default connect(msp)(FilterTryOn)
+export default connect(msp, mdp)(FilterTryOn)

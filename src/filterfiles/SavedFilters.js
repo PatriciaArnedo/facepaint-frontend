@@ -3,6 +3,7 @@ import FilterTryOn from '../camerafiles/FilterTryOn'
 import { connect } from 'react-redux'
 import { getSavedFilters, getUsers } from '../redux/actions'
 import FilterCard from '../filterfiles/FilterCard'
+import { InputText } from 'primereact/inputtext';
 
 
 class SavedFilters extends React.Component {
@@ -41,14 +42,10 @@ class SavedFilters extends React.Component {
                 </div>
                 <div className="centered-div">
                     <h3>My Saved Filters</h3>
-                    <input
-                        id="form-input"
-                        type="text"
-                        value={this.state.searchTerm}
-                        onChange={this.searchOnChange}
-                        name="searchTerm"
-                        placeholder="Search Filters by Name"
-                    />
+                    <span className="p-input-icon-left">
+                        <i className="pi pi-search" />
+                        <InputText id="form-input" name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Filter Name" />
+                    </span>
                     <div id="filter-container">
                         {this.renderFilters()}
                     </div>

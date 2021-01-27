@@ -1,6 +1,7 @@
 import React from 'react'
 import FilterCard from '../filterfiles/FilterCard'
 import { TabView, TabPanel } from 'primereact/tabview';
+import { InputText } from 'primereact/inputtext';
 
 class UserProfile extends React.Component {
 
@@ -11,7 +12,7 @@ class UserProfile extends React.Component {
     renderFilters = () => {
         if (this.props.userObj.filters && this.props.userObj.filters.length) {
             const filteredFilters = this.props.userObj.filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-            return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} isOtherSavedFilter={false}/>)
+            return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} isOtherSavedFilter={false} />)
         } else {
             return <p>This User Hasn't Created Any Filters Yet</p>
         }
@@ -20,7 +21,7 @@ class UserProfile extends React.Component {
     renderSavedFilters = () => {
         if (this.props.userObj.save_filters && this.props.userObj.save_filters.length) {
             const filteredFilters = this.props.userObj.save_filters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-            return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} isOtherSavedFilter={true}/>)
+            return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={true} isOtherSavedFilter={true} />)
         } else {
             return <p>This User Hasn't Saved Any Filters Yet</p>
         }
@@ -34,23 +35,19 @@ class UserProfile extends React.Component {
         return (
             <div className="user-profile">
                 <div className="profile-header">
-                    <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg" } className="profile-avatar" />
-                <div className="user-details">
-                    <h3>@{this.props.userObj.username}</h3>
-                    <p>{this.props.userObj.name}</p>
-                    {this.props.userObj.instagram ? <p>instagram: {this.props.userObj.instagram}</p> : null}
-                    <p>{this.props.userObj.bio}</p>
-                    <h5>{this.props.userObj.save_count} Total Saves</h5>
-                <br />
-                <input
-                    id="form-input"
-                    type="text"
-                    value={this.state.searchTerm}
-                    onChange={this.searchOnChange}
-                    name="searchTerm"
-                    placeholder="Search Filters by Name"
-                />
-                </div>
+                    <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="profile-avatar" />
+                    <div className="user-details">
+                        <h3>@{this.props.userObj.username}</h3>
+                        <p>{this.props.userObj.name}</p>
+                        {this.props.userObj.instagram ? <p>instagram: {this.props.userObj.instagram}</p> : null}
+                        <p>{this.props.userObj.bio}</p>
+                        <h5>{this.props.userObj.save_count} Total Saves</h5>
+                        <br />
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search" />
+                            <InputText id="form-input" name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Filter Name" />
+                        </span>
+                    </div>
                 </div>
                 <br />
                 <TabView>

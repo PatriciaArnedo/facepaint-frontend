@@ -3,7 +3,7 @@ import FilterTryOn from '../camerafiles/FilterTryOn'
 import { connect } from 'react-redux'
 import { getAllFilters, getUsers } from '../redux/actions'
 import FilterCard from '../filterfiles/FilterCard'
-
+import { InputText } from 'primereact/inputtext';
 
 class ExploreFilters extends React.Component {
 
@@ -19,7 +19,7 @@ class ExploreFilters extends React.Component {
 
     renderFilters = () => {
         const filteredFilters = this.props.allFilters.filter(filter => filter.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName} isOtherSavedFilter={false}/>)
+        return filteredFilters.map(filterObj => <FilterCard key={filterObj.id} filterObj={filterObj} belongsToUser={false} isSavedFilter={false} isUserCard={false} renderFilterName={this.renderFilterName} isOtherSavedFilter={false} />)
     }
 
     searchOnChange = (e) => {
@@ -40,14 +40,10 @@ class ExploreFilters extends React.Component {
                 </div>
                 <div className="centered-div">
                     <h3>Explore Filters</h3>
-                    <input
-                        id="form-input"
-                        type="text"
-                        value={this.state.searchTerm}
-                        onChange={this.searchOnChange}
-                        name="searchTerm"
-                        placeholder="Search Filters by Name"
-                    />
+                    <span className="p-input-icon-left">
+                        <i className="pi pi-search" />
+                        <InputText id="form-input" name="searchTerm" value={this.state.searchTerm} onChange={this.searchOnChange} placeholder="Search Filter Name" />
+                    </span>
                     <div id="filter-container">
                         {this.renderFilters()}
                     </div>
