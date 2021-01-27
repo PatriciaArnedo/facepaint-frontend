@@ -298,8 +298,42 @@ input[type="color"]::-webkit-color-swatch {
     align-content: flex-start;
     align-items: flex-start;
     margin: 100px 0px 0px 200px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 1%;
+    padding:50px 30px 30px 30px;
+    max-height: 500px;
+    max-width: 700px;
+    min-width: 700px;
 }
 
+.edit-account-form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin: 0px 0px 0px 0px;
+}
+
+.account-avatar {
+    border-radius: 50%;
+    max-width:150px;
+    margin: 80px 50px 50px 50px
+}
+
+.editable{
+    width: 110px;
+    display: inline-block;
+    vertical-align: top;}
+
+.account-bio{
+    max-width: 150px;
+    max-height: 50px;
+    overflow:auto;
+    display: inline-block;
+}
 
 /* Modal CSS */
 
@@ -326,10 +360,10 @@ input[type="color"]::-webkit-color-swatch {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
     text-align: center;
-    border-radius: 2%;
+    border-radius: 5px;
   }
 
 /* Code Cemetery  */

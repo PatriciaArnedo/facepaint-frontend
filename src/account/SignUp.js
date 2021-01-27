@@ -30,8 +30,9 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="modal">
+        <div className="modal-content">
+          <h3>Sign Up to Facepaint</h3>
           <form onSubmit={this.submitHandler}>
             <span className="p-float-label">
               <InputText
@@ -67,6 +68,10 @@ class SignUp extends React.Component {
 
             <Button label="Sign Up" />
           </form>
+          <br />
+          <div>
+          <Button onClick={this.props.cancelHandler} className="p-button-warning" label="Cancel" />
+          </div>
         </div>
       </div>
     )

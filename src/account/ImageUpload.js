@@ -2,7 +2,7 @@ import React from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { connect } from 'react-redux'
-import { getUser, uploadAvatar } from '../redux/actions'
+import { uploadAvatar } from '../redux/actions'
 
 
 class ImageUpload extends React.Component {
@@ -107,6 +107,7 @@ class ImageUpload extends React.Component {
 
         return (
             <div style={{ textAlign: "center" }} className="ImageUpload">
+                <h4>Upload a Profile Picture</h4>
                 <div>
                     <input type="file" accept="image/*" onChange={this.onSelectFile} />
                 </div>
@@ -122,7 +123,6 @@ class ImageUpload extends React.Component {
                             circularCrop={true}
                             ruleOfThirds={false}
                         />
-                        <br />
                     </div>
                 )}
                 {croppedImageUrl && (
@@ -153,4 +153,4 @@ function mdp(dispatch) {
     }
 }
 
-export default connect(msp,mdp)(ImageUpload)
+export default connect(msp, mdp)(ImageUpload)

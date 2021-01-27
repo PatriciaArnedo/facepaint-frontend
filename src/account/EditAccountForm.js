@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getUser, updateUser } from '../redux/actions'
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext'
+import { InputTextarea } from 'primereact/inputtextarea';
 
 class EditAccountForm extends React.Component {
 
@@ -28,11 +31,10 @@ class EditAccountForm extends React.Component {
 
     render() {
         return (
-            <div className="edit-account">
+            <div className="edit-account-form">
                             <form onSubmit={this.submitHandler}>
-                                <br />
-                                <br />
-                                <input
+                            <strong className="editable">Name:</strong>
+                                <InputText
                                     type="text"
                                     value={this.state.name}
                                     name="name"
@@ -41,7 +43,8 @@ class EditAccountForm extends React.Component {
                                 />
                                 <br />
                                 <br />
-                                <input
+                            <strong className="editable">Instagram:</strong>
+                                <InputText
                                     type="text"
                                     value={this.state.instagram}
                                     name="instagram"
@@ -50,7 +53,8 @@ class EditAccountForm extends React.Component {
                                 />
                                 <br />
                                 <br />
-                                <textarea
+                            <strong className="editable">Bio:</strong>
+                                <InputTextarea
                                     value={this.state.bio}
                                     name="bio"
                                     onChange={this.changeHandler}
@@ -58,7 +62,7 @@ class EditAccountForm extends React.Component {
                                 />
                                 <br />
                                 <br />
-                                <button>Update</button>
+                                <Button label="Update" />
                             </form>
             </div>
         )

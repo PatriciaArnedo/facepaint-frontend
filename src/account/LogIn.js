@@ -30,6 +30,8 @@ class LogIn extends React.Component {
         return (
             <div className="modal">
                 <div className="modal-content">
+                    <h3>Log In to Facepaint</h3>
+                    <br />
                     <form id="login-form" onSubmit={this.submitHandler}>
                         <span className="p-float-label">
                             <InputText
@@ -55,7 +57,9 @@ class LogIn extends React.Component {
                         <Button label="Log In" />
                     </form>
                     <br />
+                    <div>
                     <Button onClick={this.props.cancelHandler} className="p-button-warning" label="Cancel" />
+                    </div>
                 </div>
             </div>
         )
