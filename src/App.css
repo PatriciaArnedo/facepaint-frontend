@@ -120,6 +120,16 @@
     align-content: center;
 }
 
+.welcome-footer{
+    margin:-60px auto 0px auto;
+    color: rgb(255, 255, 255);
+    font-size: 13pt;
+}
+
+.welcome-footer a {
+    color: rgb(255, 255, 255);
+}
+
 /* Filter Maker CSS */
 .filter-maker{
     display: flex;
@@ -244,9 +254,12 @@ a {
     text-align: center;
 }
 
-/* .save-filter-form {
-    text-align: center;
-} */
+.save-filter-card {
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 3%;
+    margin: 10px 10px 20px 10px;
+}
 
 #form-input {
     margin:20px 0px 20px 0px;

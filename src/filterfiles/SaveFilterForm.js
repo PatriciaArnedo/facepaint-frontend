@@ -50,10 +50,12 @@ class SaveFilterForm extends React.Component {
             <div className="modal">
                 <div className="modal-content">
                     <h3>Save Your Filter</h3>
+                            <div className="save-filter-card">
                             {this.props.img ?
                                 <img id="filter-thumb" src={this.imgSrc} alt="filter img" />
                                 :
                                 null}
+                            </div>
                 <div>
                     <form className="save-filter-form" onSubmit={this.submitHandler}>
                         <span className="p-float-label">
