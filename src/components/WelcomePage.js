@@ -15,9 +15,14 @@ class WelcomePage extends React.Component {
   render() {
     return (
       <div className="welcome">
-        <h1 id="welcome-text">welcome to facepaint</h1>
+        <div className="welcome-set">
+        <h1 className="welcome-text">Creating custom filters is easy and fun with facepaint.</h1>
+        <h1 className="welcome-subtext">A tool for drawing custom AR face filters</h1>
+        <br />
+        <Button onClick={this.modalHandler} className="button p-button-lg" label="Get Started"/>
+        </div>
+        <img className="welcome-gif" src="https://i.imgur.com/6aFIUAh.gif" alt="gif of people smiling with drawinf on thwm"/>
         {this.state.showModal ? <SignUp cancelHandler={this.modalHandler}/> : null }
-        <Button onClick={this.modalHandler} className="p-button-rounded" label="Get Started"/>
       </div>
     )
   }

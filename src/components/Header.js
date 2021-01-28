@@ -58,7 +58,7 @@ class Header extends React.Component {
                 </>
             )
         } else {
-            return <Button id="login-btn" className="button p-button-rounded" onClick={this.logInHandler} label="Log In" />
+            return <Button id="login-btn" className="button p-button" onClick={this.logInHandler} label="Log In" />
         }
     }
 
@@ -109,7 +109,7 @@ class Header extends React.Component {
                     {this.loggedInHandler()}
                     <br />
                 </div>
-                <Divider style={{ marginTop: "-11px" }} />
+                <Divider style={{ marginTop: "-11px", width:"1450px" }} />
                 {this.state.showModal ?
                     <LogIn cancelHandler={this.logInHandler}/>
                     :
