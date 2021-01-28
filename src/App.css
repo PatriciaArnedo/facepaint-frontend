@@ -52,8 +52,9 @@
     align-items: center;
 }
 
-#app-name{
-    margin: 15px 20px 15px 20px;
+.app-name{
+    margin: 10px 20px 15px 20px;
+    width:190px;
 }
 
 .header a {
@@ -63,8 +64,8 @@
 
 
 #create-btn {
-    margin: 0px 20px 0px 20px;
-    margin-left: 380px;
+    margin: 15px 20px 15px 20px;
+    margin-left: 300px;
 }
 
 .header-avatar{
@@ -247,7 +248,7 @@ a {
 }
 
 #login-btn{
-    margin-left: 1100px;
+    margin-left: 1050px;
 }
 
 .drawing-form {

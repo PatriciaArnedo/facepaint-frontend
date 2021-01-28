@@ -98,13 +98,20 @@ class Header extends React.Component {
 
     }
 
+    appNameClicker = () => {
+        if (this.props.user){
+            this.props.history.push('/home')
+        } else {
+            this.props.history.push('/welcome')
+        }
+    }
+
+
     render() {
         return (
             <div className="header-container">
                 <div className="header">
-                    <NavLink to={this.props.user ? '/home' : '/welcome'}>
-                        <h1 id="app-name">facepaint</h1>
-                    </NavLink>
+                    <img onClick={this.appNameClicker} className="app-name" src="https://i.imgur.com/9g07Wkk.png" alt="facepaint writted in colorful letters"/>
 
                     {this.loggedInHandler()}
                     <br />

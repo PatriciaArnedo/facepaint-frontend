@@ -30,7 +30,7 @@ class LogIn extends React.Component {
         return (
             <div className="modal">
                 <div className="modal-content">
-                    <h3>Log In to Facepaint</h3>
+                    <h3>Log In to facepaint</h3>
                     <br />
                     <form id="login-form" onSubmit={this.submitHandler}>
                         <span className="p-float-label">
