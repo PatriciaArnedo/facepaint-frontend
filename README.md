@@ -2,7 +2,7 @@
 
 <h2>Overview</h2>
 Welcome to facepaint! facepaint is an AR drawing app that allows users to create hand drawn face filters. You can visit
-the live website at facepaint.patriciaarnedo.com.
+the live website <a href="facepaint.patriciaarnedo.com">here</a>.
 
 Start by logging in or signing up for an account. Once you are logged in, you can try on filters created by other users, create your own filters, favorite filters, or customize your profile. 
 
