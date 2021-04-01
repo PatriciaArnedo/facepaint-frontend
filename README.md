@@ -8,7 +8,7 @@ Start by logging in or signing up for an account. Once you are logged in, you ca
 
 Here is a sampe of the filter drawing interface:
 
-<img src=https://i.imgur.com/xDZgbUA.gif/>
+<img src=https://i.imgur.com/3u574f8.gif/>
 
 <h3>User Stories</h3>
 
