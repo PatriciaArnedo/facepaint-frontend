@@ -111,12 +111,12 @@ class Header extends React.Component {
         return (
             <div className="header-container">
                 <div className="header">
-                    <img onClick={this.appNameClicker} className="app-name" src="https://i.imgur.com/9g07Wkk.png" alt="facepaint writted in colorful letters"/>
+                    <img onClick={this.appNameClicker} className="app-name" src="https://i.imgur.com/9g07Wkk.png" alt="facepaint written in colorful letters"/>
 
                     {this.loggedInHandler()}
                     <br />
                 </div>
-                <Divider style={{ marginTop: "-11px", width:"1450px" }} />
+                <Divider style={{ marginTop: "-11px", width:"auto" }} />
                 {this.state.showModal ?
                     <LogIn cancelHandler={this.logInHandler}/>
                     :

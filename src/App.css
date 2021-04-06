@@ -1,8 +1,9 @@
 /* Grid CSS */
 .parent {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    /* grid-template-columns: repeat(6, 1fr); */
     grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     }
@@ -12,7 +13,7 @@
     .user-gallery { grid-area: 2 / 1 / 14 / 7; }
     .user-profile { grid-area: 2 / 1 / 14 / 7; }
     .filter-maker { grid-area: 2 / 1 / 14 / 7; }
-    .welcome { grid-area: 2 / 1 / 14 / 7; }
+    .welcome { grid-area: 2 / 1 / 15 / 7; }
     .edit-account { grid-area: 2 / 1 / 14 / 7; }
 
 /* Face Filter CSS */
@@ -41,7 +42,7 @@
 
 /* Header CSS */
 .header-container{
-    min-width: 1425px;
+    min-width: 2000px;
 }
 
 .header{
@@ -81,13 +82,16 @@
 /* Welcome Page CSS */
 
 .welcome{
+    background-image: linear-gradient(180deg,white, rgb(255, 139, 236),rgb(244, 122, 255), rgb(0, 115, 255));
+}
+
+.welcome-horizontal{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: stretch;
     align-items: center;
-    background-image: linear-gradient(180deg,white, rgb(255, 139, 236),rgb(244, 122, 255), rgb(0, 115, 255));
 }
 
 .welcome-gif {
@@ -122,9 +126,10 @@
 }
 
 .welcome-footer{
-    margin:-60px auto 0px auto;
+    /* margin:-60px auto 0px auto; */
     color: rgb(255, 255, 255);
     font-size: 13pt;
+    text-align: center;
 }
 
 .welcome-footer a {
