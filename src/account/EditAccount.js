@@ -11,27 +11,33 @@ import { Divider } from 'primereact/divider';
 
 class EditAccount extends React.Component {
 
+    //state to toggle the edit account form
     state = {
         beenClicked: false,
         showModal: false
     }
 
+    //action that gets user id when component mounts to make sure the user can edit their account
     componentDidMount() {
             this.props.getUser(this.props.userId)
     }
 
+    //toggles state
     clickHandler = () => {
-        this.setState({ beenClicked: !this.state.beenClicked })
+        this.setState({ beenClicked: !this.state.beenClicked})
     }
 
+    //toggles state
     modalHandler = () => {
         this.setState({ showModal: !this.state.showModal })
     }
+
 
     render() {
         return (
             <div className="edit-account">
                 <div style={{ textAlign: "center" }}>
+                    {/* checks for user avatar and if not found uses stock avatar */}
                     <img src={this.props.userObj.avatar ? this.props.userObj.avatar : "https://i.imgur.com/igyvLpE.jpg"} className="account-avatar" alt="profile avatar" />
                     <br />
                     <Button onClick={this.modalHandler} label="Upload Picture" />
@@ -44,9 +50,11 @@ class EditAccount extends React.Component {
                 <Divider style={{ marginRight: "70px" }} layout="vertical" />
                 <div className="account-details">
                     <h2>My Account</h2>
+                    {/* ternaries to display user information or edit form dependind on whether the edit form button was clicked and if user data has loaded */}
                     {this.props.userObj.username ?
                         this.state.beenClicked ?
                             <>
+                                {/* If the edit button has been clicked the edit form will display */}
                                 <p>
                                     <strong className="editable">Username:</strong> @{this.props.userObj.username}
                                 </p>
@@ -56,7 +64,10 @@ class EditAccount extends React.Component {
                                 <Button className="p-button-warning" onClick={this.clickHandler} label="Cancel" />
                             </>
                             :
+                           
                             <>
+                                {/* If the edit button has not been clicked user information will display */}
+
                                 <p>
                                     <strong className="editable">Username:</strong> @{this.props.userObj.username}
                                 </p>

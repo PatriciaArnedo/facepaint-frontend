@@ -8,17 +8,23 @@ import { Divider } from 'primereact/divider';
 
 class UserContainer extends React.Component {
 
+    
     state = {
+        //default searchterm to apply filter function 
         searchTerm: ""
     }
 
     componentDidMount() {
+        //makes call to API for users
         this.props.getUsers(this.props.userId)
     }
 
     renderUsers = () => {
+        //excludes users with no filters
         let activeUsers = this.props.users.filter(user => user.filters.length > 0)
+        //excludes current user from user set
         activeUsers = activeUsers.filter(user => user.id !== this.props.userId)
+        //filters for any search terms
         const filteredUsers = activeUsers.filter(user => user.username.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         return filteredUsers.map(userObj => <UserCard key={userObj.id} userObj={userObj} />)
     }

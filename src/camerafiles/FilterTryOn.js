@@ -31,6 +31,7 @@ class FilterTryOn extends React.Component {
         this.componentCleanup()
     }
 
+    //cleanup for when component unmounts
     componentCleanup = () => {
         cameraShutdown()
         .then(console.log("camera shut down"))
